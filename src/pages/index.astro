@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -58,6 +59,7 @@ import Hero from "../components/Hero.astro";
             </a>
         </div>
     </main>
+    <Footer/>
 </Layout>
 
 <script>
@@ -75,7 +77,6 @@ import Hero from "../components/Hero.astro";
             cards[0].style.setProperty("--hover-opacity", "1");
         };
 
-        console.log("setup");
         cardWrapper.onmousemove = (e) => {
             for (const card of cards) {
                 const rect = card.getBoundingClientRect(),
@@ -103,7 +104,6 @@ import Hero from "../components/Hero.astro";
     document.addEventListener(
         "astro:load",
         () => {
-            console.log("load");
             setupCards();
         },
         { once: false }
@@ -119,6 +119,7 @@ import Hero from "../components/Hero.astro";
     body {
         align-items: center;
         display: flex;
+        flex-direction: column;
         height: 100vh;
         justify-content: center;
         margin: 0px;
@@ -281,7 +282,7 @@ import Hero from "../components/Hero.astro";
     @media (max-width: 320px) {
         .card {
             width: calc(100vw - 20px);
-            height: 200px
+            height: 200px;
         }
     }
 </style>

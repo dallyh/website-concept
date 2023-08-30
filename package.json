@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "astro": "^2.10.14",
-    "css.gg": "^2.1.1"
+    "astro-i18next": "^1.0.0-beta.21",
+    "css.gg": "^2.1.1",
+    "i18n": "^0.15.1",
+    "react-i18next": "^13.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",

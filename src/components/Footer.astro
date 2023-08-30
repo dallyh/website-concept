@@ -1,0 +1,38 @@
+---
+import { t } from "i18next";
+---
+
+<footer class="footer-container">
+    <p>{t("footer:PageCreatedBy")}</p>
+    <p><Fragment set:html={t("footer:Host")} /></p>
+    <p><Fragment set:html={t("footer:Design")} /></p>
+</footer>
+
+<style>
+    /* Footer */
+    .footer-container {
+        max-width: 500px;
+        height: auto;
+        margin: 0px auto;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .footer-container p {
+        font-size: 0.8rem;
+        color: var(--body-color);
+        font-weight: 300;
+    }
+
+    .svg-astro {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 2px;
+        width: 45px;
+        height: 15px;
+        background-image: url(/assets/img/astro/full-logo-light.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: invert(100%) grayscale(100%);
+    }
+</style>
