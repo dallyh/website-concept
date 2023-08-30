@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import Hero from "../../components/Hero.astro";
+---
+
+<Layout title="Welcome to Astro.">
+    <main>
+        <Hero/>
+    </main>
+</Layout>
+
+<style>
+    .hero {
+        display: flex;
+        padding-bottom: 1rem;
+
+        > p {
+            font-size: 6rem; /* Dalibor Hon */
+        }
+
+        .hello {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            & p:nth-of-type(1) {
+                font-size: 2rem; /* Hello */
+            }
+
+            & div {
+                /* My name */
+                display: flex;
+                gap: 0.25rem;
+
+                & p:nth-of-type(1) {
+                    margin-top: auto;
+                    font-size: 2.85rem; /* is */
+                }
+
+                & div {
+                    display: flex;
+                    flex-direction: column;
+
+                    & p:nth-of-type(1) {
+                        font-size: 1.75rem; /* My */
+                    }
+
+                    & p:nth-of-type(2) {
+                        font-size: 0.925rem; /* Name */
+                    }
+                }
+            }
+        }
+    }
+</style>
