@@ -1,15 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Hero from "../components/Hero.astro";
-import Footer from "../components/Footer.astro";
+import Hero from "../components/astro/Hero.astro";
+import Footer from "../components/astro/Footer.astro";
+
+const accentColor = "var(--accent)";
 ---
 
 <Layout title="Welcome to Astro.">
     <main>
-        <Hero />
+        <Hero style="landing"/>
         <div id="cards">
-            <a href="/resume" class="card">
+            <a href="/resume" class="card" title="Resume">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-file-document"></i>
@@ -25,7 +26,7 @@ import Footer from "../components/Footer.astro";
                     </div>
                 </div>
             </a>
-            <a href="/projects" class="card">
+            <a href="/projects" class="card" title="My projects">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-git-fork"></i>
@@ -41,7 +42,7 @@ import Footer from "../components/Footer.astro";
                     </div>
                 </div>
             </a>
-            <a href="/contact" class="card">
+            <a href="/contact" class="card" title="Contact form">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-mail"></i>
@@ -63,226 +64,18 @@ import Footer from "../components/Footer.astro";
 </Layout>
 
 <script>
-    const setupCards = () => {
-        if (window.location.pathname !== "/") {
-            return;
-        }
-
-        const cardWrapper = document.getElementById("cards") as HTMLDivElement;
-        const cards = document.getElementById("cards")?.getElementsByClassName("card") as HTMLCollectionOf<HTMLAnchorElement>;
-
-        const initialLoad = () => {
-            cards[0].style.setProperty("--mouse-x", `left`);
-            cards[0].style.setProperty("--mouse-y", `top`);
-            cards[0].style.setProperty("--hover-opacity", "1");
-        };
-
-        cardWrapper.onmousemove = (e) => {
-            for (const card of cards) {
-                const rect = card.getBoundingClientRect(),
-                    x = e.clientX - rect.left,
-                    y = e.clientY - rect.top;
-
-                card.style.setProperty("--hover-opacity", "0");
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            }
-        };
-
-        cardWrapper.onmouseleave = (e) => {
-            setTimeout(() => {
-                cards[0].style.setProperty("--mouse-x", `left`);
-                cards[0].style.setProperty("--mouse-y", `top`);
-                cards[0].style.setProperty("--hover-opacity", "1");
-            }, 500);
-        };
-
-        initialLoad();
-    };
-    setupCards();
+    import * as card from "../scripts/setup-cards";
 
     document.addEventListener(
-        "astro:load",
+        "astro:page-load",
         () => {
-            setupCards();
+            console.log("Setup");
+            card.setupCards();
         },
-        { once: false }
+        { once: false },
     );
 </script>
 
-<style>
-    /* css.gg single icons */
-    @import url("css.gg/icons/css/file-document.css");
-    @import url("css.gg/icons/css/git-fork.css");
-    @import url("css.gg/icons/css/mail.css");
-
-    body {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        justify-content: center;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    #cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        max-width: 916px;
-        justify-content: center;
-        /* width: calc(100% - 20px); */
-    }
-
-    #cards:hover > .card::after {
-        opacity: 1;
-    }
-
-    .card {
-        background-color: var(--card-bg);
-        border-radius: 10px;
-        cursor: pointer;
-        display: flex;
-        height: 260px;
-        flex-direction: column;
-        position: relative;
-        width: 300px;
-        --hover-opacity: 0;
-    }
-
-    .card:hover::before {
-        opacity: 1;
-    }
-
-    .card::before,
-    .card::after {
-        border-radius: inherit;
-        content: "";
-        height: 100%;
-        left: 0px;
-        opacity: var(--hover-opacity);
-        position: absolute;
-        top: 0px;
-        transition: opacity 500ms;
-        width: 100%;
-    }
-
-    .card::before {
-        background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(var(--accent), 0.06), transparent 40%);
-        z-index: 3;
-    }
-
-    .card::after {
-        background: radial-gradient(1100px circle at var(--mouse-x) var(--mouse-y), rgba(var(--accent), 0.5), transparent 40%);
-        z-index: 1;
-    }
-
-    .card > .card-content {
-        background-color: var(--card-color);
-        border-radius: inherit;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        inset: 1px;
-        padding: 10px;
-        position: absolute;
-        z-index: 2;
-    }
-
-    /* -- ↓ ↓ ↓ extra card content styles ↓ ↓ ↓ -- */
-
-    h1,
-    h2,
-    h3,
-    h4,
-    span {
-        color: rgb(240, 240, 240);
-        font-family: "Rubik", sans-serif;
-        font-weight: 400;
-        margin: 0px;
-    }
-
-    i {
-        color: rgb(240, 240, 240);
-    }
-
-    .card-image {
-        align-items: center;
-        display: flex;
-        height: 140px;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .card-image > i {
-        transform: scale(4.5);
-        opacity: 0.25;
-    }
-
-    .card-info-wrapper {
-        align-items: center;
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-start;
-        padding: 0px 20px;
-    }
-
-    .card-info {
-        align-items: flex-start;
-        display: flex;
-        gap: 10px;
-    }
-
-    .card-info > i {
-        margin-top: 2px;
-        transform: scale(0.85);
-    }
-
-    .card-info-title > h3 {
-        font-size: 1.1em;
-        line-height: 20px;
-    }
-
-    .card-info-title > h4 {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.85em;
-        margin-top: 8px;
-    }
-
-    .card-image > .gg-git-fork {
-        margin-right: 25px;
-    }
-
-    /* -- ↓ ↓ ↓ some responsiveness ↓ ↓ ↓ -- */
-
-    @media (max-width: 1000px) {
-        body {
-            align-items: flex-start;
-            height: unset;
-        }
-        #cards {
-            max-width: 800px;
-            padding: 10px 0px;
-        }
-
-        .card {
-            /* flex-shrink: 1; */
-            /* width: calc(50% - 4px); */
-        }
-    }
-
-    @media (max-width: 500px) {
-        .card {
-            width: calc(100vw - 50px);
-            height: 250px;
-        }
-    }
-
-    @media (max-width: 320px) {
-        .card {
-            width: calc(100vw - 20px);
-            height: 200px;
-        }
-    }
+<style define:vars={{accentColor}}>
+    @import url(../styles/cards.css);
 </style>

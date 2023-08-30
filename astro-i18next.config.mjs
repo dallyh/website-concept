@@ -7,20 +7,19 @@ export default {
     namespaces: ["footer", "index", "printpdfcomponent", "shared", "languagePopup", "navigation", "contactForm"],
     defaultNamespace: "common",
     load: ["server", "client"],
-    /*i18nextServerPlugins: {
+    i18nextServerPlugins: {
         "{initReactI18next}": "react-i18next",
     },
     i18nextClientPlugins: {
         "{initReactI18next}": "react-i18next",
     },
-    */
     i18nextServer: {
-        debug: DEV_ENV,
+        debug: false,
         backend: {
             loadPath: "./public/locales/{{lng}}/{{ns}}.json",
         },
     },
     i18nextClient: {
-        debug: DEV_ENV,
+        debug: false,
     },
 };

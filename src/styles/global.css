@@ -1,8 +1,12 @@
 :root {
     --accent: 136, 58, 234;
     --accent-resume: 0, 200, 255;
+    --accent-contact: 114, 171, 0;
+    --accent-projects: 209, 118, 0;
     --accent-light: 224, 204, 250;
     --accent-dark: 49, 10, 101;
+    --button-color: white;
+    --button-hover-color: black;
     --bg-color: rgb(20, 20, 20);
     --card-color: rgb(23, 23, 23);
     --card-bg: rgba(255, 255, 255, 0.1);
@@ -29,12 +33,43 @@ p {
     margin: 0;
 }
 
-.transition-test {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    background-color: red;
-    font-size: 2rem;
-    height: 200px;
+.button {
+    font-family: inherit;
+    background-color: var(--card-bg);
+    color: var(--button-color);
+    text-transform: uppercase;
+    font-weight: 900;
+    border-radius: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    border: 2px solid rgba(var(--accent), 1);
+    font-size: 1rem;
+    transition: 300ms;
+}
+
+.button a {
+    color: inherit;
+}
+
+.button a:hover {
+    text-decoration: none;
+    color: #0000;
+}
+
+.button:hover {
+    background-color: rgba(var(--accent), 1);
+    color: var(--button-hover-color);
+    cursor: pointer;
+}
+
+a {
+    color: rgba(var(--accent), 1);
+
+    &:visited {
+        color: rgba(var(--accent-light), 1);
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

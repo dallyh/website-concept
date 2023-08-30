@@ -1,0 +1,23 @@
+---
+import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
+import ContactForm from "../../components/react/ContactForm/ContactForm";
+import CardLayout from "../../layouts/CardLayout.astro";
+
+const accentColor = "var(--accent-contact)";
+---
+
+<CardLayout accentColor={accentColor} cardStyle="contact">
+    <ContactForm client:load/>
+</CardLayout>
+
+<FloatingHomeButton accentColor={accentColor}/>
+
+<style>
+    body {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px;
+    } 
+</style>

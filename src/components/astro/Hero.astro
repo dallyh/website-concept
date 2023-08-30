@@ -1,0 +1,100 @@
+---
+interface Props {
+    style: CardStyle;
+}
+
+export type CardStyle = "landing" | "resume" | "projects" | "contact";
+
+const { style } = Astro.props;
+---
+
+{
+    style === "landing" && (
+        <div class="hero" transition:name="title-name">
+            <h1 class="hello">
+                <p>Hello, my name is</p>
+                <p>Dalibor</p>
+            </h1>
+        </div>
+    )
+}
+
+{
+    style === "resume" && (
+        <div class="hero resume" transition:name="title-name">
+            <h1 class="hello">
+                <p>Daliborův Životopis</p>
+            </h1>
+        </div>
+    )
+}
+
+{
+    style === "projects" && (
+        <div class="hero projects" transition:name="title-name">
+            <h1 class="hello">
+                <p>Projekty</p>
+            </h1>
+        </div>
+    )
+}
+
+{
+    style === "contact" && (
+        <div class="hero contact" transition:name="title-name">
+            <h1 class="hello">
+                <p>Kontakt</p>
+            </h1>
+        </div>
+    )
+}
+
+<style>
+    .hero {
+        display: flex;
+        padding: 1.5rem 0rem 1.5rem 0rem;
+        background-color: rgba(255, 255, 255, 0.5);
+        background-clip: text;
+        margin-bottom: -1.5rem;
+
+        @media (max-width: 1000px) {
+            justify-content: center;
+            text-align: center;
+            max-width: calc(100vw - 20px);
+        }
+
+        .hello {
+            line-height: 1;
+            font-family: "Pacifico", "Lato", cursive;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: transparent;
+
+            & p:nth-of-type(2) {
+                margin-top: 10px;
+                font-size: 4rem;
+                padding-left: -5px;
+                font-style: normal;
+            }
+        }
+
+        &.resume,
+        &.contact,
+        &.projects {
+            position: relative;
+            z-index: 1010;
+
+            & p:nth-of-type(1) {
+                margin-top: 10px;
+                font-size: 4rem;
+                font-style: normal;
+
+                @media (max-width: 600px) {
+                    font-size: 3rem;
+                }
+            }
+        }
+    }
+</style>
+
+<script></script>

@@ -1,11 +1,10 @@
 ---
-import { t } from "i18next";
 ---
 
 <footer class="footer-container">
-    <p>{t("footer:PageCreatedBy")}</p>
-    <p><Fragment set:html={t("footer:Host")} /></p>
-    <p><Fragment set:html={t("footer:Design")} /></p>
+    <p>Vytvořil Dalibor Hon</p>
+    <p>Hostováno s ❤️ na <a href="https://www.github.com">GitHubu</a>.</p>
+    <p>Vytvořeno s <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework"><span class="svg-astro"></span></a>.</p>
 </footer>
 
 <style>
@@ -20,7 +19,7 @@ import { t } from "i18next";
 
     .footer-container p {
         font-size: 0.8rem;
-        color: var(--body-color);
+        color: rgba(255, 255, 255, 0.5);
         font-weight: 300;
     }
 
@@ -34,5 +33,6 @@ import { t } from "i18next";
         background-size: contain;
         background-repeat: no-repeat;
         filter: invert(100%) grayscale(100%);
+        opacity: 50%;
     }
 </style>

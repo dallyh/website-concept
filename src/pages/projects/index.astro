@@ -1,56 +1,88 @@
 ---
+import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
+import Footer from "../../components/astro/Footer.astro";
+import Hero from "../../components/astro/Hero.astro";
 import Layout from "../../layouts/Layout.astro";
-import Card from "../../components/Card.astro";
-import Hero from "../../components/Hero.astro";
+
+const accentColor = "var(--accent-projects)";
 ---
 
 <Layout title="Welcome to Astro.">
+    <FloatingHomeButton accentColor={accentColor} />
     <main>
-        <Hero/>
+        <Hero style="projects" />
+        <div id="cards">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <h3><a href="#" target="_blank">This website</a></h3>
+                                <h4>Source code for this website</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <h3><a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">Lemmy Kotlin Client</a></h3>
+                                <h4>A multiplatform client for <a href="https://join-lemmy.org/" target="_blank">Lemmy</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <h3><a href="https://github.com/dallyh/web-resume" target="_blank">Old website</a></h3>
+                                <h4>Source code for my older website</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </Layout>
 
-<style>
-    .hero {
-        display: flex;
-        padding-bottom: 1rem;
+<Footer />
 
-        > p {
-            font-size: 6rem; /* Dalibor Hon */
-        }
+<script>
+    import * as card from "../../scripts/setup-cards";
 
-        .hello {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+    document.addEventListener(
+        "astro:page-load",
+        () => {
+            console.log("Setup");
+            card.setupCards();
+        },
+        { once: false },
+    );
+</script>
 
-            & p:nth-of-type(1) {
-                font-size: 2rem; /* Hello */
-            }
+<style define:vars={{ accentColor }}>
+    @import url(../../styles/cards.css);
 
-            & div {
-                /* My name */
-                display: flex;
-                gap: 0.25rem;
-
-                & p:nth-of-type(1) {
-                    margin-top: auto;
-                    font-size: 2.85rem; /* is */
-                }
-
-                & div {
-                    display: flex;
-                    flex-direction: column;
-
-                    & p:nth-of-type(1) {
-                        font-size: 1.75rem; /* My */
-                    }
-
-                    & p:nth-of-type(2) {
-                        font-size: 0.925rem; /* Name */
-                    }
-                }
-            }
-        }
+    .card::before {
+        pointer-events: none;
     }
 </style>
