@@ -1,5 +1,6 @@
 :root {
     --accent: 136, 58, 234;
+    --accent-resume: 0, 200, 255;
     --accent-light: 224, 204, 250;
     --accent-dark: 49, 10, 101;
     --bg-color: rgb(20, 20, 20);
