@@ -68,8 +68,12 @@ const accentColor = "var(--accent)";
 
     document.addEventListener(
         "astro:page-load",
-        () => {
-            console.log("Setup");
+        (e) => {
+            if (window.location.pathname !== "/website-concept")
+            {
+                e.target?.removeEventListener;
+                return;
+            }
             card.setupCards();
         },
         { once: false },

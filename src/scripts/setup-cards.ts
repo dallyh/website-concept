@@ -26,7 +26,6 @@ export const setupCards = () => {
             cards[0].style.setProperty("--mouse-y", `top`);
             cards[0].style.setProperty("--hover-opacity", "1");
         }, 500);
-    };
-
+    }; 
     initialLoad();
 };

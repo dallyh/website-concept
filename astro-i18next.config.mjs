@@ -21,5 +21,8 @@ export default {
     },
     i18nextClient: {
         debug: false,
+        backend: {
+            loadPath: "/website-concept/locales/{{lng}}/{{ns}}.json",
+        },
     },
 };

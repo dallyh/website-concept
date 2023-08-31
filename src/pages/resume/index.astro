@@ -8,7 +8,9 @@ const accentColor = "var(--accent-resume)";
 <CardLayout accentColor={accentColor} cardStyle="resume">
     <div class="resume-wrapper">
         <section class="resume-section">
-            <div class="side-panel">TOP</div>
+            <div class="side-panel">
+                <p>FIRST!</p>
+            </div>
             <div class="section-content">
                 <h2>Title</h2>
                 <p>
@@ -35,7 +37,9 @@ const accentColor = "var(--accent-resume)";
             </div>
         </section>
         <section class="resume-section">
-            <div class="side-panel">SECOND</div>
+            <div class="side-panel">
+                <p>SECOND :)</p>
+            </div>
             <div class="section-content">
                 <h2>Title</h2>
                 <p>
@@ -62,7 +66,9 @@ const accentColor = "var(--accent-resume)";
             </div>
         </section>
         <section class="resume-section">
-            <div class="side-panel last">THIRD</div>
+            <div class="side-panel">
+                <p>THIRD</p>
+            </div>
             <div class="section-content">
                 <h2>Title</h2>
                 <p>
@@ -107,16 +113,14 @@ const accentColor = "var(--accent-resume)";
     }
 
     .resume-section {
-        position: relative;
+        display: grid;
+        grid-template-columns: min-content 1fr;
     }
 
     .side-panel {
-        position: absolute;
-        left: 0;
         writing-mode: vertical-rl;
         display: flex;
         align-items: center;
-        justify-content: center;
         border-right: 1px dotted rgba(255, 255, 255, 0.4);
         border-bottom: 1px solid rgba(255, 255, 255, 0.4);
         height: 100%;
@@ -126,6 +130,12 @@ const accentColor = "var(--accent-resume)";
         opacity: 0.6;
         line-height: 1;
         font-size: 0.85rem;
+        padding-top: 1rem;
+
+        & p {
+            position: sticky;
+            top: 1rem;
+        }
     }
 
     .side-panel.last {
@@ -133,7 +143,7 @@ const accentColor = "var(--accent-resume)";
     }
 
     .section-content {
-        padding: 1rem 1rem 1rem 3rem;
+        padding: 1rem;
     }
 
     h2 {
