@@ -6,5 +6,6 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: 'https://dallyh.github.io',
   base: '/website-concept',
+  trailingSlash: "always",
   integrations: [react(), astroI18next()],
 });
