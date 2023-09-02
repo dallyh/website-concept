@@ -1,15 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "@formspree/react";
-import { getI18n, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import "./ContactForm.css";
+import "../i18n/i18n";
 
-const contactForm = () => {
+interface ContactFormProps {
+    locale: string;
+}
+
+const contactForm = (props: ContactFormProps) => {
     const [state, handleSubmit] = useForm("mayzkojd");
     const [errorState, setErrorMessage] = useState([{ type: "", message: "" }]);
-    const { t } = useTranslation("contactForm");
     const isFirstRender = useRef(true);
     const formRef = useRef(null);
     const formWrapperRef = useRef(null);
+
+    // I18n - pass locale so there are no server side HTML render errors
+    const { t } = useTranslation("contactForm", {lng: props.locale});
 
     // Handle submit and errors
     useEffect(() => {
@@ -20,7 +27,7 @@ const contactForm = () => {
         var formErrors = state.errors?.getAllFieldErrors();
 
         if (formErrors === undefined) {
-            console.debug("No errors returned from form.")
+            console.debug("No errors returned from form.");
             setErrorMessage((prevState) => [
                 ...prevState,
                 {
@@ -34,7 +41,7 @@ const contactForm = () => {
         formErrors.map((x) => {
             x[1].map((e) => {
                 validateError(e.code, e.message);
-            })
+            });
         });
 
         setErrorMessage((prevState) => [
@@ -44,13 +51,12 @@ const contactForm = () => {
                 message: t("contactForm:ERROR_CORRECT_FIELDS"),
             },
         ]);
-
     }, [state.errors]);
 
     // Animate form
     useEffect(() => {
-        formRef.current //&& autoAnimate(formRef.current);
-        formWrapperRef.current //&& autoAnimate(formWrapperRef.current);
+        formRef.current; //&& autoAnimate(formRef.current);
+        formWrapperRef.current; //&& autoAnimate(formWrapperRef.current);
     }, [formRef, formWrapperRef]);
 
     // Validate form submission errors
@@ -78,7 +84,7 @@ const contactForm = () => {
                 setErrorMessage((prevState) => [
                     ...prevState,
                     {
-                        type: errorCode?? "UNDEFINED",
+                        type: errorCode ?? "UNDEFINED",
                         message: errorMessage,
                     },
                 ]);

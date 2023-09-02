@@ -4,13 +4,14 @@ import Hero from "../components/astro/Hero.astro";
 import Footer from "../components/astro/Footer.astro";
 
 const accentColor = "var(--accent)";
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Welcome to Astro.">
     <main>
         <Hero style="landing"/>
         <div id="cards">
-            <a href="/website-concept/resume" class="card" title="Resume">
+            <a href={`${baseUrl}resume/`} class="card" title="Resume">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-file-document"></i>
@@ -26,7 +27,7 @@ const accentColor = "var(--accent)";
                     </div>
                 </div>
             </a>
-            <a href="/website-concept/projects" class="card" title="My projects">
+            <a href={`${baseUrl}projects/`} class="card" title="My projects">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-git-fork"></i>
@@ -42,7 +43,7 @@ const accentColor = "var(--accent)";
                     </div>
                 </div>
             </a>
-            <a href="/website-concept/contact" class="card" title="Contact form">
+            <a href={`${baseUrl}contact/`} class="card" title="Contact form">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-mail"></i>

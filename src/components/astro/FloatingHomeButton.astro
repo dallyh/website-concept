@@ -4,9 +4,10 @@ interface Props {
 }
 
 const { accentColor } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<a href="/website-concept" aria-label="Go home" title="Home page" class="floating-menu">
+<a href={`${baseUrl}`} aria-label="Go home" title="Home page" class="floating-menu">
     <i class="gg-home"></i>
 </a>
 
