@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useForm } from "@formspree/react";
 import { useTranslation } from "react-i18next";
 import "./ContactForm.css";
-import "../i18n/i18n";
+//import "../i18n/i18n";
 
 interface ContactFormProps {
     locale: string;
