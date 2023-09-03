@@ -13,7 +13,7 @@ const site = import.meta.env.PROD ? import.meta.env.SITE : "http://localhost:432
 
 i18next
     .use(HttpApi)
-    .use(initReactI18next) // passes i18n down to react-i18next
+    //.use(initReactI18next) // passes i18n down to react-i18next. TODO: Find why this errors out on client directive and build.
     .init<HttpBackendOptions>({
         debug: !import.meta.env.PROD,
         ns: [],
