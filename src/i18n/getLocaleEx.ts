@@ -6,10 +6,8 @@ export function getLocaleEx(astro: AstroGlobal): string {
 
     if (locale === undefined)
     {
-        console.debug("getLocale: Locale was undefined: " + defaultLocale)
         return defaultLocale;
     }
 
-    console.debug("getLocale: Locale was: " + defaultLocale)
     return locale;
 }

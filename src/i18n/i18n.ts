@@ -1,5 +1,11 @@
 export const defaultLocale = "cs";
 export const locales = {
-    en: "en", 
-    cs: "cs", // the `defaultLocale` value must present in `locales` keys
+    en: "en-US",
+    cs: "cs-CZ"
 };
+
+export const getLocales = (): string[] => {
+    const localeArray: string[] = [];
+    Object.entries(locales).forEach(([key]) => {localeArray.push(key)})
+    return localeArray;
+}

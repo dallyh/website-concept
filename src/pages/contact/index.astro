@@ -2,20 +2,11 @@
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 import CardLayout from "../../layouts/CardLayout.astro";
-import { getLocale } from "astro-i18n-aut";
 import { getLocaleEx } from "../../i18n/getLocaleEx"
-import { Code } from "astro:components";
-import Counter from "../../components/react/Counter/Counter"
 
 const accentColor = "var(--accent-contact)";
 
-const lang = getLocale(Astro.url) 
-let locale = "cs";
-if (lang !== undefined)
-{
-    locale = lang;
-}
-console.log(locale);
+const locale = getLocaleEx(Astro);
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">
