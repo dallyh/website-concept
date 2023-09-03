@@ -3,16 +3,21 @@ import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro"
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 import CardLayout from "../../layouts/CardLayout.astro";
 import { getLocaleEx } from "../../i18n/getLocaleEx";
+import ContactFormT from "../../components/react/ContactForm/ContactFormT";
+import i18next from 'i18next';
+import "../../components/react/i18n/i18n"
 
 const accentColor = "var(--accent-contact)";
 const locale = getLocaleEx(Astro);
 const isProd = import.meta.env.PROD;
+
+const t = i18next.getFixedT("cs", "contactForm");
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">
-     {import.meta.env.PROD && <ContactForm locale={locale} client:only="react"/>}
-    {!import.meta.env.PROD && <ContactForm locale={locale} client:load/>}
-    <!-- <ContactForm locale={locale} client:load /> -->
+     <!--{import.meta.env.PROD && <ContactForm locale={locale} client:only="react"/>}
+    {!import.meta.env.PROD && <ContactForm locale={locale} client:load/>} -->
+     <ContactFormT label={t("contactForm:FullName")} client:load /> 
 </CardLayout>
 
 <FloatingHomeButton accentColor={accentColor} />

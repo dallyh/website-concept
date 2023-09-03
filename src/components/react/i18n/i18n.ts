@@ -1,5 +1,4 @@
 import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
 import HttpApi, { type HttpBackendOptions } from "i18next-http-backend";
 import FsBackend, { type FsBackendOptions } from "i18next-fs-backend";
 import { getLocales, defaultLocale } from "../../../i18n/i18n";
@@ -17,10 +16,9 @@ const site = import.meta.env.BASE_URL;
 if (import.meta.env.SSR) {
     i18next
         .use(FsBackend)
-        .use(initReactI18next) // passes i18n down to react-i18next.
         .init<FsBackendOptions>({
             debug: true,
-            ns: [],
+            ns: ["contactForm"],
             defaultNS: "",
             fallbackLng: fallbackLng,
             supportedLngs: supportedLngs,
@@ -31,10 +29,9 @@ if (import.meta.env.SSR) {
 } else {
     i18next
         .use(HttpApi)
-        .use(initReactI18next) // passes i18n down to react-i18next.
         .init<HttpBackendOptions>({
             debug: true,
-            ns: [],
+            ns: ["contactForm"],
             defaultNS: "",
             fallbackLng: fallbackLng,
             supportedLngs: supportedLngs,
