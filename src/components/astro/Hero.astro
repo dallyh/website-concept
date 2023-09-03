@@ -1,4 +1,5 @@
 ---
+import LanguageSelector from './LanguageSelector.astro';
 interface Props {
     style: CardStyle;
 }
@@ -15,6 +16,7 @@ const { style } = Astro.props;
                 <p>Hello, my name is</p>
                 <p>Dalibor</p>
             </h1>
+            <LanguageSelector buttonId="headerLanguageButton" dropdownId="headerLanguageDropdown" showFlag={true} showTitle={false} placement="bottom" />
         </div>
     )
 }
@@ -52,6 +54,9 @@ const { style } = Astro.props;
 <style>
     .hero {
         display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1000;
         padding: 1.5rem 0rem 1.5rem 0rem;
         background-color: rgba(255, 255, 255, 0.5);
         background-clip: text;

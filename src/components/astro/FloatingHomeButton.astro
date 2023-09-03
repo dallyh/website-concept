@@ -1,12 +1,18 @@
 ---
+import { getLocaleUrl } from 'astro-i18n-aut';
+import { getLocaleEx } from '../../i18n/getLocaleEx';
+
 interface Props {
     accentColor: string
 }
 
 const { accentColor } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const locale = getLocaleEx(Astro);
+
 ---
 
-<a href="/website-concept" aria-label="Go home" title="Home page" class="floating-menu">
+<a href={getLocaleUrl("/", locale)} aria-label="Go home" title="Home page" class="floating-menu">
     <i class="gg-home"></i>
 </a>
 
@@ -29,6 +35,11 @@ const { accentColor } = Astro.props;
         font-size: 30px;
         border: 2px solid rgba(var(--accentColor), 0.5);
         z-index: 2000;
+
+        @media (max-width: 500px) {
+            bottom: 15px;
+            right: 15px;
+        }
         
 
         & i {

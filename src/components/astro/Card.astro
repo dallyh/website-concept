@@ -1,6 +1,6 @@
 ---
 interface Props {
-    accentColor: string,
+    accentColor: string;
 }
 
 const { accentColor } = Astro.props;
@@ -10,11 +10,11 @@ const { accentColor } = Astro.props;
     <div class="card-overlay"></div>
     <div class="card-border"></div>
     <div class="card-content">
-        <slot/>
+        <slot />
     </div>
 </div>
 
-<style define:vars={{accentColor}} >
+<style define:vars={{ accentColor }}>
     .card {
         /* background-color: var(--card-bg); */
         border-radius: 10px;
@@ -23,6 +23,11 @@ const { accentColor } = Astro.props;
         position: relative;
         height: fit-content;
         width: 1200px;
+
+        @media (max-width: 1200px) {
+            max-width: calc(100vw - 10px);
+            margin-right: 5px; /* Nitpicking */
+        }
     }
 
     @keyframes overlay-in {
@@ -78,6 +83,10 @@ const { accentColor } = Astro.props;
         background: linear-gradient(120deg, transparent 0%, transparent 50%, rgba(var(--accentColor), 0.5) 100%);
         right: 0;
         animation: overlay-in 500ms ease-in-out both;
+
+        @media (max-width: 600px) {
+            display: none;
+        }
     }
 
     .card .card-border::before {
@@ -97,11 +106,5 @@ const { accentColor } = Astro.props;
         background-color: transparent;
         z-index: 1000;
         height: fit-content;
-    }
-
-    @media (max-width: 1200px) {
-        .card {
-            max-width: calc(100vw - 30px);
-        }
     }
 </style>

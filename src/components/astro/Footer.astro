@@ -1,10 +1,19 @@
 ---
+import { Image } from "astro:assets";
+import astroSvg from "../../../public/assets/img/astro/simple-full-logo-light.svg";
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <footer class="footer-container">
     <p>Vytvořil Dalibor Hon</p>
     <p>Hostováno s ❤️ na <a href="https://www.github.com">GitHubu</a>.</p>
-    <p>Vytvořeno s <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework"><span class="svg-astro"></span></a>.</p>
+    <p>
+        Vytvořeno s
+        <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework">
+            <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
+        </a>.
+    </p>
 </footer>
 
 <style>
@@ -29,7 +38,6 @@
         margin-left: 2px;
         width: 45px;
         height: 15px;
-        background-image: url(/website-concept/assets/img/astro/full-logo-light.svg);
         background-size: contain;
         background-repeat: no-repeat;
         filter: invert(100%) grayscale(100%);
