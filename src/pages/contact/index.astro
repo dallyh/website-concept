@@ -5,12 +5,13 @@ import CardLayout from "../../layouts/CardLayout.astro";
 import { getLocaleEx } from "../../i18n/getLocaleEx"
 
 const accentColor = "var(--accent-contact)";
-
 const locale = getLocaleEx(Astro);
+const isProd = import.meta.env.PROD
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">
-    <ContactForm locale={locale} />
+    {import.meta.env.PROD && <ContactForm locale={locale} client:only="react"/>}
+    {!import.meta.env.PROD && <ContactForm locale={locale} client:load/>}
 </CardLayout>
 
 <FloatingHomeButton accentColor={accentColor}/>
