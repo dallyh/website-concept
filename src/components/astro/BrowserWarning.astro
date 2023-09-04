@@ -9,7 +9,7 @@ await loadNamespaces(locale, namespaces);
 ---
 
 <div class="top-panel disabled">
-    <p>Your browser currently does not support some of the features used on this side. Viewing experience may not be optimal.</p>
+    <p>Your browser currently does not support some of the features used on this site. Viewing experience may not be optimal.</p>
     <i class="gg-close"></i>
 </div>
 
@@ -53,6 +53,12 @@ await loadNamespaces(locale, namespaces);
 
 <script>
     const showWarning = () => {
+        //@ts-ignore - ignore for now, because it is not widely supported, thus, the function does not exist in typings yet
+        const supportsViewTransitions = !!document.startViewTransition;
+        if(supportsViewTransitions) {
+            return;
+        }
+
         const topPanel = document.querySelector<HTMLDivElement>(".top-panel");
         const topPanelButton = topPanel?.querySelector(".gg-close");
         const warningShown = window.localStorage.getItem("warningShown");
@@ -70,7 +76,7 @@ await loadNamespaces(locale, namespaces);
 
         setTimeout(() => {
             topPanel?.classList.add("hidden");
-        }, 3500);
+        }, 5000);
     };
     showWarning();
 </script>
