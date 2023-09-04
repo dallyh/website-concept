@@ -4,6 +4,7 @@ import "../styles/reset.css";
 import "../styles/global.css";
 import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
 import i18n from "../i18n/i18n";
+import BrowserWarning from "../components/astro/BrowserWarning.astro";
 
 interface Props {
     title: string;
@@ -22,10 +23,11 @@ if (!i18n.isInitialized) {
 <!doctype html>
 <html lang="cs">
     <head>
+        <BrowserWarning />
         <ViewTransitions fallback="swap" />
         <HeadHrefLangs />
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
+        <meta name="description" content="Dalibor's webpage" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
