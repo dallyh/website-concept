@@ -2,27 +2,22 @@
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 import CardLayout from "../../layouts/CardLayout.astro";
-import { getLocaleEx } from "../../i18n/getLocaleEx";
-import i18next, { t } from 'i18next';
-import type {ContactForm as ContactFormRes} from "../../i18n/namespaces"
-
+import { getLocaleEx } from "../../i18n/i18n-aut-ex";
+import i18n, { loadNamespaces } from "../../i18n/i18n";
+import type { ContactForm as ContactFormRes } from "../../i18n/locales";
 
 const accentColor = "var(--accent-contact)";
 
 // i18next
 const locale = getLocaleEx(Astro);
-const namespace = "contactForm";
-if (i18next.isInitialized)
-{
-    await i18next.changeLanguage(locale);
-    await i18next.loadNamespaces([namespace]);
-}
+const namespaces = ["contactForm"];
+await loadNamespaces(locale, namespaces);
+const res: ContactFormRes = i18n.getResourceBundle(locale, "contactForm");
 
-const res: ContactFormRes = i18next.getResourceBundle(locale, namespace)
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">
-    <ContactForm resources={res} client:load/>
+    <ContactForm resources={res} client:load />
 </CardLayout>
 
 <FloatingHomeButton accentColor={accentColor} />

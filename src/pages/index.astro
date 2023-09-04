@@ -3,10 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/astro/Hero.astro";
 import Footer from "../components/astro/Footer.astro";
 import { getLocaleUrl } from "astro-i18n-aut";
-import { getLocaleEx } from "../i18n/getLocaleEx";
+import { getLocaleEx } from "../i18n/i18n-aut-ex";
+import { loadNamespaces, t } from "../i18n/i18n";
 
 const accentColor = "var(--accent)";
+
+// i18next
 const locale = getLocaleEx(Astro);
+const namespaces = ["landing"];
+await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title="Welcome to Astro.">
@@ -22,8 +27,8 @@ const locale = getLocaleEx(Astro);
                         <div class="card-info">
                             <i class="gg-file-document"></i>
                             <div class="card-info-title">
-                                <h3>Resume</h3>
-                                <h4>My resume, on the web.</h4>
+                                <h3>{t("landing:resume_title")}</h3>
+                                <h4>{t("landing:resume_description")}</h4>
                             </div>
                         </div>
                     </div>
@@ -38,8 +43,8 @@ const locale = getLocaleEx(Astro);
                         <div class="card-info">
                             <i class="gg-git-fork"></i>
                             <div class="card-info-title">
-                                <h3>Projects</h3>
-                                <h4>A list of my projects</h4>
+                                <h3>{t("landing:projects_title")}</h3>
+                                <h4>{t("landing:projects_description")}</h4>
                             </div>
                         </div>
                     </div>
@@ -54,8 +59,8 @@ const locale = getLocaleEx(Astro);
                         <div class="card-info">
                             <i class="gg-mail"></i>
                             <div class="card-info-title">
-                                <h3>Contact</h3>
-                                <h4>Contact me here</h4>
+                                <h3>{t("landing:contact_title")}</h3>
+                                <h4>{t("landing:contact_description")}</h4>
                             </div>
                         </div>
                     </div>
@@ -72,11 +77,7 @@ const locale = getLocaleEx(Astro);
     document.addEventListener(
         "astro:page-load",
         (e) => {
-            if (window.location.pathname !== `${import.meta.env.BASE_URL}`)
-            {
-                e.target?.removeEventListener;
-                return;
-            }
+            e.target?.removeEventListener;
             card.setupCards();
         },
         { once: false },

@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config";
 import { i18n, filterSitemapByDefaultLocale } from "astro-i18n-aut/integration";
 import react from "@astrojs/react";
-import {defaultLocale} from "./src/i18n/i18n";
-import {locales} from "./src/i18n/i18n";
+import { defaultLocale } from "./src/i18n/locales";
+import { locales } from "./src/i18n/locales";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -17,11 +17,11 @@ export default defineConfig({
             defaultLocale,
         }),
         sitemap({
-          i18n: {
-            locales,
-            defaultLocale,
-          },
-          filter: filterSitemapByDefaultLocale({ defaultLocale }),
+            i18n: {
+                locales,
+                defaultLocale,
+            },
+            filter: filterSitemapByDefaultLocale({ defaultLocale }),
         }),
     ],
 });
