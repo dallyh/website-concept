@@ -34,22 +34,14 @@ const i18nConfig = {
 if (import.meta.env.SSR) {
     console.debug("Initializing i18next");
     i18next.use(FsBackend).init<FsBackendOptions>({
-        debug: true,
-        ns: [],
-        defaultNS: "",
-        fallbackLng: defaultLocale,
-        supportedLngs: getLocales(),
+        ...i18nConfig,
         backend: {
             loadPath: "./public/locales/{{lng}}/{{ns}}.json",
         },
     });
 } else {
     i18next.use(HttpApi).init<HttpBackendOptions>({
-        debug: true,
-        ns: [""],
-        defaultNS: "",
-        fallbackLng: defaultLocale,
-        supportedLngs: getLocales(),
+        ...i18nConfig,
         backend: {
             loadPath: `${site}locales/{{lng}}/{{ns}}.json`,
         },

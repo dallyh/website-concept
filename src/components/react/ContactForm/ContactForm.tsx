@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "@formspree/react";
-import { useTranslation } from "react-i18next";
+//@ts-ignore ignore the types resolution error for now - package has wrong exports
+import autoAnimate from "@formkit/auto-animate";
 import "./ContactForm.css";
-import "../i18n/i18n";
+import type { ContactForm } from "../../../i18n/namespaces";
 
 interface ContactFormProps {
-    locale: string;
+    resources: ContactForm;
 }
 
 const contactForm = (props: ContactFormProps) => {
@@ -14,9 +15,6 @@ const contactForm = (props: ContactFormProps) => {
     const isFirstRender = useRef(true);
     const formRef = useRef(null);
     const formWrapperRef = useRef(null);
-
-    // I18n - pass locale so there are no server side HTML render errors
-    const { t } = useTranslation("contactForm", {lng: props.locale});
 
     // Handle submit and errors
     useEffect(() => {
@@ -32,7 +30,7 @@ const contactForm = (props: ContactFormProps) => {
                 ...prevState,
                 {
                     type: "UNDEFINED",
-                    message: t("contactForm:SubmitError"),
+                    message: props.resources.SubmitError,
                 },
             ]);
             return;
@@ -48,15 +46,15 @@ const contactForm = (props: ContactFormProps) => {
             ...prevState,
             {
                 type: "CORRECT_FIELDS",
-                message: t("contactForm:ERROR_CORRECT_FIELDS"),
+                message: props.resources.ERROR_CORRECT_FIELDS,
             },
         ]);
     }, [state.errors]);
 
     // Animate form
     useEffect(() => {
-        formRef.current; //&& autoAnimate(formRef.current);
-        formWrapperRef.current; //&& autoAnimate(formWrapperRef.current);
+        formRef.current && autoAnimate(formRef.current);
+        formWrapperRef.current && autoAnimate(formWrapperRef.current);
     }, [formRef, formWrapperRef]);
 
     // Validate form submission errors
@@ -67,7 +65,7 @@ const contactForm = (props: ContactFormProps) => {
                     ...prevState,
                     {
                         type: "EMAIL",
-                        message: t("contactForm:ERROR_TYPE_EMAIL"),
+                        message: props.resources.ERROR_TYPE_EMAIL,
                     },
                 ]);
                 break;
@@ -76,7 +74,7 @@ const contactForm = (props: ContactFormProps) => {
                     ...prevState,
                     {
                         type: "TEXT",
-                        message: t("contactForm:ERROR_TYPE_TEXT"),
+                        message: props.resources.ERROR_TYPE_TEXT,
                     },
                 ]);
                 break;
@@ -94,21 +92,31 @@ const contactForm = (props: ContactFormProps) => {
 
     return (
         <div ref={formWrapperRef}>
-            {state.succeeded && (
-                <div id="submit-success">
-                    <p>{t("contactForm:SubmitSuccess")}</p>
+            {state.submitting && (
+                <div id="submitting">
+                    <div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             )}
-            {!state.succeeded && (
+            {state.succeeded && (
+                <div id="submit-success">
+                    <p>{props.resources.SubmitSuccess}</p>
+                </div>
+            )}
+            {(!state.succeeded && !state.submitting) && (
                 <form id="fs-frm" ref={formRef} name="simple-contact-form" onSubmit={handleSubmit}>
                     <fieldset id="fs-frm-inputs">
-                        <label htmlFor="full-name">{t("contactForm:FullName")}</label>
-                        <input type="text" autoComplete="name" name="name" id="full-name" placeholder={t("contactForm:NameAndSurname") as string} required />
-                        <label htmlFor="email">{t("contactForm:EmailAddress")}</label>
+                        <label htmlFor="full-name">{props.resources.FullName}</label>
+                        <input type="text" autoComplete="name" name="name" id="full-name" placeholder={props.resources.NameAndSurname} required />
+                        <label htmlFor="email">{props.resources.EmailAddress}</label>
                         <input id="email" autoComplete="email" type="email" name="email" placeholder="@" required />
                         {errorState.some((key) => key.type === "EMAIL") && <p className="error">{errorState.find((item) => item.type === "EMAIL")?.message}</p>}
-                        <label htmlFor="message">{t("contactForm:Message")}</label>
-                        <textarea rows={5} name="message" id="message" placeholder={t("contactForm:MessagePlaceholder") as string} required></textarea>
+                        <label htmlFor="message">{props.resources.Message}</label>
+                        <textarea rows={5} name="message" id="message" placeholder={props.resources.MessagePlaceholder} required></textarea>
                         {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
                         <input type="hidden" name="_subject" id="email-subject" value="New resume submission" />
                         <input type="hidden" name="_language" value="cs" />
@@ -116,7 +124,7 @@ const contactForm = (props: ContactFormProps) => {
                     {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}
                     {errorState.some((key) => key.type === "UNDEFINED") && <p className="error">{errorState.find((item) => item.type === "UNDEFINED")?.message}</p>}
                     <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
-                        {t("contactForm:Submit")}
+                        {props.resources.Submit}
                     </button>
                 </form>
             )}

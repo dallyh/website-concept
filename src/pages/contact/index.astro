@@ -3,9 +3,8 @@ import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro"
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 import CardLayout from "../../layouts/CardLayout.astro";
 import { getLocaleEx } from "../../i18n/getLocaleEx";
-import ContactFormT from "../../components/react/ContactForm/ContactFormT";
 import i18next, { t } from 'i18next';
-import * as resrc from "../../res";
+import type {ContactForm as ContactFormRes} from "../../i18n/namespaces"
 
 
 const accentColor = "var(--accent-contact)";
@@ -19,13 +18,11 @@ if (i18next.isInitialized)
     await i18next.loadNamespaces([namespace]);
 }
 
-const res: resrc.TranslationResources.contactFormRes = i18next.getResourceBundle(locale, namespace)
+const res: ContactFormRes = i18next.getResourceBundle(locale, namespace)
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">
-     <!--{import.meta.env.PROD && <ContactForm locale={locale} client:only="react"/>}
-    {!import.meta.env.PROD && <ContactForm locale={locale} client:load/>} -->
-     <ContactFormT resources={res} client:load /> 
+    <ContactForm resources={res} client:load/>
 </CardLayout>
 
 <FloatingHomeButton accentColor={accentColor} />
