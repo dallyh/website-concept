@@ -1,14 +1,12 @@
 ---
 import { getLocaleUrl } from "astro-i18n-aut";
-import * as locales from "../../i18n/i18n";
-import { getLocales } from "../../i18n/i18n";
-
+import * as locales from "../../i18n/locales";
 ---
 
 <Fragment>
     <link rel="alternate" hreflang="x-default" href={getLocaleUrl(Astro.url, locales.defaultLocale)} />
     {
-      getLocales().map((supportedLocale) => (
+      locales.getLocales().map((supportedLocale) => (
           <link rel="alternate" hreflang={supportedLocale} href={getLocaleUrl(Astro.url, supportedLocale)}/>
         ))
     }

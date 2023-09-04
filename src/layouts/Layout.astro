@@ -3,6 +3,7 @@ import { ViewTransitions } from "astro:transitions";
 import "../styles/reset.css";
 import "../styles/global.css";
 import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
+import i18n from "../i18n/i18n";
 
 interface Props {
     title: string;
@@ -10,12 +11,18 @@ interface Props {
 
 const { title } = Astro.props;
 const basePath = import.meta.env.BASE_URL;
+
+// Init just once on layout render
+if (!i18n.isInitialized) {
+    i18n.init();
+}
+
 ---
 
 <!doctype html>
 <html lang="cs">
     <head>
-        <ViewTransitions fallback="none"/>
+        <ViewTransitions fallback="none" />
         <HeadHrefLangs />
         <meta charset="UTF-8" />
         <meta name="description" content="Astro description" />
@@ -42,17 +49,15 @@ const basePath = import.meta.env.BASE_URL;
     </head>
     <body>
         <slot />
-    </body>
+    </body><script>
+        import DropdownHandler from "../scripts/dropdown";
+
+        document.addEventListener(
+            "astro:page-load",
+            (e) => {
+                DropdownHandler.init();
+            },
+            { once: false },
+        );
+    </script>
 </html>
-
-<script>
-    import DropdownHandler from "../scripts/dropdown";
-
-    document.addEventListener(
-        "astro:page-load",
-        (e) => {
-            DropdownHandler.init();
-        },
-        { once: false },
-    );
-</script>

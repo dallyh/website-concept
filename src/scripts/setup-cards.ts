@@ -1,5 +1,8 @@
 export const setupCards = () => {
     const cardWrapper = document.getElementById("cards") as HTMLDivElement;
+    if (cardWrapper === null) {
+        return;
+    }
     const cards = document.getElementById("cards")?.getElementsByClassName("card") as HTMLCollectionOf<HTMLAnchorElement>;
 
     const initialLoad = () => {
