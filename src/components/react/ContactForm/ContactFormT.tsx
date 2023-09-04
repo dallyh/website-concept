@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "@formspree/react";
 import "./ContactForm.css";
+import * as res from "../../../res";
+
 
 interface ContactFormProps {
-    label: string;
+    resources: res.TranslationResources.contactFormRes;
 }
 
-const contactFormT = (props: ContactFormProps) => {
+const contactFormT = ({ resources }: ContactFormProps) => {
     const [state, handleSubmit] = useForm("mayzkojd");
     const [errorState, setErrorMessage] = useState([{ type: "", message: "" }]);
     const isFirstRender = useRef(true);
@@ -14,7 +16,12 @@ const contactFormT = (props: ContactFormProps) => {
     const formWrapperRef = useRef(null);
 
     // I18n - pass locale so there are no server side HTML render errors
-    //const { t } = useTranslation("contactForm", {lng: props.locale});
+    //const { t } = useTranslation("contactForm", { i18n: props.i18n });
+
+
+    useEffect(() => {
+        console.log(resources);
+    },[resources])
 
     // Handle submit and errors
     useEffect(() => {
@@ -114,7 +121,7 @@ const contactFormT = (props: ContactFormProps) => {
                     {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}
                     {errorState.some((key) => key.type === "UNDEFINED") && <p className="error">{errorState.find((item) => item.type === "UNDEFINED")?.message}</p>}
                     <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
-                        {props.label}
+                        "TEST"
                     </button>
                 </form>
             )}
