@@ -1,14 +1,14 @@
 ---
 import { loadNamespaces } from "../../i18n/i18n";
-import { getLocaleEx } from "../../i18n/i18n-aut-ex";
+import { getLocale } from "astro-i18n-aut";
 
 // i18next
-const locale = getLocaleEx(Astro);
+const locale = getLocale(Astro.url);
 const namespaces = ["landing"];
 await loadNamespaces(locale, namespaces);
 ---
 
-<div class="top-panel disabled">
+<div class="top-panel">
     <p>Your browser currently does not support some of the features used on this site. Viewing experience may not be optimal.</p>
     <i class="gg-close"></i>
 </div>
@@ -27,6 +27,7 @@ await loadNamespaces(locale, namespaces);
         color: black;
         transition: transform 400ms ease-in-out;
         z-index: 3000;
+        display: none;
 
         & p {
             padding: 1rem;
@@ -40,12 +41,8 @@ await loadNamespaces(locale, namespaces);
             cursor: pointer;
             transform: scale(1.3);
         }
-
-        &.disabled {
-            display: none;
-        }
-
-        &.hidden {
+        &.enabled {
+            display: initial;
             transform: translateY(-100%);
         }
     }
@@ -66,16 +63,14 @@ await loadNamespaces(locale, namespaces);
         if (warningShown === "true") {
             return;
         }
-
-        topPanel?.classList.remove("disabled");
         window.localStorage.setItem("warningShown", "true");
 
         topPanelButton?.addEventListener("click", () => {
-            topPanel?.classList.add("hidden");
+            topPanel?.classList.add("enabled");
         });
 
         setTimeout(() => {
-            topPanel?.classList.add("hidden");
+            topPanel?.classList.add("enabled");
         }, 5000);
     };
     showWarning();

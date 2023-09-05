@@ -1,13 +1,13 @@
 import i18next from "i18next";
-import FsBackend, { type FsBackendOptions } from "i18next-fs-backend";
-import { defaultLocale, getLocales } from "./locales";
+import FsBackend from "i18next-fs-backend";
+import { defaultLocale, localeKeys } from "astro-i18n-aut";
 
 const i18nConfig = {
     debug: true,
     ns: [],
     defaultNS: "",
     fallbackLng: defaultLocale,
-    supportedLngs: getLocales(),
+    supportedLngs: localeKeys,
 };
 
 const i18n = i18next

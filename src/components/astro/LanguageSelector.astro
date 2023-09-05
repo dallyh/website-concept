@@ -3,10 +3,8 @@
 // Edited for this project needs.
 
 import { getLocaleUrl } from "astro-i18n-aut";
-import localeEmoji from "locale-emoji";
 import ISO6991 from "iso-639-1";
-import { getLocaleEx } from "../../i18n/i18n-aut-ex";
-import { getLocales } from "../../i18n/locales";
+import { getLocale, localeKeys } from "astro-i18n-aut";
 
 export interface Props {
     showFlag?: boolean;
@@ -17,10 +15,9 @@ export interface Props {
     additionalClassList?: string[];
 }
 
-const supportedLanguages = getLocales();
-const currentLanguage = getLocaleEx(Astro);
+const currentLanguage = getLocale(Astro.url);
 const { pathname } = Astro.url;
-const { showFlag = false, showTitle = true, placement="bottom", additionalClassList = [], buttonId, dropdownId } = Astro.props;
+const { showFlag = false, showTitle = true, placement = "bottom", additionalClassList = [], buttonId, dropdownId } = Astro.props;
 const capitalizeFirstLetter = (str: string) => {
     const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
     return capitalized;
@@ -29,20 +26,20 @@ const capitalizeFirstLetter = (str: string) => {
 
 <div class="language-selector">
     <button class:list={["dropdown"].concat(additionalClassList)} data-dropdown-target={`#${dropdownId}`} data-dropdown-placement={placement} id={buttonId}>
-        {(showFlag ? localeEmoji(currentLanguage) + " " : "") + (showTitle ? capitalizeFirstLetter(ISO6991.getNativeName(currentLanguage)): "")}
+        {showFlag && <span class={`flag ${currentLanguage}`}/>}
+        {showTitle ? capitalizeFirstLetter(ISO6991.getNativeName(currentLanguage)) : ""}
     </button>
     <ul class="dropdown-content" id={dropdownId} data-js-current-language={currentLanguage}>
         {
-            supportedLanguages.map((supportedLanguage: string) => {
+            localeKeys.map((supportedLanguage: string) => {
                 let value = getLocaleUrl(pathname, supportedLanguage);
                 const nativeName = capitalizeFirstLetter(ISO6991.getNativeName(supportedLanguage));
-                const flag = showFlag ? localeEmoji(supportedLanguage) + " " : "";
-                const label = flag + nativeName;
 
                 return (
                     <li>
                         <a href={value} data-js-language={supportedLanguage}>
-                            <span>{label}</span>
+                            {showFlag && <span class={`flag ${supportedLanguage}`} />}
+                            <span>{nativeName}</span>
                             <i class={supportedLanguage == currentLanguage ? "fa fa-check" : ""} aria-hidden="true" />
                         </a>
                     </li>
@@ -73,7 +70,23 @@ const capitalizeFirstLetter = (str: string) => {
         pointer-events: none;
     }
 
-    .language-selector {
+    .flag {
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 15px;
+        height: 10px;
+        margin-right: 0.5rem;
+        &.cs {
+            background-image: url(/assets/img/flags/cz.svg);
+        }
+        &.en {
+            background-image: url(/assets/img/flags/us.svg);
+        }
+    }
+
+    .flag .flag .language-selector {
         display: flex;
         justify-content: center;
         font-size: 1rem;

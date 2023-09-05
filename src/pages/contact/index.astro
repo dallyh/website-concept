@@ -2,14 +2,14 @@
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 import CardLayout from "../../layouts/CardLayout.astro";
-import { getLocaleEx } from "../../i18n/i18n-aut-ex";
+import { getLocale } from "astro-i18n-aut";
 import i18n, { loadNamespaces } from "../../i18n/i18n";
 import type { ContactForm as ContactFormRes } from "../../i18n/locales";
 
 const accentColor = "var(--accent-contact)";
 
 // i18next
-const locale = getLocaleEx(Astro);
+const locale = getLocale(Astro.url);
 const namespaces = ["contactForm"];
 await loadNamespaces(locale, namespaces);
 const res: ContactFormRes = i18n.getResourceBundle(locale, "contactForm");

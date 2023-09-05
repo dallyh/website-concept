@@ -2,14 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/astro/Hero.astro";
 import Footer from "../components/astro/Footer.astro";
-import { getLocaleUrl } from "astro-i18n-aut";
-import { getLocaleEx } from "../i18n/i18n-aut-ex";
+import { getLocaleUrl, getLocale } from "astro-i18n-aut";
 import { loadNamespaces, t } from "../i18n/i18n";
 
 const accentColor = "var(--accent)";
 
 // i18next
-const locale = getLocaleEx(Astro);
+const locale = getLocale(Astro.url);
 const namespaces = ["landing"];
 await loadNamespaces(locale, namespaces);
 ---
@@ -18,7 +17,7 @@ await loadNamespaces(locale, namespaces);
     <main>
         <Hero style="landing"/>
         <div id="cards">
-            <a href={getLocaleUrl("/resume", locale)} class="card" title="Resume">
+            <a href={getLocaleUrl("/resume", locale)} rel="prefetch" class="card" title="Resume">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-file-document"></i>
@@ -34,7 +33,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </a>
-            <a href={getLocaleUrl("/projects", locale)} class="card" title="My projects">
+            <a href={getLocaleUrl("/projects", locale)} rel="prefetch" class="card" title="My projects">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-git-fork"></i>
@@ -50,7 +49,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </a>
-            <a href={getLocaleUrl("/contact", locale)} class="card" title="Contact form">
+            <a href={getLocaleUrl("/contact", locale)} rel="prefetch" class="card" title="Contact form">
                 <div class="card-content">
                     <div class="card-image">
                         <i class="gg-mail"></i>
