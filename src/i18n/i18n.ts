@@ -22,9 +22,10 @@ const i18n = i18next
 export const t = i18n.t;
 
 export const loadNamespaces = async (locale: string, namespaces: string[]) => {
+    console.debug("loadNamespaces: loading namespaces: " + namespaces);
     if (!i18n.isInitialized) {
-        console.warn("loadNamespaces: i18n is not initialized.")
-        return;
+        console.warn("loadNamespaces: i18n is not initialized. Trying to init.");
+        await initOnce();
     }
 
     if (i18n.language !== locale) {
@@ -32,6 +33,15 @@ export const loadNamespaces = async (locale: string, namespaces: string[]) => {
     }
 
     await i18n.loadNamespaces(namespaces);
-}
+};
+
+const initOnce = async () => {
+    if (!i18n.isInitialized) {
+        console.debug("initOnce: i18n start init.");
+        await i18n.init().then(() => {
+            console.debug("initOnce: i18n was initialized.");
+        });
+    }
+};
 
 export default i18n;

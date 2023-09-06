@@ -12,8 +12,7 @@ const accentColor = "var(--accent-contact)";
 const locale = getLocale(Astro.url);
 const namespaces = ["contactForm"];
 await loadNamespaces(locale, namespaces);
-const res: ContactFormRes = i18n.getResourceBundle(locale, "contactForm");
-
+const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
 
 <CardLayout accentColor={accentColor} cardStyle="contact">

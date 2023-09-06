@@ -5,6 +5,7 @@ import "../styles/global.css";
 import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
 import i18n from "../i18n/i18n";
 import BrowserWarning from "../components/astro/BrowserWarning.astro";
+import { getLocale } from "astro-i18n-aut";
 
 interface Props {
     title: string;
@@ -12,17 +13,12 @@ interface Props {
 
 const { title } = Astro.props;
 const basePath = import.meta.env.BASE_URL;
-
-// Init just once on layout render
-if (!i18n.isInitialized) {
-    i18n.init();
-}
+const locale = getLocale(Astro.url);
 ---
 
 <!doctype html>
-<html lang="cs">
+<html lang={locale}>
     <head>
-        
         <ViewTransitions fallback="swap" />
         <HeadHrefLangs />
         <meta charset="UTF-8" />
@@ -32,35 +28,26 @@ if (!i18n.isInitialized) {
         <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
-        <link href="https://unpkg.com/css.gg@2.0.0/icons/css/folder.css" rel="stylesheet" />
         <link rel="preconnect" href="https://use.typekit.net" />
-        <link rel="stylesheet" href="https://use.typekit.net/bxg2com.css" />
+        <link rel="stylesheet prefetch" href="https://use.typekit.net/bxg2com.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap" rel="stylesheet" />
-        <script type="module" defer>
-            import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
-            document.addEventListener(
-                "astro:page-load",
-                (e) => {
-                    polyfillCountryFlagEmojis();
-                },
-                { once: false },
-            );
-        </script>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap" type="text/css" rel="stylesheet prefetch" />
+        <link href="https://css.gg/css?=file-document|folder|git-fork|mail" type="text/css" rel="stylesheet prefetch" />
     </head>
     <body>
         <BrowserWarning />
         <slot />
-    </body><script>
-        import DropdownHandler from "../scripts/dropdown";
+        <script>
+            import DropdownHandler from "../scripts/dropdown";
 
-        document.addEventListener(
-            "astro:page-load",
-            (e) => {
-                DropdownHandler.init();
-            },
-            { once: false },
-        );
-    </script>
+            document.addEventListener(
+                "astro:page-load",
+                (e) => {
+                    DropdownHandler.init();
+                },
+                { once: false },
+            );
+        </script>
+    </body>
 </html>

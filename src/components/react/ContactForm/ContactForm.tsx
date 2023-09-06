@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "@formspree/react";
-//@ts-ignore ignore the types resolution error for now - package has wrong exports
 import autoAnimate from "@formkit/auto-animate";
 import "./ContactForm.css";
 import type { ContactForm } from "../../../i18n/locales";

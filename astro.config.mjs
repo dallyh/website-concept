@@ -14,7 +14,8 @@ const locales = {
 // https://astro.build/config
 export default defineConfig({
     site: "https://dallyh.github.io",
-    base: import.meta.env.PROD ? "/website-concept" : "",
+    //base: import.meta.env.PROD ? "/website-concept" : "",
+    base: "/website-concept",
     trailingSlash: "always",
     integrations: [
         react(),
