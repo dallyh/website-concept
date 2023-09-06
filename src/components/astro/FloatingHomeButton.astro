@@ -11,7 +11,7 @@ const baseUrl = import.meta.env.BASE_URL;
 const locale = getLocale(Astro.url);
 ---
 
-<a href={getLocaleUrl("/", locale)} aria-label="Go home" title="Home page" class="floating-menu">
+<a href={getLocaleUrl("/", locale)} rel="prefetch" aria-label="Go home" title="Home page" class="floating-menu">
     <i class="gg-home"></i>
 </a>
 

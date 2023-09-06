@@ -2,9 +2,8 @@
 // Credits: https://github.com/yassinedoghri/astro-i18next/blob/beta/src/components/LanguageSelector.astro
 // Edited for this project needs.
 
-import { getLocaleUrl } from "astro-i18n-aut";
 import ISO6991 from "iso-639-1";
-import { getLocale, localeKeys } from "astro-i18n-aut";
+import { getLocale, localeKeys, getLocaleUrl } from "astro-i18n-aut";
 
 export interface Props {
     showFlag?: boolean;
@@ -15,7 +14,7 @@ export interface Props {
     additionalClassList?: string[];
 }
 
-const currentLanguage = getLocale(Astro.url);
+const locale = getLocale(Astro.url);
 const { pathname } = Astro.url;
 const { showFlag = false, showTitle = true, placement = "bottom", additionalClassList = [], buttonId, dropdownId } = Astro.props;
 const capitalizeFirstLetter = (str: string) => {
@@ -26,10 +25,10 @@ const capitalizeFirstLetter = (str: string) => {
 
 <div class="language-selector">
     <button class:list={["dropdown"].concat(additionalClassList)} data-dropdown-target={`#${dropdownId}`} data-dropdown-placement={placement} id={buttonId}>
-        {showFlag && <span class={`flag ${currentLanguage}`}/>}
-        {showTitle ? capitalizeFirstLetter(ISO6991.getNativeName(currentLanguage)) : ""}
+        {showFlag && <span class={`flag ${locale}`} />}
+        {showTitle ? capitalizeFirstLetter(ISO6991.getNativeName(locale)) : ""}
     </button>
-    <ul class="dropdown-content" id={dropdownId} data-js-current-language={currentLanguage}>
+    <ul class="dropdown-content" id={dropdownId} data-js-current-language={locale}>
         {
             localeKeys.map((supportedLanguage: string) => {
                 let value = getLocaleUrl(pathname, supportedLanguage);
@@ -37,10 +36,10 @@ const capitalizeFirstLetter = (str: string) => {
 
                 return (
                     <li>
-                        <a href={value} data-js-language={supportedLanguage}>
+                        <a href={value} rel="prefetch" data-js-language={supportedLanguage}>
                             {showFlag && <span class={`flag ${supportedLanguage}`} />}
                             <span>{nativeName}</span>
-                            <i class={supportedLanguage == currentLanguage ? "fa fa-check" : ""} aria-hidden="true" />
+                            <i class={supportedLanguage == locale ? "fa fa-check" : ""} aria-hidden="true" />
                         </a>
                     </li>
                 );
