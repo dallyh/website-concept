@@ -2,8 +2,8 @@
 import { ViewTransitions } from "astro:transitions";
 import "../styles/reset.css";
 import "../styles/global.css";
+import "../styles/keyframes.css";
 import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
-import i18n from "../i18n/i18n";
 import BrowserWarning from "../components/astro/BrowserWarning.astro";
 import { getLocale } from "astro-i18n-aut";
 
@@ -33,7 +33,7 @@ const locale = getLocale(Astro.url);
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap" type="text/css" rel="stylesheet prefetch" />
-        <link href="https://css.gg/css?=file-document|folder|git-fork|mail" type="text/css" rel="stylesheet prefetch" />
+        <link href="https://css.gg/css?=file-document|folder|git-fork|mail|info|mouse" type="text/css" rel="stylesheet prefetch" />
     </head>
     <body>
         <BrowserWarning />

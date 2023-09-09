@@ -1,0 +1,32 @@
+@keyframes mouseAnim {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+
+@keyframes typing {
+    to {
+        width: 0;
+    }
+}
+
+@keyframes scaleUpX {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}

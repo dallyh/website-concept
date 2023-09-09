@@ -22,16 +22,6 @@ const { style } = Astro.props;
 }
 
 {
-    style === "resume" && (
-        <div class="hero resume" transition:name="title-name">
-            <h1 class="hello">
-                <p>Daliborův Životopis</p>
-            </h1>
-        </div>
-    )
-}
-
-{
     style === "projects" && (
         <div class="hero projects" transition:name="title-name">
             <h1 class="hello">
@@ -89,6 +79,13 @@ const { style } = Astro.props;
 
             & p:nth-of-type(1) {
                 margin-top: 10px;
+                font-style: normal;
+            }
+        }
+
+        &.contact,
+        &.projects {
+            & p:nth-of-type(1) {
                 font-size: 4rem;
                 font-style: normal;
 

@@ -1,155 +1,311 @@
 ---
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
-import CardLayout from "../../layouts/CardLayout.astro";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import i18n, { loadNamespaces, t } from "../../i18n/i18n";
 
 const accentColor = "var(--accent-resume)";
+
+// Images
+import profilePicture from "../../assets/img/profile.png";
+import { getLocale } from "astro-i18n-aut";
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["index", "shared"];
+await loadNamespaces(locale, namespaces);
 ---
 
-<CardLayout accentColor={accentColor} cardStyle="resume">
-    <div class="resume-wrapper">
-        <section class="resume-section">
-            <div class="side-panel">
-                <p>FIRST!</p>
-            </div>
-            <div class="section-content">
-                <h2>Title</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris dictum
-                    facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
-                    Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris
-                    elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In
-                    rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis
-                    quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra
-                    vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia
-                    nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel,
-                    interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis
-                    mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget,
-                    tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut,
-                    suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora
-                    torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui,
-                    pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde
-                    omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien
-                    elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.
-                </p>
-            </div>
-        </section>
-        <section class="resume-section">
-            <div class="side-panel">
-                <p>SECOND :)</p>
-            </div>
-            <div class="section-content">
-                <h2>Title</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris dictum
-                    facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
-                    Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris
-                    elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In
-                    rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis
-                    quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra
-                    vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia
-                    nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel,
-                    interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis
-                    mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget,
-                    tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut,
-                    suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora
-                    torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui,
-                    pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde
-                    omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien
-                    elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.
-                </p>
-            </div>
-        </section>
-        <section class="resume-section">
-            <div class="side-panel last">
-                <p>THIRD</p>
-            </div>
-            <div class="section-content">
-                <h2>Title</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris dictum
-                    facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
-                    Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris
-                    elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In
-                    rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis
-                    quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra
-                    vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia
-                    nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel,
-                    interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis
-                    mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget,
-                    tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut,
-                    suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora
-                    torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui,
-                    pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde
-                    omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                    Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien
-                    elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.
-                </p>
-            </div>
-        </section>
+<Layout title="Dalibor's Resume">
+    <div class="resume-wrapper with-header">
+        <main class="resume-content">
+            <!-- Introduction -->
+            <section class="hero-container" id="hero">
+                <div class="hero">
+                    <div class="profile-picture-wrapper">
+                        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+                    </div>
+                    <div class="hero-title-wrapper">
+                        <h1 class="hero-title" transition:name="title-name">
+                            Dalibor <br />
+                             Hon
+                        </h1>
+                        <p>BUSINESS CONSULTANT</p>
+                    </div>
+                </div>
+                <div class="section-footer noprint">
+                    <div class="section-next-chapter">
+                        <span class="gg-mouse mouse-anim"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="resume-section skills">
+                <div class="section-content">
+                    <h2>Intro</h2>
+                    <div class="intro-projects">
+                        <div class="item top-item">
+                            <div class="content">
+                                <div class="skill-level">
+                                    <span>+</span>
+                                    <h3>45 {t("index:CardProjectTitle")}</h3>
+                                    <h3 class="skill-title"></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <p>{t("index:CardProjectDetail")}</p>
+                    </div>
+                    <h3>Test</h3>
+                    <div class="intro-summary">
+                        <div class="bars">
+                            <div class="bar">
+                                <label for="ba">Business Analysis</label>
+                                <progress id="ba" value="50" max="100"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="resume-section">
+                <div class="section-content">
+                    <h2>Title</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris
+                        dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                        hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec,
+                        diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris
+                        vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget,
+                        tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo
+                        ut, suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad
+                        litora torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit
+                        dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut
+                        perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies,
+                        scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis
+                        congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris
+                        vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam
+                        metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus
+                        nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula
+                        pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.
+                    </p>
+                </div>
+            </section>
+        </main>
     </div>
-</CardLayout>
+</Layout>
 
 <FloatingHomeButton accentColor={accentColor} />
 
 <style define:vars={{ accentColor }}>
-    :global(.card > .card-content) {
-        padding: 0 !important; /* TODO: This is ugly, find a better way */
-    }
-
-    body {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0px;
-    }
-
-    .resume-section {
+    /* Hero section */
+    .hero-container {
+        --title-padding-left: 1.25rem;
         display: grid;
-        grid-template-columns: min-content 1fr;
+        gap: 0.5rem;
+        padding-bottom: 1rem;
+        scroll-margin-top: 100px;
+        align-items: center;
+        min-height: 100vh;
     }
 
-    .side-panel {
-        writing-mode: vertical-rl;
-        display: flex;
-        align-items: center;
-        border-right: 1px dotted rgba(255, 255, 255, 0.4);
-        border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
-        height: 100%;
-        width: 2rem;
-        letter-spacing: 5px;
-        font-weight: bold;
-        opacity: 0.6;
-        line-height: 1;
-        font-size: 0.85rem;
-        padding-top: 1rem;
-
-        & p {
-            position: sticky;
-            top: 1rem;
+    @media (max-width: 1366px) {
+        .hero-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 
-    .side-panel.last {
-        border-bottom: unset;
+    .hero-title-wrapper > p {
+        font-weight: 800;
+        letter-spacing: 0.35rem;
+        margin-top: 0.5rem;
+        position: relative;
+        width: max-content;
+        margin-left: var(--title-padding-left);
+    }
+
+    .hero-title-wrapper > p::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        animation: typing 1s steps(19) forwards;
+        animation-delay: 300ms;
+        background-color: var(--bg-color);
+    }
+
+    .hero-title {
+        display: inline-flex;
+        font-size: clamp(4rem, 20vw, 8rem);
+        line-height: 1;
+        position: relative;
+        letter-spacing: 0.25rem;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.5);
+        background-clip: text;
+        font-family: "Pacifico", "Lato", cursive;
+        color: transparent;
+        padding: 3rem 1.25rem 3rem 1.25rem;
+    }
+
+    .hero-title::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 15rem;
+        background-color: rgba(var(--accentColor), 1);
+        left: var(--title-padding-left);
+        bottom: 0;
+        transform: scaleX(0);
+        animation: scaleUpX 300ms ease-in-out forwards 300ms;
+        transform-origin: left;
+    }
+
+    .profile-picture-wrapper {
+        position: relative;
+        margin-top: 2rem;
+        margin-left: var(--title-padding-left);
+    }
+
+    .profile-picture {
+        display: block;
+        width: clamp(120px, 40vw, 220px);
+        height: clamp(120px, 40vw, 220px);
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid rgba(var(--accentColor), 0.8);
+        margin-bottom: 2rem;
+    }
+
+    .section-footer {
+        padding-bottom: 1rem;
+        align-self: flex-end;
+    }
+
+    .section-next-chapter {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        text-transform: uppercase;
+    }
+
+    .mouse-anim {
+        animation-name: mouseAnim;
+        animation-iteration-count: infinite;
+        animation-duration: 1.2s;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        color: rgba(var(--accentColor), 1);
+    }
+
+    .resume-wrapper {
+        max-width: var(--resume-page-width);
+        margin: auto;
+        border-radius: 15px;
+        position: relative;
+        z-index: 1;
+        margin-top: 1rem;
+    }
+
+    .resume-content {
+        position: relative;
+        z-index: 3;
+        padding: 1rem;
+    }
+
+    .resume-section {
+        /* display: grid; */
     }
 
     .section-content {
-        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 3rem;
+        gap: 1rem;
     }
+
+    .intro-projects .skill-level {
+        display: flex;
+        font-size: 2rem;
+        color: rgba(var(--accentColor), 1);
+    }
+
+    .intro-projects .skill-level span {
+        font-size: 1rem;
+    }
+
+    .intro-projects .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bars {
+        display: grid;
+    }
+
+    .bars > .bar {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    /* .bars > .bar > progress {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        accent-color: rgba(var(--accentColor), 1);
+        background: rgba(var(--accentColor), 1);
+        color: rgba(var(--accentColor), 1);
+        width: 100%;
+        border-radius: 20px;
+        height: 6px;
+    }
+
+    .bars > .bar > progress::-moz-progress-bar {
+        background: rgba(var(--accentColor), 1);
+        border-radius: 20px;
+    }
+    .bars > .bar > progress::-webkit-progress-value {
+        background: rgba(var(--accentColor), 1);
+        border-radius: 20px;
+    } */
 
     h2 {
         line-height: 1;
         font-family: muli;
         font-size: 3rem;
         font-weight: bold;
+        color: rgba(var(--accentColor), 1);
+        padding-bottom: 1rem;
+    }
+
+    progress[value] {
+        --color: rgba(var(--accentColor), 1); /* the progress color */
+        --background: lightgrey; /* the background color */
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        width: 100%;
+        height: 5px;
+        border-radius: 10em;
+        background: var(--background);
+    }
+    progress[value]::-webkit-progress-bar {
+        border-radius: 10em;
+        background: var(--background);
+    }
+    progress[value]::-webkit-progress-value {
+        border-radius: 10em;
+        background: var(--color);
+    }
+    progress[value]::-moz-progress-bar {
+        border-radius: 10em;
+        background: var(--color);
     }
 </style>

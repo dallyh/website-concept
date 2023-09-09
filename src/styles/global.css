@@ -13,7 +13,10 @@
     --card-bg: rgba(255, 255, 255, 0.1);
     --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
     --dropdown-bg: #161b22;
-    --dropdown-border-color: rgba(255, 255, 255, 0.1);
+    --dropdown-border-color: rgba(255, 255, 255, 0.3);
+    --header-size: 70px;
+    --resume-page-width: 1350px;
+    --header-bg: rgb(39, 39, 39);
 }
 
 html {
