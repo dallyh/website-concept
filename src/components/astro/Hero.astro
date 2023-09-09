@@ -50,7 +50,7 @@ const { style } = Astro.props;
         padding: 1.5rem 0rem 1.5rem 0rem;
         background-color: rgba(255, 255, 255, 0.5);
         background-clip: text;
-        margin-bottom: -1.5rem;
+        margin-bottom: -1.7rem;
 
         @media (max-width: 1000px) {
             justify-content: center;
@@ -71,7 +71,6 @@ const { style } = Astro.props;
             }
         }
 
-        &.resume,
         &.contact,
         &.projects {
             position: relative;
@@ -80,12 +79,6 @@ const { style } = Astro.props;
             & p:nth-of-type(1) {
                 margin-top: 10px;
                 font-style: normal;
-            }
-        }
-
-        &.contact,
-        &.projects {
-            & p:nth-of-type(1) {
                 font-size: 4rem;
                 font-style: normal;
 
@@ -93,6 +86,10 @@ const { style } = Astro.props;
                     font-size: 3rem;
                 }
             }
+        }
+
+        &.contact {
+            margin-bottom: -2rem;
         }
     }
 </style>

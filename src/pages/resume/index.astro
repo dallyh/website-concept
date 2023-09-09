@@ -2,13 +2,18 @@
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import i18n, { loadNamespaces, t } from "../../i18n/i18n";
+import { loadNamespaces, t } from "../../i18n/i18n";
+import { getLocale } from "astro-i18n-aut";
 
 const accentColor = "var(--accent-resume)";
 
 // Images
 import profilePicture from "../../assets/img/profile.png";
-import { getLocale } from "astro-i18n-aut";
+import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
+import mfilesLogo from "../../assets/img/company-logos/m-files.png";
+import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
+import nintextLogo from "../../assets/img/company-logos/nintex-black.svg";
+import Footer from "../../components/astro/Footer.astro";
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -43,7 +48,7 @@ await loadNamespaces(locale, namespaces);
                 <div class="section-content">
                     <h2>Intro</h2>
                     <div class="intro-projects">
-                        <div class="item top-item">
+                        <div>
                             <div class="content">
                                 <div class="skill-level">
                                     <span>+</span>
@@ -54,12 +59,22 @@ await loadNamespaces(locale, namespaces);
                         </div>
                         <p>{t("index:CardProjectDetail")}</p>
                     </div>
-                    <h3>Test</h3>
                     <div class="intro-summary">
                         <div class="bars">
                             <div class="bar">
-                                <label for="ba">Business Analysis</label>
+                                <label for="ba">{t("index:CardBATitle")}</label>
+                                <progress id="ba" value="75" max="100"></progress>
+                                <p>{t("index:CardBADetail")}</p>
+                            </div>
+                            <div class="bar">
+                                <label for="ba">{t("index:CardImplementationTitle")}</label>
                                 <progress id="ba" value="50" max="100"></progress>
+                                <p>{t("index:CardImplementationDetail")}</p>
+                            </div>
+                            <div class="bar">
+                                <label for="ba">{t("index:CardDevTitle")}</label>
+                                <progress id="ba" value="20" max="100"></progress>
+                                <p>{t("index:CardDevDetail")}</p>
                             </div>
                         </div>
                     </div>
@@ -67,37 +82,301 @@ await loadNamespaces(locale, namespaces);
             </section>
             <section class="resume-section">
                 <div class="section-content">
-                    <h2>Title</h2>
+                    <h2 class="">{t("index:SectionSkills")}</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris
-                        dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                        hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec,
-                        diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris
-                        vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget,
-                        tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis congue commodo. Aliquam ante. In sem justo, commodo
-                        ut, suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris vehicula lacinia. Class aptent taciti sociosqu ad
-                        litora torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam metus. Curabitur sagittis hendrerit ante. Sed elit
-                        dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus nec, pretium sit amet, tempor quis. Sed ut
-                        perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                        dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies,
-                        scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec quis nibh at felis
-                        congue commodo. Aliquam ante. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Mauris dictum facilisis augue. Vivamus porttitor turpis ac leo. Aenean vel massa quis mauris
-                        vehicula lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nunc dapibus tortor vel mi dapibus sollicitudin. Nullam rhoncus aliquam
-                        metus. Curabitur sagittis hendrerit ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris elementum mauris vitae tortor. Duis pulvinar. Cras pede libero, dapibus
-                        nec, pretium sit amet, tempor quis. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aenean vel massa quis mauris vehicula lacinia. In rutrum. Etiam bibendum elit eget erat. Suspendisse nisl. Etiam ligula
-                        pede, sagittis quis, interdum ultricies, scelerisque eu. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Nam quis nulla.
+                        {t("index:SkillsIntroduction")}
                     </p>
+
+                    <div class="list-card exp">
+                        <div class="exp-text">+ 2 {t("index:SkillsYears")}</div>
+                        <div class="exp-description">
+                            <h3>{t("index:SkillsBA")}</h3>
+                            <span>{t("index:SkillsBADescription")}</span>
+                        </div>
+                    </div>
+
+                    <div class="list-card exp">
+                        <div class="exp-text">+ 2 {t("index:SkillsYears")}</div>
+                        <div class="exp-description">
+                            <h3>{t("index:SkillsWindowsServers")}</h3>
+                            <span>{t("index:SkillsWindowsServersDescription")}</span>
+                        </div>
+                    </div>
+
+                    <div class="list-card exp">
+                        <div class="exp-text">+ 4 {t("index:SkillsYears")}</div>
+                        <div class="exp-description">
+                            <h3>{t("index:SkillsDatabases")}</h3>
+                            <span>{t("index:SkillsDatabasesDescription")}</span>
+                        </div>
+                    </div>
+
+                    <div class="list-card exp">
+                        <div class="exp-text">+ 1 {t("index:SkillsYears")}</div>
+                        <div class="exp-description">
+                            <h3>{t("index:SkillsOOP")}</h3>
+                            <span>{t("index:SkillsOOPDescription")}</span>
+                        </div>
+                    </div>
+
+                    <div class="list-card">
+                        <h3 class="dev-list-title">{t("index:SkillsProgrammingLangAndTools")} <i class="gg-info" data-tooltip="top" data-tooltip-text={t("index:HoverIconsTooltip")}></i></h3>
+                        <ul class="dev-list-inline">
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="HTML5">
+                                <i class="devicon-html5-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="CSS3">
+                                <i class="devicon-css3-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="JavaScript">
+                                <i class="devicon-javascript-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="Node JS">
+                                <i class="devicon-nodejs-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="SASS">
+                                <i class="devicon-sass-original"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="NPM">
+                                <i class="devicon-npm-original-wordmark"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="Webpack">
+                                <i class="devicon-webpack-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="C#">
+                                <i class="devicon-csharp-line"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text=".NET Framework">
+                                <i class="devicon-dot-net-plain-wordmark"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text=".NET Core">
+                                <i class="devicon-dotnetcore-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="Bootstrap">
+                                <i class="devicon-bootstrap-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="MSSQL">
+                                <i class="devicon-microsoftsqlserver-plain-wordmark"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="GIT">
+                                <i class="devicon-git-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="jQuery">
+                                <i class="devicon-jquery-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="Adobe Photoshop">
+                                <i class="devicon-photoshop-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="Azure">
+                                <i class="devicon-azure-plain"></i>
+                            </li>
+                            <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="TypeScript">
+                                <i class="devicon-typescript-plain"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list-card">
+                        <h3>{t("index:SkillsSoftwareAndPlatforms")}</h3>
+                        <div class="software-experience-list">
+                            <ul>
+                                <li>
+                                    <a href="https://www.abbyy.com/flexicapture/" target="_blank">ABBYY FlexiCapture</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.abbyy.com/finereader-server/" target="_blank"> ABBYY FineReader Server</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.abbyy.com/vantage/" target="_blank">ABBYY Vantage</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.microsoft.com/cs-cz/microsoft-365/sharepoint/collaboration" target="_blank">Microsoft SharePoint</a>
+                                </li>
+                                <li>
+                                    <a href="https://powerplatform.microsoft.com/en-us/" target="_blank"> Microsoft PowerPlaftorm</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.m-files.com/" target="_blank">M-Files</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.nintex.com/process-automation/k2-software/" target="_blank"> K2 Five/K2 Cloud</a>
+                                </li>
+                            </ul>
+                            <p>
+                                {t("index:SkillsSoftwareAndPlatformsDescription")}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="resume-section">
+                <div class="section-content">
+                    <h2 class="section-title pagebreak">{t("index:SectionCertifications")}</h2>
+                    <div class="certifications-list">
+                        <p><Fragment set:html={t("index:CertLinkedIn")} /></p>
+                        <div class="certifications-grid">
+                            <div class="cert-card">
+                                <Image class="cert-card-logo" src={msftLogo} format="avif" width={150} height={32} alt="Microsoft logo" />
+                                <p class="cer-card-description">Power Platform Fundamentals (PL-900)</p>
+                            </div>
+                            <div class="cert-card">
+                                <Image class="cert-card-logo" src={msftLogo} format="avif" width={150} height={32} alt="Microsoft logo" />
+                                <p class="cer-card-description">Microsoft Dynamics 365 Fundamentals (PL-900)</p>
+                            </div>
+                            <div class="cert-card">
+                                <Image class="cert-card-logo abbyy" src={abbyyLogo} format="avif" width={110} alt="ABBYY logo" />
+                                <p class="cer-card-description">FlexiCapture 12 Basic</p>
+                            </div>
+                            <div class="cert-card">
+                                <Image class="cert-card-logo abbyy" src={abbyyLogo} format="avif" width={110} alt="ABBYY logo" />
+                                <p class="cer-card-description">Vantage Certified Business Analyst</p>
+                            </div>
+                            <div class="cert-card">
+                                <img class="cert-card-logo nintex" src={nintextLogo.src} alt="Nintex logo" width="150px" height="40px" />
+                                <p class="cer-card-description">K2 IT Developer</p>
+                            </div>
+                            <div class="cert-card">
+                                <img class="cert-card-logo nintex" src={nintextLogo.src} alt="Nintex logo" width="150px" height="40px" />
+                                <p class="cer-card-description">K2 Business Analyst</p>
+                            </div>
+                            <div class="cert-card">
+                                <img class="cert-card-logo nintex" src={nintextLogo.src} alt="Nintex logo" width="150px" height="40px" />
+                                <p class="cer-card-description">K2 Citizen Developer</p>
+                            </div>
+                            <div class="cert-card">
+                                <Image class="cert-card-logo" src={mfilesLogo} format="avif" width={150} alt="M-Files Corporation logo" />
+                                <p class="cer-card-description">M-Files Solution Engineer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="resume-setion">
+                <div class="section-content timeline">
+                    <h2 class="section-title pagebreak">{t("index:TimelineTitle")}</h2>
+                    <div class="timeline-cards">
+                        <div class="timeline-card">
+                            <h3>{t("index:SectionExperience")}</h3>
+                            <div class="timeline-content">
+                                <div class="meta">
+                                    <p class="title">ECM Business Consultant</p>
+                                    <p>Konica Minolta IT Solutions Czech s.r.o</p>
+                                    <span class="date">{t("index:ECMBusinessConsultantDate")}</span>
+                                    <p class="description">
+                                        {t("index:ECMBusinessConsultantDescription")}
+                                    </p>
+                                </div>
+                                <div class="meta">
+                                    <p class="title">Analyst, Shared Services</p>
+                                    <p>MONETA Money Bank a.s.</p>
+                                    <span class="date">{t("index:MonetaAnalystDate")}</span>
+                                    <p class="description">
+                                        {t("index:MonetaAnalystDescription")}
+                                    </p>
+                                </div>
+                                <div class="meta">
+                                    <p class="title">Administrator End User Services, IT</p>
+                                    <p>MONETA Money Bank a.s.</p>
+                                    <span class="date">{t("index:MonetaEndUserServicesDate")}</span>
+                                    <p class="description">
+                                        {t("index:MonetaEndUserServicesDescription")}
+                                    </p>
+                                </div>
+                                <div class="meta">
+                                    <p class="title">Motherboard technician</p>
+                                    <p>ASUS Czech Service s.r.o.</p>
+                                    <span class="date">{t("index:AsusTechnicianDate")}</span>
+                                    <p class="description">
+                                        {t("index:AsusTechnicianDescription")}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-card pagebreak">
+                            <h3>{t("index:SectionEducation")}</h3>
+                            <div class="timeline-content">
+                                <div class="meta">
+                                    <p class="title">{t("index:HighSchoolNaJizdarne")}</p>
+                                    <p>{t("index:MaturityDiploma")}</p>
+                                    <span class="date">2010 - 2014</span>
+                                    <p class="description">{t("index:HighSchoolNaJizdarneDescription")}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
+    <Footer />
 </Layout>
-
 <FloatingHomeButton accentColor={accentColor} />
 
+<script>
+    const timeline = () => {
+        const timelineCards = document.querySelectorAll<HTMLElement>(".timeline-content");
+
+        let observerOptions = {
+            root: document.querySelector("#scrollArea"),
+            rootMargin: "0px",
+            threshold: [0.85, 0.5],
+        };
+
+        let observer = new IntersectionObserver((entires, observer) => {
+            entires.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    let timelineCard = entry.target as HTMLElement;
+                    timelineCard.classList.add("animate");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        if (timelineCards) {
+            timelineCards.forEach((element) => {
+                observer.observe(element);
+            });
+        }
+    };
+
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            timeline();
+        },
+        { once: false },
+    );
+</script>
+
 <style define:vars={{ accentColor }}>
+    h2 {
+        line-height: 1;
+        font-size: 3rem;
+        font-weight: bold;
+        background-color: rgba(var(--accentColor), 0.9);
+        background-clip: text;
+        color: transparent;
+        font-family: "Pacifico", "Lato", cursive;
+        border-top: 5px solid transparent; /* Font shenanigans */
+        border-bottom: 15px solid transparent; /* Font shenanigans */
+    }
+
+    h3 {
+        line-height: 1;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgba(var(--accentColor), 0.8);
+        padding-bottom: 1rem;
+
+        &.dev-list-title {
+            display: flex;
+            gap: 1rem;
+
+            & i {
+                color: white;
+            }
+        }
+    }
+
     /* Hero section */
     .hero-container {
         --title-padding-left: 1.25rem;
@@ -107,12 +386,9 @@ await loadNamespaces(locale, namespaces);
         scroll-margin-top: 100px;
         align-items: center;
         min-height: 100vh;
-    }
 
-    @media (max-width: 1366px) {
-        .hero-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+        @media (max-width: 1366px) {
+            margin-left: -1.5rem;
         }
     }
 
@@ -123,6 +399,7 @@ await loadNamespaces(locale, namespaces);
         position: relative;
         width: max-content;
         margin-left: var(--title-padding-left);
+        margin-top: -25px;
     }
 
     .hero-title-wrapper > p::after {
@@ -154,10 +431,10 @@ await loadNamespaces(locale, namespaces);
         content: "";
         position: absolute;
         height: 2px;
-        width: 15rem;
+        width: 295px;
         background-color: rgba(var(--accentColor), 1);
         left: var(--title-padding-left);
-        bottom: 0;
+        bottom: 0px;
         transform: scaleX(0);
         animation: scaleUpX 300ms ease-in-out forwards 300ms;
         transform-origin: left;
@@ -167,6 +444,7 @@ await loadNamespaces(locale, namespaces);
         position: relative;
         margin-top: 2rem;
         margin-left: var(--title-padding-left);
+        margin-bottom: -4rem;
     }
 
     .profile-picture {
@@ -180,7 +458,7 @@ await loadNamespaces(locale, namespaces);
     }
 
     .section-footer {
-        padding-bottom: 1rem;
+        padding-bottom: 2rem;
         align-self: flex-end;
     }
 
@@ -217,10 +495,6 @@ await loadNamespaces(locale, namespaces);
         padding: 1rem;
     }
 
-    .resume-section {
-        /* display: grid; */
-    }
-
     .section-content {
         display: flex;
         flex-direction: column;
@@ -243,69 +517,303 @@ await loadNamespaces(locale, namespaces);
         flex-direction: column;
     }
 
+    .intro-summary {
+        width: 100%;
+    }
+
     .bars {
         display: grid;
-    }
-
-    .bars > .bar {
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-    }
-
-    /* .bars > .bar > progress {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        accent-color: rgba(var(--accentColor), 1);
-        background: rgba(var(--accentColor), 1);
-        color: rgba(var(--accentColor), 1);
+        grid-auto-flow: column;
+        gap: 1rem;
         width: 100%;
-        border-radius: 20px;
-        height: 6px;
-    }
 
-    .bars > .bar > progress::-moz-progress-bar {
-        background: rgba(var(--accentColor), 1);
-        border-radius: 20px;
-    }
-    .bars > .bar > progress::-webkit-progress-value {
-        background: rgba(var(--accentColor), 1);
-        border-radius: 20px;
-    } */
+        @media (max-width: 800px) {
+            grid-auto-flow: row;
+        }
 
-    h2 {
-        line-height: 1;
-        font-family: muli;
-        font-size: 3rem;
-        font-weight: bold;
-        color: rgba(var(--accentColor), 1);
-        padding-bottom: 1rem;
+        .bar {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            flex: 1 1 0px;
+
+            > .bar-progress {
+                width: 100%;
+            }
+
+            & label {
+                font-size: 1.25rem;
+            }
+        }
     }
 
     progress[value] {
         --color: rgba(var(--accentColor), 1); /* the progress color */
-        --background: lightgrey; /* the background color */
+        --background: rgba(119, 119, 119, 0.2); /* the background color */
 
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         border: none;
         width: 100%;
-        height: 5px;
-        border-radius: 10em;
+        height: 2px;
         background: var(--background);
     }
     progress[value]::-webkit-progress-bar {
-        border-radius: 10em;
         background: var(--background);
     }
     progress[value]::-webkit-progress-value {
-        border-radius: 10em;
         background: var(--color);
     }
     progress[value]::-moz-progress-bar {
-        border-radius: 10em;
         background: var(--color);
+    }
+
+    .list-card {
+        margin-top: 1rem;
+    }
+
+    .list-card.exp {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 1rem;
+    }
+
+    .list-card.exp .exp-text,
+    .list-card span {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .list-card.exp .exp-text {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .list-card.exp .exp-description span {
+        font-weight: inherit;
+    }
+
+    .list-card p {
+        padding-top: 1rem;
+    }
+
+    .dev-list-inline {
+        margin: 0;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        flex-wrap: wrap;
+    }
+
+    .dev-list-inline .dev-list-inline-item {
+        font-size: 3rem;
+        transition: all 300ms;
+        color: var(--dev-icon-color);
+    }
+
+    .dev-list-inline .dev-list-inline-item:hover,
+    .dev-list-inline .dev-list-inline-item:focus {
+        transform: scale(1.05);
+        color: rgba(var(--accentColor), 1);
+        text-shadow: 0px 0px 2px rgb(0, 0, 0, 0.3);
+    }
+
+    .software-experience-list {
+        display: grid;
+        grid-template-columns: min-content 1fr;
+
+        @media (max-width: 800px) {
+            grid-template-columns: unset;
+        }
+
+        & ul {
+            list-style: circle;
+            margin-left: 1rem;
+            line-height: 22px;
+            min-width: 300px;
+        }
+    }
+
+    .certifications-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 0.5fr));
+        gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .certifications-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 0.5fr));
+            gap: 1rem;
+        }
+    }
+
+    .cert-card {
+        height: 150px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        background-color: var(--card-bg);
+        border: 1px solid rgba(var(--accentColor), 0.4);
+        border-radius: 10px;
+    }
+
+    .cert-card p {
+        margin: 0;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .cert-card-logo {
+        max-width: 150px;
+        max-height: 40px;
+        filter: brightness(100%) grayscale(100%) invert(1);
+    }
+
+    @media (max-width: 768px) {
+        .cert-card {
+            gap: 1rem;
+        }
+
+        .cert-card p {
+            margin: 0;
+            max-width: 90%;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .cert-card-logo:not(.nintex) {
+            width: 125px;
+            height: 25px;
+        }
+
+        .cert-card-logo.nintex {
+            width: 130px;
+        }
+
+        .cert-card-logo.abbyy {
+            width: 120px;
+            height: unset;
+        }
+    }
+
+    .timeline {
+        position: relative;
+        display: grid;
+        grid-template-rows: min-content 1fr;
+    }
+
+    .timeline-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        @media (max-width: 800px) {
+            grid-template-columns: unset;
+        }
+    }
+
+    .timeline-cards > .timeline-card {
+        padding: 0;
+    }
+
+    .timeline-content {
+        position: relative;
+    }
+
+    .timeline-content::before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: calc(100% + 30px);
+        left: 1px;
+        top: 0;
+        background-color: #4f4f4f;
+    }
+
+    .timeline-content:after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        left: -1px;
+        top: calc(100% + 30px);
+        background-color: rgba(var(--accentColor), 1);
+    }
+
+    .timeline-content > .header {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .timeline-content .meta {
+        position: relative;
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-content .meta::before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        left: 1px;
+        top: 0;
+        background-color: rgba(var(--accentColor), 1);
+        transform: scaleY(0);
+    }
+
+    .timeline-content > .meta > .title {
+        padding: 10px 0;
+        margin-top: 20px;
+        position: relative;
+        font-weight: normal;
+        max-width: 95%;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 25px;
+        color: rgba(var(--accentColor), 0.8);
+    }
+
+    .timeline-content > .meta:first-of-type > .title {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .timeline-content > .meta > .date {
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+    .timeline-content > .meta > .description {
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-top: 1rem;
+    }
+
+    .timeline-content.animate .meta::before {
+        transform-origin: top;
+        animation: 1s ease-in both scaleUp;
+    }
+
+    .timeline-content.animate .meta:nth-of-type(2)::before {
+        animation-delay: 1s;
+    }
+
+    .timeline-content.animate .meta:nth-of-type(3)::before {
+        animation-delay: 2s;
+    }
+
+    .timeline-content.animate .meta:nth-of-type(4)::before {
+        animation-delay: 3s;
     }
 </style>

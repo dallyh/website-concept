@@ -30,3 +30,13 @@
         transform: scaleX(1);
     }
 }
+
+@keyframes scaleUp {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
