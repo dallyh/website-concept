@@ -14,6 +14,7 @@ import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-black.svg";
 import Footer from "../../components/astro/Footer.astro";
+import Navigation from "../../components/astro/resume/Navigation.astro";
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -22,6 +23,7 @@ await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title="Dalibor's Resume">
+    <Navigation accentColor={accentColor} />
     <div class="resume-wrapper with-header">
         <main class="resume-content">
             <!-- Introduction -->
@@ -44,7 +46,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </section>
-            <section class="resume-section skills">
+            <section class="resume-section skills" id="intro">
                 <div class="section-content">
                     <h2>Intro</h2>
                     <div class="intro-projects">
@@ -80,7 +82,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </section>
-            <section class="resume-section">
+            <section class="resume-section" id="skills">
                 <div class="section-content">
                     <h2 class="">{t("index:SectionSkills")}</h2>
                     <p>
@@ -120,7 +122,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
 
                     <div class="list-card">
-                        <h3 class="dev-list-title">{t("index:SkillsProgrammingLangAndTools")} <i class="gg-info" data-tooltip="top" data-tooltip-text={t("index:HoverIconsTooltip")}></i></h3>
+                        <h3 class="dev-list-title">{t("index:SkillsProgrammingLangAndTools")} <span><i class="gg-info" data-tooltip="top" data-tooltip-text={t("index:HoverIconsTooltip")}></i></span></h3>
                         <ul class="dev-list-inline">
                             <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="HTML5">
                                 <i class="devicon-html5-plain"></i>
@@ -208,7 +210,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </section>
-            <section class="resume-section">
+            <section class="resume-section" id="certifications">
                 <div class="section-content">
                     <h2 class="section-title pagebreak">{t("index:SectionCertifications")}</h2>
                     <div class="certifications-list">
@@ -250,7 +252,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
             </section>
-            <section class="resume-setion">
+            <section class="resume-setion" id="experience">
                 <div class="section-content timeline">
                     <h2 class="section-title pagebreak">{t("index:TimelineTitle")}</h2>
                     <div class="timeline-cards">
@@ -367,13 +369,11 @@ await loadNamespaces(locale, namespaces);
         color: rgba(var(--accentColor), 0.8);
         padding-bottom: 1rem;
 
-        &.dev-list-title {
-            display: flex;
-            gap: 1rem;
-
-            & i {
-                color: white;
-            }
+        i {
+            display: inline-block;
+            color: white;
+            margin-left: 10px;
+            --ggs: 0.8;
         }
     }
 
@@ -385,7 +385,7 @@ await loadNamespaces(locale, namespaces);
         padding-bottom: 1rem;
         scroll-margin-top: 100px;
         align-items: center;
-        min-height: 100vh;
+        min-height: 100svh;
 
         @media (max-width: 1366px) {
             margin-left: -1.5rem;

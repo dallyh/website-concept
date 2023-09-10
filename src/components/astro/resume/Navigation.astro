@@ -1,0 +1,98 @@
+---
+interface Props {
+    accentColor: string;
+}
+
+const { accentColor } = Astro.props;
+---
+
+<nav class="resume-nav">
+    <div class="nav-items">
+        <a href="#hero" class="nav-item selected">
+            <div class="dot" data-tooltip="left" data-tooltip-text="TOP"></div>
+        </a>
+        <a href="#intro" class="nav-item">
+            <div class="dot" data-tooltip="left" data-tooltip-text="Intro"></div>
+        </a>
+        <a href="#skills" class="nav-item">
+            <div class="dot" data-tooltip="left" data-tooltip-text="Skills"></div>
+        </a>
+        <a href="#certifications" class="nav-item">
+            <div class="dot" data-tooltip="left" data-tooltip-text="Certifications"></div>
+        </a>
+        <a href="#experience" class="nav-item">
+            <div class="dot" data-tooltip="left" data-tooltip-text="Experience"></div>
+        </a>
+    </div>
+</nav>
+
+<style define:vars={{ accentColor }}>
+    .resume-nav {
+        position: fixed;
+        right: 3px;
+        top: 50%;
+        z-index: 4000;
+    }
+
+    .nav-items {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        a {
+            color: white;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    }
+
+    .dot {
+        border: 1px solid rgba(var(--accentColor), 1);
+        background-color: rgb(23, 23, 23);
+        width: 15px;
+        height: 15px;
+        margin-right: 25px;
+        border-radius: 50%;
+        transition: background-color 400ms ease-in-out;
+    }
+
+    .nav-item.selected .dot {
+        background-color: rgba(var(--accentColor), 1);
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<script>
+    const initNav = () => {
+        const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-items .nav-item");
+
+        navItems.forEach((e) => {
+            e.addEventListener("click", (ev) => {
+                e.classList.add("selected");
+                removeSelected(e);
+            });
+        });
+
+        const removeSelected = (clickedAnchor: HTMLAnchorElement) => {
+            navItems.forEach((e) => {
+                if (e == clickedAnchor) {
+                    return;
+                }
+
+                e.classList.remove("selected")
+            });
+        };
+    };
+
+    initNav();
+</script>

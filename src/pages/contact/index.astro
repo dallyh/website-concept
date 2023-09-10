@@ -10,7 +10,7 @@ const accentColor = "var(--accent-contact)";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["contactForm"];
+const namespaces = ["contactForm", "shared"];
 await loadNamespaces(locale, namespaces);
 const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
