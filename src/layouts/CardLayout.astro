@@ -15,7 +15,7 @@ const { accentColor, cardStyle} = Astro.props;
 
 <Layout title="Welcome to Astro.">
     <main>
-        <Hero style={cardStyle} />
+        <Hero style={cardStyle} accentColor={accentColor} />
         <Card accentColor={accentColor}>
             <slot />
         </Card>

@@ -16,7 +16,7 @@ await loadNamespaces(locale, namespaces);
 
 <Layout title="Welcome to Astro.">
     <main>
-        <Hero style="landing"/>
+        <Hero style="landing" accentColor={accentColor}/>
         <div id="cards">
             <a href={getLocaleUrl("/resume", locale)} rel="prefetch" class="card" title="Resume">
                 <div class="card-content">

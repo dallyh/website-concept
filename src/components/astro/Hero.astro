@@ -1,12 +1,13 @@
 ---
-import LanguageSelector from './LanguageSelector.astro';
+import LanguageSelector from "./LanguageSelector.astro";
 interface Props {
     style: CardStyle;
+    accentColor: string;
 }
 
 export type CardStyle = "landing" | "resume" | "projects" | "contact";
 
-const { style } = Astro.props;
+const { style, accentColor } = Astro.props;
 ---
 
 {
@@ -14,7 +15,9 @@ const { style } = Astro.props;
         <div class="hero" transition:name="title-name">
             <h1 class="hello">
                 <p>Hello, my name is</p>
-                <p>Dalibor</p>
+                <p>
+                    dalibor
+                </p>
             </h1>
             <LanguageSelector buttonId="headerLanguageButton" dropdownId="headerLanguageDropdown" showFlag={true} showTitle={true} placement="bottom" />
         </div>
@@ -25,7 +28,7 @@ const { style } = Astro.props;
     style === "projects" && (
         <div class="hero projects" transition:name="title-name">
             <h1 class="hello">
-                <p>Projekty</p>
+                <p>projeKty pRojects</p>
             </h1>
         </div>
     )
@@ -35,22 +38,18 @@ const { style } = Astro.props;
     style === "contact" && (
         <div class="hero contact" transition:name="title-name">
             <h1 class="hello">
-                <p>Kontakt</p>
+                <p>Kontakt coNtact</p>
             </h1>
         </div>
     )
 }
 
-<style>
+<style define:vars={{accentColor}}>
     .hero {
         display: flex;
         justify-content: space-between;
         position: relative;
         z-index: 1000;
-        padding: 1.5rem 0rem 1.5rem 0rem;
-        background-color: rgba(255, 255, 255, 0.5);
-        background-clip: text;
-        margin-bottom: -1.7rem;
 
         @media (max-width: 1000px) {
             justify-content: center;
@@ -58,39 +57,36 @@ const { style } = Astro.props;
 
         .hello {
             line-height: 1;
-            font-family: "Pacifico", "Lato", cursive;
-            font-size: 0.85rem;
-            font-style: italic;
-            color: transparent;
+            font-family: "Major Mono Display";
+
+            & p:nth-of-type(1) {
+                margin-left: 2px;
+                margin-bottom: -5px;
+                font-size: 0.85rem;
+                font-style: italic;
+                letter-spacing: -1px;
+                word-spacing: -5px;
+                color: rgba(255, 255, 255, 0.3);
+            }
 
             & p:nth-of-type(2) {
-                font-size: 4rem;
-                padding-left: -5px;
+                color: rgba(var(--accentColor), 1);
+                font-size: 3rem;
                 font-style: normal;
             }
         }
 
         &.contact,
         &.projects {
-            position: relative;
-            z-index: 1010;
-
-            & p:nth-of-type(1) {
-                margin-top: 10px;
-                font-style: normal;
-                font-size: 4rem;
+            .hello p {
+                font-size: 3rem;
+                color: rgba(var(--accentColor), 1);
                 font-style: normal;
 
                 @media (max-width: 600px) {
-                    font-size: 3rem;
+                    font-size: 2rem;
                 }
             }
         }
-
-        &.contact {
-            margin-bottom: -2rem;
-        }
     }
 </style>
-
-<script></script>

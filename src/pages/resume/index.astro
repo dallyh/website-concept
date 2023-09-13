@@ -34,7 +34,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                     <div class="hero-title-wrapper">
                         <h1 class="hero-title" transition:name="title-name">
-                            Dalibor <br />
+                            dalibor<br />
                              Hon
                         </h1>
                         <p>BUSINESS CONSULTANT</p>
@@ -48,7 +48,7 @@ await loadNamespaces(locale, namespaces);
             </section>
             <section class="resume-section skills" id="intro">
                 <div class="section-content">
-                    <h2>Intro</h2>
+                    <h2>úvod</h2>
                     <div class="intro-projects">
                         <div>
                             <div class="content">
@@ -357,9 +357,11 @@ await loadNamespaces(locale, namespaces);
         background-color: rgba(var(--accentColor), 0.9);
         background-clip: text;
         color: transparent;
-        font-family: "Pacifico", "Lato", cursive;
-        border-top: 5px solid transparent; /* Font shenanigans */
-        border-bottom: 15px solid transparent; /* Font shenanigans */
+        font-family: "Major Mono Display";
+        color: rgba(var(--accentColor), 1);
+        font-weight: lighter;
+        word-spacing: -1.5rem;
+        letter-spacing: -2px;
     }
 
     h3 {
@@ -379,7 +381,6 @@ await loadNamespaces(locale, namespaces);
 
     /* Hero section */
     .hero-container {
-        --title-padding-left: 1.25rem;
         display: grid;
         gap: 0.5rem;
         padding-bottom: 1rem;
@@ -391,11 +392,9 @@ await loadNamespaces(locale, namespaces);
     .hero-title-wrapper > p {
         font-weight: 800;
         letter-spacing: 0.35rem;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
         position: relative;
         width: max-content;
-        margin-left: var(--title-padding-left);
-        margin-top: -25px;
     }
 
     .hero-title-wrapper > p::after {
@@ -411,16 +410,15 @@ await loadNamespaces(locale, namespaces);
 
     .hero-title {
         display: inline-flex;
-        font-size: clamp(4rem, 20vw, 8rem);
+        font-size: clamp(2rem, 15vw, 7rem);
         line-height: 1;
         position: relative;
-        letter-spacing: 0.25rem;
+        letter-spacing: -0.5rem;
         font-weight: bold;
-        background-color: rgba(255, 255, 255, 0.5);
-        background-clip: text;
-        font-family: "Pacifico", "Lato", cursive;
-        color: transparent;
-        padding: 3rem 1.25rem 3rem 1.25rem;
+        font-family: "Major Mono Display";
+        color: rgba(var(--accentColor), 1);
+        font-weight: lighter;
+        margin-bottom: 1rem;
     }
 
     .hero-title::after {
@@ -429,8 +427,7 @@ await loadNamespaces(locale, namespaces);
         height: 2px;
         width: 295px;
         background-color: rgba(var(--accentColor), 1);
-        left: var(--title-padding-left);
-        bottom: 0px;
+        bottom: -1.25rem;
         transform: scaleX(0);
         animation: scaleUpX 300ms ease-in-out forwards 300ms;
         transform-origin: left;
@@ -438,9 +435,6 @@ await loadNamespaces(locale, namespaces);
 
     .profile-picture-wrapper {
         position: relative;
-        margin-top: 2rem;
-        margin-left: var(--title-padding-left);
-        margin-bottom: -4rem;
     }
 
     .profile-picture {
