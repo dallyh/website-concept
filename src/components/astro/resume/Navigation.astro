@@ -8,7 +8,7 @@ const { accentColor } = Astro.props;
 
 <nav class="resume-nav">
     <div class="nav-items">
-        <a href="#hero" class="nav-item selected">
+        <a href="#hero" class="nav-item active">
             <div class="dot" data-tooltip="left" data-tooltip-text="TOP"></div>
         </a>
         <a href="#intro" class="nav-item">
@@ -26,11 +26,67 @@ const { accentColor } = Astro.props;
     </div>
 </nav>
 
+<script is:inline>
+document.addEventListener(
+    "astro:page-load",
+    function () {
+        const sections = document.querySelectorAll("section");
+        const menu_links = document.querySelectorAll(".nav-item");
+
+        const makeActive = (link) => menu_links[link].classList.add("active");
+        const removeActive = (link) => menu_links[link].classList.remove("active");
+        const removeAllActive = () => [...Array(sections.length).keys()].forEach((link) => removeActive(link));
+
+        const sectionMargin = 200;
+        let currentActive = 0;
+
+        document.addEventListener("scroll", () => {
+            const current = sections.length - [...sections].reverse().findIndex((section) => window.scrollY >= section.offsetTop - sectionMargin) - 1;
+
+            // only if the section has changed
+            // remove active class from all menu links
+            // and then apply it to the link for the current section
+            if (current !== currentActive) {
+                removeAllActive();
+                currentActive = current;
+                makeActive(current);
+            }
+        });
+    },
+    {once: false},
+);
+</script>
+
+<script>
+    const initNav = () => {
+        const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-items .nav-item");
+
+        navItems.forEach((e) => {
+            e.addEventListener("click", (ev) => {
+                e.classList.add("active");
+                removeSelected(e);
+            });
+        });
+
+        const removeSelected = (clickedAnchor: HTMLAnchorElement) => {
+            navItems.forEach((e) => {
+                if (e == clickedAnchor) {
+                    return;
+                }
+
+                e.classList.remove("active");
+            });
+        };
+    };
+    initNav();
+</script>
+
 <style define:vars={{ accentColor }}>
     .resume-nav {
         position: fixed;
         right: 3px;
         top: 50%;
+        transform: translateY(-50%);
         z-index: 4000;
     }
 
@@ -58,7 +114,7 @@ const { accentColor } = Astro.props;
         transition: background-color 400ms ease-in-out;
     }
 
-    .nav-item.selected .dot {
+    .nav-item.active .dot {
         background-color: rgba(var(--accentColor), 1);
     }
 
@@ -70,29 +126,9 @@ const { accentColor } = Astro.props;
         letter-spacing: 1px;
         text-transform: uppercase;
     }
+
+    .text {
+        width: max-content;
+        bottom: 0;
+    }
 </style>
-
-<script>
-    const initNav = () => {
-        const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-items .nav-item");
-
-        navItems.forEach((e) => {
-            e.addEventListener("click", (ev) => {
-                e.classList.add("selected");
-                removeSelected(e);
-            });
-        });
-
-        const removeSelected = (clickedAnchor: HTMLAnchorElement) => {
-            navItems.forEach((e) => {
-                if (e == clickedAnchor) {
-                    return;
-                }
-
-                e.classList.remove("selected")
-            });
-        };
-    };
-
-    initNav();
-</script>

@@ -1,5 +1,7 @@
 ---
+import { getLocale } from "astro-i18n-aut";
 import LanguageSelector from "./LanguageSelector.astro";
+import { loadNamespaces, t } from "../../i18n/i18n";
 interface Props {
     style: CardStyle;
     accentColor: string;
@@ -8,12 +10,17 @@ interface Props {
 export type CardStyle = "landing" | "resume" | "projects" | "contact";
 
 const { style, accentColor } = Astro.props;
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["landing"];
+await loadNamespaces(locale, namespaces);
 ---
 
 {
     style === "landing" && (
-        <div class="hero" transition:name="title-name">
-            <h1 class="hello">
+        <div class="hero">
+            <h1 class="hello" transition:name="title-name">
                 <p>Hello, my name is</p>
                 <p>
                     dalibor
@@ -26,9 +33,9 @@ const { style, accentColor } = Astro.props;
 
 {
     style === "projects" && (
-        <div class="hero projects" transition:name="title-name">
-            <h1 class="hello">
-                <p>projeKty pRojects</p>
+        <div class="hero projects">
+            <h1 class="hello" transition:name="title-name">
+                <p>{t("landing:projects_title")}</p>
             </h1>
         </div>
     )
@@ -36,9 +43,9 @@ const { style, accentColor } = Astro.props;
 
 {
     style === "contact" && (
-        <div class="hero contact" transition:name="title-name">
-            <h1 class="hello">
-                <p>Kontakt coNtact</p>
+        <div class="hero contact">
+            <h1 class="hello" transition:name="title-name">
+                <p>{t("landing:contact_title")}</p>
             </h1>
         </div>
     )

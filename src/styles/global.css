@@ -1,8 +1,9 @@
 :root {
     --accent: 136, 58, 234;
-    --accent-resume: 0, 200, 255;
-    --accent-contact: 114, 171, 0;
-    --accent-projects: 209, 118, 0;
+    --accent-resume: 0, 217, 255;
+    --accent-contact: 0, 221, 173;
+    --accent-projects: 190, 156, 4;
+    --test: rgb(150, 63, 255);
     --accent-light: 224, 204, 250;
     --accent-dark: 49, 10, 101;
     --body-color: white;

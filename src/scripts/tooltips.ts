@@ -23,7 +23,7 @@ export const initializeTooltips = () => {
         // Show tooltip on page load
         let showOnLoadDelay = Number(tooltip.attributes.getNamedItem("data-tooltip-pageload")?.value);
 
-        console.info(`Content ${content}, placement: ${placement}`);
+        //console.info(`Content ${content}, placement: ${placement}`);
         let tippyInstance = tippy(tooltip, {
             content: content,
             placement: placement,
@@ -41,7 +41,7 @@ export const initializeTooltips = () => {
     }
 
     tooltips.forEach((e) => {
-        console.info(`Tooltip found.`);
+        //console.info(`Tooltip found.`);
         InitializeTooltip(e);
     });
 }

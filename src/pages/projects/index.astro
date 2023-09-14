@@ -2,7 +2,6 @@
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import Footer from "../../components/astro/Footer.astro";
 import Hero from "../../components/astro/Hero.astro";
-import Stars from "../../components/astro/Stars.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const accentColor = "var(--accent-projects)";
@@ -88,5 +87,10 @@ const accentColor = "var(--accent-projects)";
     }
     .card::before {
         pointer-events: none;
+    }
+
+    h3 {
+        font-family: inherit;
+        font-weight: 400;
     }
 </style>
