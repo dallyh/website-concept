@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import astroSvg from "../../../public/assets/img/astro/simple-full-logo-light.svg";
+import LanguageSelector from "./LanguageSelector.astro";
 ---
 
 <footer class="footer-container">
@@ -12,22 +13,32 @@ import astroSvg from "../../../public/assets/img/astro/simple-full-logo-light.sv
             <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
         </a>.
     </p>
+    <div class="lang">
+        <p>Jazyk:</p>
+        <LanguageSelector buttonId="langFooterButton" dropdownId="langFooterDropdown" placement="top"/>
+    </div>
 </footer>
 
 <style>
     /* Footer */
     .footer-container {
-        max-width: 500px;
         height: auto;
         margin: 0px auto;
         padding: 2rem;
         text-align: center;
-    }
-
-    .footer-container p {
         font-size: 0.8rem;
         color: rgba(255, 255, 255, 0.5);
         font-weight: 300;
+    }
+
+    .footer-container .lang {
+        gap: 0.25rem;
+        display: flex;
+        flex-direction: row;
+        margin-top: 0.25rem;
+        justify-content: center;
+        align-items: center;
+        text-align: unset;
     }
 
     .svg-astro {

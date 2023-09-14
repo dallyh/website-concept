@@ -18,19 +18,19 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 <CardLayout accentColor={accentColor} cardStyle="contact">
     <div class="contact-info">
         <div class="social">
-            <h2>{t("shared:SocialLinks")}</h3>
+            <h2>{t("shared:SocialLinks")}</h2>
             <a href="https://www.linkedin.com/in/dalibor-hon/" target="_blank">
                 <i class="devicon-linkedin-plain"></i>
                 {" "}LinkedIn
             </a>
         </div>
         <div class="location">
-            <h2>{t("shared:Location")}</h3>
+            <h2>{t("shared:Location")}</h2>
             <p>Ostrava, {t("shared:MSRegion")}</p>
             <p>{t("shared:CzechRepublic")}</p>
         </div>
         <div class="contact-me noprint">
-            <h2>{t("shared:LeaveMeAMessage")}</h3>
+            <h2>{t("shared:LeaveMeAMessage")}</h2>
             <p>{t("contactForm:ContactMe")}</p>
             <ContactForm resources={res} client:load />
         </div>
@@ -90,6 +90,9 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
     }
 
     @media (max-width: 980px) {
+        body {
+            height: unset;
+        }
         .contact-info {
             display: grid;
             grid-template-rows: min-content 1fr;

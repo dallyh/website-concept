@@ -19,14 +19,13 @@ await loadNamespaces(locale, namespaces);
 
 {
     style === "landing" && (
-        <div class="hero">
+        <div class="hero landing">
             <h1 class="hello" transition:name="title-name">
-                <p>Hello, my name is</p>
-                <p>
-                    dalibor
-                </p>
+                <div class="top-bar">
+                    <p>Hello, my name is</p>
+                </div>
+                <p>dalibor</p>
             </h1>
-            <LanguageSelector buttonId="headerLanguageButton" dropdownId="headerLanguageDropdown" showFlag={true} showTitle={true} placement="bottom" />
         </div>
     )
 }
@@ -51,7 +50,7 @@ await loadNamespaces(locale, namespaces);
     )
 }
 
-<style define:vars={{accentColor}}>
+<style define:vars={{ accentColor }}>
     .hero {
         display: flex;
         justify-content: space-between;
@@ -64,9 +63,14 @@ await loadNamespaces(locale, namespaces);
 
         .hello {
             line-height: 1;
-            font-family: "Major Mono Display";
+            width: 100%;
 
-            & p:nth-of-type(1) {
+            @media (max-width: 1000px) {
+                width: unset;
+            }
+
+            .top-bar p {
+                font-family: "Major Mono Display";
                 margin-left: 2px;
                 margin-bottom: -5px;
                 font-size: 0.85rem;
@@ -76,24 +80,50 @@ await loadNamespaces(locale, namespaces);
                 color: rgba(255, 255, 255, 0.3);
             }
 
-            & p:nth-of-type(2) {
+            & p {
                 color: rgba(var(--accentColor), 1);
                 font-size: 3rem;
                 font-style: normal;
+                font-family: "Major Mono Display";
             }
         }
 
         &.contact,
         &.projects {
+            container-type: inline-size;
+
+            .hello {
+                @media (max-width: 1000px) {
+                    width: unset;
+                }
+            }
+
             .hello p {
                 font-size: 3rem;
                 color: rgba(var(--accentColor), 1);
                 font-style: normal;
 
-                @media (max-width: 600px) {
-                    font-size: 2rem;
+                @media (max-width: 400px) {
+                    font-size: 15cqw;
                 }
             }
+        }
+
+        &.landing {
+            @media (max-width: 1000px) {
+                padding: 1rem 1rem 0rem 1rem;
+            }
+        }
+
+        &.projects {
+            @media (max-width: 1000px) {
+                justify-content: center;
+                padding-top: 0.5rem;
+            }
+        }
+
+        &.contact {
+            padding: 1rem 0rem 0rem 0rem;
         }
     }
 </style>
