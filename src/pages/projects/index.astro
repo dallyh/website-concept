@@ -1,13 +1,20 @@
 ---
+import { getLocale } from "astro-i18n-aut";
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
-import Footer from "../../components/astro/Footer.astro";
+import Footer from "../../components/astro/footer/Footer.astro";
 import Hero from "../../components/astro/Hero.astro";
+import { loadNamespaces, t } from "../../i18n/i18n";
 import Layout from "../../layouts/Layout.astro";
 
 const accentColor = "var(--accent-projects)";
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["index", "shared"];
+await loadNamespaces(locale, namespaces);
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={t("landing:projects_title")}>
     <FloatingHomeButton accentColor={accentColor} />
     <main>
         <Hero style="projects" accentColor={accentColor} />
@@ -62,9 +69,8 @@ const accentColor = "var(--accent-projects)";
             </div>
         </div>
     </main>
+    <Footer accentColor={accentColor} />
 </Layout>
-
-<Footer />
 
 <script>
     import * as card from "../../scripts/setup-cards";

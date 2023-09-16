@@ -1,52 +1,62 @@
 ---
 import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
-import CardLayout from "../../layouts/CardLayout.astro";
 import { getLocale } from "astro-i18n-aut";
 import i18n, { loadNamespaces, t } from "../../i18n/i18n";
 import type { ContactForm as ContactFormRes } from "../../i18n/locales";
+import Card from "../../components/astro/Card.astro";
+import Footer from "../../components/astro/footer/Footer.astro";
+import Hero from "../../components/astro/Hero.astro";
+import Layout from "../../layouts/Layout.astro";
 
 const accentColor = "var(--accent-contact)";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["contactForm", "shared"];
+const namespaces = ["contactForm", "shared", "landing"];
 await loadNamespaces(locale, namespaces);
 const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
 
-<CardLayout accentColor={accentColor} cardStyle="contact">
-    <div class="contact-info">
-        <div class="social">
-            <h2>{t("shared:SocialLinks")}</h2>
-            <a href="https://www.linkedin.com/in/dalibor-hon/" target="_blank">
-                <i class="devicon-linkedin-plain"></i>
-                {" "}LinkedIn
-            </a>
-        </div>
-        <div class="location">
-            <h2>{t("shared:Location")}</h2>
-            <p>Ostrava, {t("shared:MSRegion")}</p>
-            <p>{t("shared:CzechRepublic")}</p>
-        </div>
-        <div class="contact-me noprint">
-            <h2>{t("shared:LeaveMeAMessage")}</h2>
-            <p>{t("contactForm:ContactMe")}</p>
-            <ContactForm resources={res} client:load />
-        </div>
-    </div>
-</CardLayout>
+<Layout title={t("landing:contact_title")}>
+    <main>
+        <Hero style="contact" accentColor={accentColor} />
+        <Card accentColor={accentColor}>
+            <div class="contact-info">
+                <div class="social">
+                    <h2>{t("shared:SocialLinks")}</h2>
+                    <a href="https://www.linkedin.com/in/dalibor-hon/" target="_blank">
+                        <i class="devicon-linkedin-plain"></i>
+                        {" "}LinkedIn
+                    </a>
+                </div>
+                <div class="location">
+                    <h2>{t("shared:Location")}</h2>
+                    <p>Ostrava, {t("shared:MSRegion")}</p>
+                    <p>{t("shared:CzechRepublic")}</p>
+                </div>
+                <div class="contact-me noprint">
+                    <h2>{t("shared:LeaveMeAMessage")}</h2>
+                    <p>{t("contactForm:ContactMe")}</p>
+                    <ContactForm resources={res} client:load />
+                </div>
+            </div>
+        </Card>
+    </main>
+    <Footer accentColor={accentColor} />
+</Layout>
 
 <FloatingHomeButton accentColor={accentColor} />
 
 <style>
     body {
-        align-items: center;
+        height: 100vh;
+        margin: 0px;
+        padding: 0px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 0px;
-        height: 100vh;
+        align-items: center;
     }
 
     h2 {

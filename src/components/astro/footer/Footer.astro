@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import LanguageSelector from "../LanguageSelector.astro";
+import LanguageCollapsible from "./LanguageCollapsible.astro";
+import { getLocale } from "astro-i18n-aut";
+import { loadNamespaces, t } from "../../../i18n/i18n";
+
+interface Props {
+    accentColor: string;
+}
+
+const { accentColor } = Astro.props;
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["footer"];
+await loadNamespaces(locale, namespaces);
+
+import astroSvg from "../../../../public/assets/img/astro/simple-full-logo-light.svg";
+---
+
+<footer class="footer-container">
+    <LanguageCollapsible accentColor={accentColor} />
+    <p>{t("footer:PageCreatedBy")}</p>
+    <p><Fragment set:html={t("footer:Host")}/></p>
+    <p>
+        {t("footer:Framework")}
+        <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework">
+            <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
+        </a>.
+    </p>
+</footer>
+
+<style define:vars={{accentColor}}>
+    /* Footer */
+    .footer-container {
+        width: 100%;
+        gap: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        margin: 0px auto;
+        padding: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 300;
+    }
+
+    :global(.svg-astro) {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 2px;
+        width: 45px;
+        height: 15px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: invert(100%) grayscale(100%);
+        opacity: 50%;
+    }
+</style>

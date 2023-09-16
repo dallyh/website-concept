@@ -1,0 +1,181 @@
+---
+import ISO6991 from "iso-639-1";
+import { getLocale, localeKeys, getLocaleUrl } from "astro-i18n-aut";
+import { loadNamespaces, t } from "../../../i18n/i18n";
+
+export interface Props {
+    showFlag?: boolean;
+    showTitle?: boolean;
+    accentColor: string;
+}
+
+const locale = getLocale(Astro.url);
+const { pathname } = Astro.url;
+const { accentColor, showFlag = false, showTitle = true } = Astro.props;
+const capitalizeFirstLetter = (str: string) => {
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+};
+
+// i18next
+const namespaces = ["footer"];
+await loadNamespaces(locale, namespaces);
+---
+
+<div class="wrap-collabsible">
+    <input id="collapsible2" class="toggle" type="checkbox" />
+    <label for="collapsible2" class="lbl-toggle">
+        {showFlag && <span class={`flag ${locale}`} />}
+        {showTitle ? t("footer:Language") + ": " + capitalizeFirstLetter(ISO6991.getNativeName(locale)) : ""}
+    </label>
+    <div class="collapsible-content">
+        <div class="content-inner" data-js-current-language={locale}>
+            {
+                localeKeys.map((supportedLanguage: string) => {
+                    let value = getLocaleUrl(pathname, supportedLanguage);
+                    const nativeName = capitalizeFirstLetter(ISO6991.getNativeName(supportedLanguage));
+
+                    return (
+                        <>
+                            <div class="content-row">
+                                <a href={value} rel="prefetch" data-js-language={supportedLanguage}>
+                                    <span class={`flag ${supportedLanguage}`} />
+                                    <span>{nativeName}</span>
+                                    <i class={supportedLanguage == locale ? "gg-check" : ""} aria-hidden="true" />
+                                </a>
+                            </div>
+                        </>
+                    );
+                })
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    const setupLinks = () => {
+        const languageSelector = document.querySelectorAll<HTMLAnchorElement>(".wrap-collabsible [data-js-language]");
+        languageSelector.forEach((selector) => {
+            selector.addEventListener("click", function (e) {
+                let currectSelector = selector;
+                let selectedLanguage = currectSelector.getAttribute("data-js-language");
+                if (selectedLanguage === null) {
+                    console.error("Could not find 'data-js-language' attribute.");
+                    return;
+                }
+                console.log("Language changed: " + selectedLanguage);
+                window.localStorage.setItem("language", selectedLanguage);
+            });
+        });
+    };
+
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            e.target?.removeEventListener;
+            setupLinks();
+        },
+        { once: false },
+    );
+</script>
+
+<style define:vars={{ accentColor }}>
+    .flag {
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 15px;
+        height: 10px;
+        margin-right: 0.5rem;
+        &.cs {
+            background-image: url(/website-concept/assets/img/flags/cz.svg);
+        }
+        &.en {
+            background-image: url(/website-concept/assets/img/flags/us.svg);
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    .wrap-collabsible {
+        position: relative;
+    }
+
+    .lbl-toggle {
+        display: block;
+        font-weight: bold;
+        color: rgba(var(--accentColor), 1);
+        cursor: pointer;
+        border-radius: 7px;
+        transition: all 0.25s ease-out;
+        font-size: 0.8rem;
+    }
+
+    .lbl-toggle::before {
+        content: " ";
+        display: inline-block;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid currentColor;
+        vertical-align: middle;
+        margin-right: 0.7rem;
+        transform: translateY(-2px);
+        transition: transform 0.2s ease-out;
+    }
+
+    .toggle:checked + .lbl-toggle::before {
+        transform: rotate(90deg) translateX(-3px);
+    }
+
+    .collapsible-content {
+        width: 100%;
+        max-height: 0px;
+        background: var(--bg-color);
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+        transition: max-height 0.25s ease-in-out;
+        padding-bottom: 1rem;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .toggle:checked + .lbl-toggle + .collapsible-content {
+        max-height: 350px;
+        opacity: 1;
+    }
+
+    .collapsible-content .content-inner {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        margin-top: 5px;
+        padding: 0.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+        min-width: 150px;
+    }
+
+    .content-inner > .content-row {
+        padding: 0.5rem;
+    }
+
+    .content-inner > .content-row a {
+        display: flex;
+        padding: 0.25rem;
+        color: rgba(var(--accentColor), 1) !important;
+    }
+
+    .gg-check {
+        margin-left: auto;
+        --ggs: 1.5;
+        transform: translateY(-3px);
+    }
+</style>

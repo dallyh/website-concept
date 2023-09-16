@@ -1,24 +1,19 @@
-/* css.gg single icons 
-@import url("css.gg/icons/css/file-document.css");
-@import url("css.gg/icons/css/git-fork.css");
-@import url("css.gg/icons/css/mail.css");
-*/
+/* The cards and its effects were mostly made by https://codepen.io/Hyperplexed/. Thanks! */
 
 body {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
     height: 100vh;
-    justify-content: center;
     margin: 0px;
     padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 }
 
 #cards {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    max-width: 916px;
     justify-content: center;
     /* width: calc(100% - 20px); */
 }
@@ -83,14 +78,9 @@ body {
 h1,
 h2,
 h3,
-h4,
-span {
+h4 {
     color: rgb(240, 240, 240);
-}
-
-h3 {
-    font-family: "Major Mono Display";
-    font-weight: 800;
+    font-weight: 400;
 }
 
 i {

@@ -1,8 +1,11 @@
 {
-    "resume_title": "živoTopis",
+    "resume_title": "Životopis",
+    "resume_title_page": "živoTopis",
     "resume_description": "Můj životopis, zcela online",
-    "projects_title": "projeKty",
+    "projects_title": "Projekty",
+    "projects_title_page": "projeKty",
     "projects_description": "Seznam mých projektů",
-    "contact_title": "kontaKt",
+    "contact_title": "Kontakt",
+    "contact_title_page": "kontaKt",
     "contact_description": "Kontaktujte mne zde"
 }

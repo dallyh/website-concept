@@ -4,6 +4,8 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
+import Footer from "../../components/astro/footer/Footer.astro"
+import Navigation from "../../components/astro/resume/Navigation.astro";
 
 const accentColor = "var(--accent-resume)";
 
@@ -13,8 +15,7 @@ import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
 import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-black.svg";
-import Footer from "../../components/astro/Footer.astro";
-import Navigation from "../../components/astro/resume/Navigation.astro";
+
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -22,7 +23,7 @@ const namespaces = ["index", "shared"];
 await loadNamespaces(locale, namespaces);
 ---
 
-<Layout title="Dalibor's Resume">
+<Layout title={t("shared:NamePossesive") + " " + t("shared:Resume")}>
     <Navigation accentColor={accentColor} />
     <div class="resume-wrapper with-header">
         <main class="resume-content">
@@ -309,7 +310,7 @@ await loadNamespaces(locale, namespaces);
             </section>
         </main>
     </div>
-    <Footer />
+    <Footer accentColor={accentColor} />
 </Layout>
 <FloatingHomeButton accentColor={accentColor} />
 

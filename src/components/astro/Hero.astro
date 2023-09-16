@@ -34,7 +34,7 @@ await loadNamespaces(locale, namespaces);
     style === "projects" && (
         <div class="hero projects">
             <h1 class="hello" transition:name="title-name">
-                <p>{t("landing:projects_title")}</p>
+                <p>{t("landing:projects_title_page")}</p>
             </h1>
         </div>
     )
@@ -44,7 +44,7 @@ await loadNamespaces(locale, namespaces);
     style === "contact" && (
         <div class="hero contact">
             <h1 class="hello" transition:name="title-name">
-                <p>{t("landing:contact_title")}</p>
+                <p>{t("landing:contact_title_page")}</p>
             </h1>
         </div>
     )
@@ -89,7 +89,8 @@ await loadNamespaces(locale, namespaces);
         }
 
         &.contact,
-        &.projects {
+        &.projects,
+        &.landing {
             container-type: inline-size;
 
             .hello {
@@ -98,13 +99,21 @@ await loadNamespaces(locale, namespaces);
                 }
             }
 
-            .hello p {
-                font-size: 3rem;
-                color: rgba(var(--accentColor), 1);
-                font-style: normal;
+            .hello {
+                & p {
+                    font-size: 3rem;
+                    color: rgba(var(--accentColor), 1);
+                    font-style: normal;
 
-                @media (max-width: 400px) {
-                    font-size: 15cqw;
+                    @media (max-width: 400px) {
+                        font-size: 15cqw;
+                    }
+                }
+
+                .top-bar p {
+                    @media (max-width: 400px) {
+                        font-size: 5cqw;
+                    }
                 }
             }
         }
