@@ -1,5 +1,4 @@
 ---
-import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
@@ -7,7 +6,7 @@ import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro"
 import Navigation from "../../components/astro/resume/Navigation.astro";
 
-const accentColor = "var(--accent-resume)";
+const accentColor = "0, 217, 255";
 
 // Images
 import profilePicture from "../../assets/img/profile.png";
@@ -15,16 +14,18 @@ import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
 import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-black.svg";
+import FloatingMenuButton from "../../components/astro/resume/FloatingMenuButton.astro";
+import ProgressBar from "../../components/astro/resume/ProgressBar.astro";
 
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["index", "shared"];
+const namespaces = ["resume", "shared"];
 await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title={t("shared:NamePossesive") + " " + t("shared:Resume")}>
-    <Navigation accentColor={accentColor} />
+    <ProgressBar accentColor={accentColor}/>
     <div class="resume-wrapper with-header">
         <main class="resume-content">
             <!-- Introduction -->
@@ -49,35 +50,35 @@ await loadNamespaces(locale, namespaces);
             </section>
             <section class="resume-section skills" id="intro">
                 <div class="section-content">
-                    <h2>úvod</h2>
+                    <h2>{t("resume:SectionIntro")}</h2>
                     <div class="intro-projects">
                         <div>
                             <div class="content">
                                 <div class="skill-level">
                                     <span>+</span>
-                                    <h3>45 {t("index:CardProjectTitle")}</h3>
+                                    <h3>45 {t("resume:CardProjectTitle")}</h3>
                                     <h3 class="skill-title"></h3>
                                 </div>
                             </div>
                         </div>
-                        <p>{t("index:CardProjectDetail")}</p>
+                        <p>{t("resume:CardProjectDetail")}</p>
                     </div>
                     <div class="intro-summary">
                         <div class="bars">
                             <div class="bar">
-                                <label for="ba">{t("index:CardBATitle")}</label>
+                                <label for="ba">{t("resume:CardBATitle")}</label>
                                 <progress id="ba" value="75" max="100"></progress>
-                                <p>{t("index:CardBADetail")}</p>
+                                <p>{t("resume:CardBADetail")}</p>
                             </div>
                             <div class="bar">
-                                <label for="ba">{t("index:CardImplementationTitle")}</label>
+                                <label for="ba">{t("resume:CardImplementationTitle")}</label>
                                 <progress id="ba" value="50" max="100"></progress>
-                                <p>{t("index:CardImplementationDetail")}</p>
+                                <p>{t("resume:CardImplementationDetail")}</p>
                             </div>
                             <div class="bar">
-                                <label for="ba">{t("index:CardDevTitle")}</label>
+                                <label for="ba">{t("resume:CardDevTitle")}</label>
                                 <progress id="ba" value="20" max="100"></progress>
-                                <p>{t("index:CardDevDetail")}</p>
+                                <p>{t("resume:CardDevDetail")}</p>
                             </div>
                         </div>
                     </div>
@@ -85,45 +86,45 @@ await loadNamespaces(locale, namespaces);
             </section>
             <section class="resume-section" id="skills">
                 <div class="section-content">
-                    <h2 class="">{t("index:SectionSkills")}</h2>
+                    <h2 class="">{t("resume:SectionSkills")}</h2>
                     <p>
-                        {t("index:SkillsIntroduction")}
+                        {t("resume:SkillsIntroduction")}
                     </p>
 
                     <div class="list-card exp">
-                        <div class="exp-text">+ 2 {t("index:SkillsYears")}</div>
+                        <div class="exp-text">+ 2 {t("resume:SkillsYears")}</div>
                         <div class="exp-description">
-                            <h3>{t("index:SkillsBA")}</h3>
-                            <span>{t("index:SkillsBADescription")}</span>
+                            <h3>{t("resume:SkillsBA")}</h3>
+                            <span>{t("resume:SkillsBADescription")}</span>
                         </div>
                     </div>
 
                     <div class="list-card exp">
-                        <div class="exp-text">+ 2 {t("index:SkillsYears")}</div>
+                        <div class="exp-text">+ 2 {t("resume:SkillsYears")}</div>
                         <div class="exp-description">
-                            <h3>{t("index:SkillsWindowsServers")}</h3>
-                            <span>{t("index:SkillsWindowsServersDescription")}</span>
+                            <h3>{t("resume:SkillsWindowsServers")}</h3>
+                            <span>{t("resume:SkillsWindowsServersDescription")}</span>
                         </div>
                     </div>
 
                     <div class="list-card exp">
-                        <div class="exp-text">+ 4 {t("index:SkillsYears")}</div>
+                        <div class="exp-text">+ 4 {t("resume:SkillsYears")}</div>
                         <div class="exp-description">
-                            <h3>{t("index:SkillsDatabases")}</h3>
-                            <span>{t("index:SkillsDatabasesDescription")}</span>
+                            <h3>{t("resume:SkillsDatabases")}</h3>
+                            <span>{t("resume:SkillsDatabasesDescription")}</span>
                         </div>
                     </div>
 
                     <div class="list-card exp">
-                        <div class="exp-text">+ 1 {t("index:SkillsYears")}</div>
+                        <div class="exp-text">+ 1 {t("resume:SkillsYears")}</div>
                         <div class="exp-description">
-                            <h3>{t("index:SkillsOOP")}</h3>
-                            <span>{t("index:SkillsOOPDescription")}</span>
+                            <h3>{t("resume:SkillsOOP")}</h3>
+                            <span>{t("resume:SkillsOOPDescription")}</span>
                         </div>
                     </div>
 
                     <div class="list-card">
-                        <h3 class="dev-list-title">{t("index:SkillsProgrammingLangAndTools")} <span><i class="gg-info" data-tooltip="top" data-tooltip-text={t("index:HoverIconsTooltip")}></i></span></h3>
+                        <h3 class="dev-list-title">{t("resume:SkillsProgrammingLangAndTools")} <span><i class="gg-info" data-tooltip="top" data-tooltip-text={t("resume:HoverIconsTooltip")}></i></span></h3>
                         <ul class="dev-list-inline">
                             <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="HTML5">
                                 <i class="devicon-html5-plain"></i>
@@ -179,7 +180,7 @@ await loadNamespaces(locale, namespaces);
                         </ul>
                     </div>
                     <div class="list-card">
-                        <h3>{t("index:SkillsSoftwareAndPlatforms")}</h3>
+                        <h3>{t("resume:SkillsSoftwareAndPlatforms")}</h3>
                         <div class="software-experience-list">
                             <ul>
                                 <li>
@@ -203,19 +204,19 @@ await loadNamespaces(locale, namespaces);
                                 <li>
                                     <a href="https://www.nintex.com/process-automation/k2-software/" target="_blank"> K2 Five/K2 Cloud</a>
                                 </li>
-                            </ul>
-                            <p>
-                                {t("index:SkillsSoftwareAndPlatformsDescription")}
-                            </p>
+                            </ul>                           
                         </div>
+                        <p>
+                            {t("resume:SkillsSoftwareAndPlatformsDescription")}
+                        </p>
                     </div>
                 </div>
             </section>
             <section class="resume-section" id="certifications">
                 <div class="section-content">
-                    <h2 class="section-title pagebreak">{t("index:SectionCertifications")}</h2>
+                    <h2 class="section-title pagebreak">{t("resume:SectionCertifications")}</h2>
                     <div class="certifications-list">
-                        <p><Fragment set:html={t("index:CertLinkedIn")} /></p>
+                        <p><Fragment set:html={t("resume:CertLinkedIn")} /></p>
                         <div class="certifications-grid">
                             <div class="cert-card">
                                 <Image class="cert-card-logo" src={msftLogo} format="avif" width={150} height={32} alt="Microsoft logo" />
@@ -255,53 +256,53 @@ await loadNamespaces(locale, namespaces);
             </section>
             <section class="resume-setion" id="experience">
                 <div class="section-content timeline">
-                    <h2 class="section-title pagebreak">{t("index:TimelineTitle")}</h2>
+                    <h2 class="section-title pagebreak">{t("resume:TimelineTitle")}</h2>
                     <div class="timeline-cards">
                         <div class="timeline-card">
-                            <h3>{t("index:SectionExperience")}</h3>
+                            <h3>{t("resume:SectionExperience")}</h3>
                             <div class="timeline-content">
                                 <div class="meta">
                                     <p class="title">ECM Business Consultant</p>
                                     <p>Konica Minolta IT Solutions Czech s.r.o</p>
-                                    <span class="date">{t("index:ECMBusinessConsultantDate")}</span>
+                                    <span class="date">{t("resume:ECMBusinessConsultantDate")}</span>
                                     <p class="description">
-                                        {t("index:ECMBusinessConsultantDescription")}
+                                        {t("resume:ECMBusinessConsultantDescription")}
                                     </p>
                                 </div>
                                 <div class="meta">
                                     <p class="title">Analyst, Shared Services</p>
                                     <p>MONETA Money Bank a.s.</p>
-                                    <span class="date">{t("index:MonetaAnalystDate")}</span>
+                                    <span class="date">{t("resume:MonetaAnalystDate")}</span>
                                     <p class="description">
-                                        {t("index:MonetaAnalystDescription")}
+                                        {t("resume:MonetaAnalystDescription")}
                                     </p>
                                 </div>
                                 <div class="meta">
                                     <p class="title">Administrator End User Services, IT</p>
                                     <p>MONETA Money Bank a.s.</p>
-                                    <span class="date">{t("index:MonetaEndUserServicesDate")}</span>
+                                    <span class="date">{t("resume:MonetaEndUserServicesDate")}</span>
                                     <p class="description">
-                                        {t("index:MonetaEndUserServicesDescription")}
+                                        {t("resume:MonetaEndUserServicesDescription")}
                                     </p>
                                 </div>
                                 <div class="meta">
                                     <p class="title">Motherboard technician</p>
                                     <p>ASUS Czech Service s.r.o.</p>
-                                    <span class="date">{t("index:AsusTechnicianDate")}</span>
+                                    <span class="date">{t("resume:AsusTechnicianDate")}</span>
                                     <p class="description">
-                                        {t("index:AsusTechnicianDescription")}
+                                        {t("resume:AsusTechnicianDescription")}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline-card pagebreak">
-                            <h3>{t("index:SectionEducation")}</h3>
+                            <h3>{t("resume:SectionEducation")}</h3>
                             <div class="timeline-content">
                                 <div class="meta">
-                                    <p class="title">{t("index:HighSchoolNaJizdarne")}</p>
-                                    <p>{t("index:MaturityDiploma")}</p>
+                                    <p class="title">{t("resume:HighSchoolNaJizdarne")}</p>
+                                    <p>{t("resume:MaturityDiploma")}</p>
                                     <span class="date">2010 - 2014</span>
-                                    <p class="description">{t("index:HighSchoolNaJizdarneDescription")}</p>
+                                    <p class="description">{t("resume:HighSchoolNaJizdarneDescription")}</p>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +313,7 @@ await loadNamespaces(locale, namespaces);
     </div>
     <Footer accentColor={accentColor} />
 </Layout>
-<FloatingHomeButton accentColor={accentColor} />
+<FloatingMenuButton accentColor={accentColor} />
 
 <script>
     const timeline = () => {
@@ -355,14 +356,9 @@ await loadNamespaces(locale, namespaces);
         line-height: 1;
         font-size: 2rem;
         font-weight: bold;
-        background-color: rgba(var(--accentColor), 0.9);
-        background-clip: text;
-        color: transparent;
-        font-family: "Major Mono Display";
         color: rgba(var(--accentColor), 1);
         font-weight: lighter;
-        word-spacing: -1rem;
-        letter-spacing: -2px;
+        letter-spacing: -1px;
     }
 
     h3 {
@@ -395,7 +391,7 @@ await loadNamespaces(locale, namespaces);
         letter-spacing: 0.35rem;
         margin-top: 1rem;
         position: relative;
-        width: max-content;
+        font-size: min(5vw, 1rem);
     }
 
     .hero-title-wrapper > p::after {
@@ -411,22 +407,18 @@ await loadNamespaces(locale, namespaces);
 
     .hero-title {
         display: inline-flex;
-        font-size: clamp(2rem, 15vw, 7rem);
-        line-height: 1;
+        font-size: min(15vw, 7rem);
         position: relative;
-        letter-spacing: -0.5rem;
-        font-weight: bold;
         font-family: "Major Mono Display";
         color: rgba(var(--accentColor), 1);
-        font-weight: lighter;
         margin-bottom: 1rem;
     }
 
-    .hero-title::after {
+    .hero-title::before {
         content: "";
         position: absolute;
         height: 2px;
-        width: 295px;
+        width: 50%;
         background-color: rgba(var(--accentColor), 1);
         bottom: -1.25rem;
         transform: scaleX(0);
@@ -440,8 +432,8 @@ await loadNamespaces(locale, namespaces);
 
     .profile-picture {
         display: block;
-        width: clamp(120px, 40vw, 220px);
-        height: clamp(120px, 40vw, 220px);
+        width: clamp(140px, 40vw, 220px);
+        height: clamp(140px, 40vw, 220px);
         object-fit: cover;
         border-radius: 50%;
         border: 2px solid rgba(var(--accentColor), 0.8);
@@ -476,13 +468,12 @@ await loadNamespaces(locale, namespaces);
         margin: auto;
         border-radius: 15px;
         position: relative;
-        z-index: 1;
         margin-top: 1rem;
     }
 
     .resume-content {
         position: relative;
-        z-index: 3;
+        z-resume: 3;
         padding: 1rem;
     }
 
@@ -611,18 +602,12 @@ await loadNamespaces(locale, namespaces);
     }
 
     .software-experience-list {
-        display: grid;
-        grid-template-columns: min-content 1fr;
-
-        @media (max-width: 800px) {
-            grid-template-columns: unset;
-        }
+        display: flex;
 
         & ul {
             list-style: circle;
             margin-left: 1rem;
             line-height: 22px;
-            min-width: 300px;
         }
     }
 
@@ -639,7 +624,7 @@ await loadNamespaces(locale, namespaces);
 
     @media (max-width: 768px) {
         .certifications-grid {
-            grid-template-columns: repeat(auto-fit, minmax(150px, 0.5fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
         }
     }

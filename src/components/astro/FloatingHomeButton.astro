@@ -16,8 +16,6 @@ const locale = getLocale(Astro.url);
 </a>
 
 <style define:vars={{ accentColor }}>
-    @import url("css.gg/icons/css/home.css");
-
     .floating-menu {
         position: fixed;
         display: flex;
@@ -42,7 +40,7 @@ const locale = getLocale(Astro.url);
 
         & i {
             color: rgba(var(--accentColor), 1);
-            transition: all 300ms ease-in-out;
+            transition: transform 300ms ease-in-out;
         }
 
         &:hover {

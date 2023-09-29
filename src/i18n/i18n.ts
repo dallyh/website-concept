@@ -3,7 +3,7 @@ import FsBackend from "i18next-fs-backend";
 import { defaultLocale, localeKeys } from "astro-i18n-aut";
 
 const i18nConfig = {
-    debug: true,
+    debug: false,
     ns: [],
     defaultNS: "",
     fallbackLng: defaultLocale,

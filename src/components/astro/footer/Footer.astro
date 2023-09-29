@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import LanguageSelector from "../LanguageSelector.astro";
 import LanguageCollapsible from "./LanguageCollapsible.astro";
 import { getLocale } from "astro-i18n-aut";
 import { loadNamespaces, t } from "../../../i18n/i18n";
@@ -22,12 +21,12 @@ import astroSvg from "../../../../public/assets/img/astro/simple-full-logo-light
 <footer class="footer-container">
     <LanguageCollapsible accentColor={accentColor} />
     <p>{t("footer:PageCreatedBy")}</p>
-    <p><Fragment set:html={t("footer:Host")}/></p>
+    <p>{t("footer:Host")}{" "}<a href="https://www.github.com" target="_blank"> {t("footer:Github")}</a>.</p>
     <p>
-        {t("footer:Framework")}
+        {t("footer:Framework")} {" "}
         <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework">
             <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
-        </a>.
+        </a>
     </p>
 </footer>
 

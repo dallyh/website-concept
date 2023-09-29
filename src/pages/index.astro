@@ -5,7 +5,7 @@ import Footer from "../components/astro/footer/Footer.astro";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
 import i18n, { loadNamespaces, t  } from "../i18n/i18n";
 
-const accentColor = "var(--accent)";
+const accentColor = "var(--accent)"; // Color is in RGB
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -14,9 +14,9 @@ await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title="Dalibor Hon">
-    <main>
-        <Hero style="landing" accentColor={accentColor}/>
-        <div id="cards">
+    <main> 
+        <Hero style="landing" accentColor={accentColor}/> 
+        <div id="cards" class="cards-landing">
             <a href={getLocaleUrl("/resume", locale)} rel="prefetch" class="card" title="Resume">
                 <div class="card-content">
                     <div class="card-image">
@@ -85,4 +85,6 @@ await loadNamespaces(locale, namespaces);
 
 <style define:vars={{accentColor}}>
     @import url(../styles/cards.css);
+
+    main {}
 </style>

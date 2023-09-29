@@ -25,17 +25,18 @@ const locale = getLocale(Astro.url);
         <HeadHrefLangs />
         <meta charset="UTF-8" />
         <meta name="description" content="Dalibor's webpage" />
+        <title>{title}</title>
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/x-icon" href={`${basePath}favicon.ico`} />
         <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+        <meta name="theme-color" content = "#141414">
         <link rel="preconnect" href="https://use.typekit.net" />
         <link rel="stylesheet prefetch" href="https://use.typekit.net/bxg2com.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" type="text/css" rel="stylesheet prefetch" />
-        <link href="https://css.gg/css?=file-document|folder|git-fork|mail|info|mouse|software-download|check" type="text/css" rel="stylesheet prefetch" />
+        <link href="https://css.gg/css?=file-document|folder|git-fork|mail|info|mouse|software-download|check|home|menu" type="text/css" rel="stylesheet prefetch" />
         <link rel="stylesheet prefetch" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     </head>
     <body>

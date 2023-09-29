@@ -7,16 +7,51 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
+@media (max-width: 1000px) {
+    body {
+        height: auto;
+    }
+}
+
+/*
 #cards {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
-    /* width: calc(100% - 20px); */
 }
+*/
+
+#cards {
+    display: grid;
+    max-width: calc(100vw - 20px);
+    gap: 8px;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+}
+
+@media (max-width: 1000px) {
+    #cards {
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+
+    .cards-landing .card:nth-of-type(3) {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 740px) {
+    #cards {
+        grid-template-columns: minmax(300px, 1fr);
+    }
+
+    #cards .card:nth-of-type(3) {
+        grid-column: unset;
+    }
+}
+
 
 #cards:hover > .card::after {
     opacity: 1;
@@ -30,8 +65,29 @@ body {
     height: 260px;
     flex-direction: column;
     position: relative;
-    width: 300px;
+    /* width: 300px; */
     --hover-opacity: 0;
+}
+
+@media (max-width: 740px) {
+    .card {
+        width: calc(100vw - 200px);
+        height: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    .card {
+        width: calc(100vw - 80px);
+        height: 200px;
+    }
+}
+
+@media (max-width: 350px) {
+    .card {
+        width: calc(100vw - 20px);
+        height: 200px;
+    }
 }
 
 .card:hover::before {
@@ -96,8 +152,14 @@ i {
 }
 
 .card-image > i {
-    transform: scale(4.5);
+    --ggs: 4.5;
     opacity: 0.25;
+}
+
+@media (max-width: 350px) {
+    .card-image > i {
+        --ggs: 3.5;
+    }
 }
 
 .card-info-wrapper {
@@ -119,12 +181,14 @@ i {
     transform: scale(0.85);
 }
 
-.card-info-title > h3 {
+.card-info-title > h3,
+.card-info-title > a {
     font-size: 1.1em;
     line-height: 20px;
 }
 
-.card-info-title > h4 {
+.card-info-title > h4,
+.card-info-title > p{
     color: rgba(255, 255, 255, 0.5);
     font-size: 0.85em;
     margin-top: 8px;
@@ -132,30 +196,4 @@ i {
 
 .card-image > .gg-git-fork {
     margin-right: 25px;
-}
-
-/* -- ↓ ↓ ↓ some responsiveness ↓ ↓ ↓ -- */
-
-@media (max-width: 1000px) {
-    body {
-        height: auto;
-    }
-
-    main {
-        width: fit-content;
-    }
-}
-
-@media (max-width: 500px) {
-    .card {
-        width: calc(100vw - 50px);
-        height: 250px;
-    }
-}
-
-@media (max-width: 320px) {
-    .card {
-        width: calc(100vw - 20px);
-        height: 200px;
-    }
 }

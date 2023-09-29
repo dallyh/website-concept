@@ -1,6 +1,5 @@
 ---
 import { getLocale } from "astro-i18n-aut";
-import LanguageSelector from "./LanguageSelector.astro";
 import { loadNamespaces, t } from "../../i18n/i18n";
 interface Props {
     style: CardStyle;
@@ -20,7 +19,7 @@ await loadNamespaces(locale, namespaces);
 {
     style === "landing" && (
         <div class="hero landing">
-            <h1 class="hello" transition:name="title-name">
+            <h1 class="hello">
                 <div class="top-bar">
                     <p>Hello, my name is</p>
                 </div>
@@ -33,7 +32,7 @@ await loadNamespaces(locale, namespaces);
 {
     style === "projects" && (
         <div class="hero projects">
-            <h1 class="hello" transition:name="title-name">
+            <h1 class="hello">
                 <p>{t("landing:projects_title_page")}</p>
             </h1>
         </div>
@@ -43,96 +42,37 @@ await loadNamespaces(locale, namespaces);
 {
     style === "contact" && (
         <div class="hero contact">
-            <h1 class="hello" transition:name="title-name">
+            <h1 class="hello">
                 <p>{t("landing:contact_title_page")}</p>
             </h1>
         </div>
     )
 }
-
 <style define:vars={{ accentColor }}>
     .hero {
         display: flex;
-        justify-content: space-between;
-        position: relative;
-        z-index: 1000;
+        width: min-content;
+        padding-top: 1rem;
+    }
 
-        @media (max-width: 1000px) {
-            justify-content: center;
-        }
+    .hello {
+        font-family: "Major Mono Display";
 
-        .hello {
-            line-height: 1;
-            width: 100%;
+    }
 
-            @media (max-width: 1000px) {
-                width: unset;
-            }
+    .top-bar p {
+        margin-left: 2px;
+        margin-bottom: -5px;
+        font-size: min(5vw, 0.875rem);
+        font-style: italic;
+        letter-spacing: -1px;
+        word-spacing: -5px;
+        color: rgba(255, 255, 255, 0.3);
+    }
 
-            .top-bar p {
-                font-family: "Major Mono Display";
-                margin-left: 2px;
-                margin-bottom: -5px;
-                font-size: 0.85rem;
-                font-style: italic;
-                letter-spacing: -1px;
-                word-spacing: -5px;
-                color: rgba(255, 255, 255, 0.3);
-            }
-
-            & p {
-                color: rgba(var(--accentColor), 1);
-                font-size: 3rem;
-                font-style: normal;
-                font-family: "Major Mono Display";
-            }
-        }
-
-        &.contact,
-        &.projects,
-        &.landing {
-            container-type: inline-size;
-
-            .hello {
-                @media (max-width: 1000px) {
-                    width: unset;
-                }
-            }
-
-            .hello {
-                & p {
-                    font-size: 3rem;
-                    color: rgba(var(--accentColor), 1);
-                    font-style: normal;
-
-                    @media (max-width: 400px) {
-                        font-size: 15cqw;
-                    }
-                }
-
-                .top-bar p {
-                    @media (max-width: 400px) {
-                        font-size: 5cqw;
-                    }
-                }
-            }
-        }
-
-        &.landing {
-            @media (max-width: 1000px) {
-                padding: 1rem 1rem 0rem 1rem;
-            }
-        }
-
-        &.projects {
-            @media (max-width: 1000px) {
-                justify-content: center;
-                padding-top: 0.5rem;
-            }
-        }
-
-        &.contact {
-            padding: 1rem 0rem 0rem 0rem;
-        }
+    .hello > p {
+        color: rgba(var(--accentColor), 1);
+        font-size: min(15vw, 3rem);
+        font-style: normal;
     }
 </style>

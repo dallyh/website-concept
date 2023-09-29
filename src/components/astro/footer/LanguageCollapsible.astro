@@ -35,13 +35,16 @@ await loadNamespaces(locale, namespaces);
                     let value = getLocaleUrl(pathname, supportedLanguage);
                     const nativeName = capitalizeFirstLetter(ISO6991.getNativeName(supportedLanguage));
 
+                    if (supportedLanguage === locale) {
+                        return;
+                    }
+
                     return (
                         <>
                             <div class="content-row">
                                 <a href={value} rel="prefetch" data-js-language={supportedLanguage}>
                                     <span class={`flag ${supportedLanguage}`} />
                                     <span>{nativeName}</span>
-                                    <i class={supportedLanguage == locale ? "gg-check" : ""} aria-hidden="true" />
                                 </a>
                             </div>
                         </>
@@ -156,20 +159,16 @@ await loadNamespaces(locale, namespaces);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 10px;
         margin-top: 5px;
-        padding: 0.5rem 1rem;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
         font-size: 1rem;
         min-width: 150px;
     }
 
-    .content-inner > .content-row {
-        padding: 0.5rem;
-    }
-
     .content-inner > .content-row a {
-        display: flex;
-        padding: 0.25rem;
         color: rgba(var(--accentColor), 1) !important;
     }
 
