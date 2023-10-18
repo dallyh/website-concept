@@ -19,7 +19,7 @@ await loadNamespaces(locale, namespaces);
 {
     style === "landing" && (
         <div class="hero landing">
-            <h1 class="hello">
+            <h1 class="hello" transition:name="title-name">
                 <div class="top-bar">
                     <p>Hello, my name is</p>
                 </div>
@@ -52,12 +52,10 @@ await loadNamespaces(locale, namespaces);
     .hero {
         display: flex;
         width: min-content;
-        padding-top: 1rem;
     }
 
     .hello {
         font-family: "Major Mono Display";
-
     }
 
     .top-bar p {
@@ -67,11 +65,11 @@ await loadNamespaces(locale, namespaces);
         font-style: italic;
         letter-spacing: -1px;
         word-spacing: -5px;
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.5);
     }
 
     .hello > p {
-        color: rgba(var(--accentColor), 1);
+        color: black;
         font-size: min(15vw, 3rem);
         font-style: normal;
     }

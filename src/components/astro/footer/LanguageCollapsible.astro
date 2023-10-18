@@ -112,6 +112,7 @@ await loadNamespaces(locale, namespaces);
         font-weight: bold;
         color: rgba(var(--accentColor), 1);
         cursor: pointer;
+        user-select: none;
         border-radius: 7px;
         transition: all 0.25s ease-out;
         font-size: 0.8rem;
@@ -148,11 +149,13 @@ await loadNamespaces(locale, namespaces);
         align-items: center;
         justify-content: center;
         z-index: 1000;
+        pointer-events: none;
     }
 
     .toggle:checked + .lbl-toggle + .collapsible-content {
         max-height: 350px;
         opacity: 1;
+        pointer-events: all;
     }
 
     .collapsible-content .content-inner {

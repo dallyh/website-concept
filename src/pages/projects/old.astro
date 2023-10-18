@@ -1,0 +1,97 @@
+---
+import { getLocale } from "astro-i18n-aut";
+import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
+import Footer from "../../components/astro/footer/Footer.astro";
+import Hero from "../../components/astro/Hero.astro";
+import { loadNamespaces, t } from "../../i18n/i18n";
+import Layout from "../../layouts/Layout.astro";
+
+const accentColor = "var(--accent-projects)";
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["index", "shared"];
+await loadNamespaces(locale, namespaces);
+---
+
+<Layout title={t("landing:projects_title")}>
+    <FloatingHomeButton accentColor={accentColor} />
+    <main transition:animate="slide">
+        <Hero style="projects" accentColor={accentColor} />
+        <div id="cards">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <a href="#" target="_blank">This website</a>
+                                <p>Source code for this website</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">Lemmy Kotlin Client</a>
+                                <p>A multiplatform client for <a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        <i class="gg-file-document"></i>
+                    </div>
+                    <div class="card-info-wrapper">
+                        <div class="card-info">
+                            <i class="gg-file-document"></i>
+                            <div class="card-info-title">
+                                <a href="https://github.com/dallyh/web-resume" target="_blank">Old website</a>
+                                <p>Source code for my older website</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <Footer accentColor={accentColor} />
+</Layout>
+
+<script>
+    import * as card from "../../scripts/setup-cards";
+
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            e.target?.removeEventListener;
+            card.setupCards();
+        },
+        { once: false },
+    );
+</script>
+
+<style define:vars={{ accentColor }}>
+    @import url(../../styles/cards.css);
+
+    .card {
+        cursor: auto;
+    }
+    .card::before {
+        pointer-events: none;
+    }
+</style>

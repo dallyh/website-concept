@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/astro/Hero.astro";
-import Footer from "../components/astro/footer/Footer.astro";
+import { Image } from "astro:assets";
+import profilePicture from "../assets/img/profile.png";
+import { loadNamespaces, t } from "../i18n/i18n";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
-import i18n, { loadNamespaces, t  } from "../i18n/i18n";
+import Footer from "../components/astro/footer/Footer.astro"
+import Hero from "../components/astro/Hero.astro";
 
 const accentColor = "var(--accent)"; // Color is in RGB
 
@@ -14,77 +16,319 @@ await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title="Dalibor Hon">
-    <main> 
-        <Hero style="landing" accentColor={accentColor}/> 
-        <div id="cards" class="cards-landing">
-            <a href={getLocaleUrl("/resume", locale)} rel="prefetch" class="card" title="Resume">
-                <div class="card-content">
-                    <div class="card-image">
-                        <i class="gg-file-document"></i>
-                    </div>
-                    <div class="card-info-wrapper">
-                        <div class="card-info">
-                            <i class="gg-file-document"></i>
-                            <div class="card-info-title">
-                                <h3>{t("landing:resume_title")}</h3>
-                                <h4>{t("landing:resume_description")}</h4>
-                            </div>
-                        </div>
-                    </div>
+    <main>
+        <div class="nav-container">
+            <div class="hero">
+                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+                <div class="hero-title-wrapper" transition:name="hero">
+                    <Hero accentColor={accentColor} style="landing">
                 </div>
-            </a>
-            <a href={getLocaleUrl("/projects", locale)} rel="prefetch" class="card" title="My projects">
-                <div class="card-content">
-                    <div class="card-image">
-                        <i class="gg-git-fork"></i>
-                    </div>
-                    <div class="card-info-wrapper">
-                        <div class="card-info">
-                            <i class="gg-git-fork"></i>
-                            <div class="card-info-title">
-                                <h3>{t("landing:projects_title")}</h3>
-                                <h4>{t("landing:projects_description")}</h4>
+            </div>
+            <nav class="nav">
+                <ul class="nav-items">
+                    <li class="nav-item">
+                        <a href={getLocaleUrl("/resume", locale)} rel="prefetch" >
+                            <div class="nav-item-content">
+                                <i class="gg-file-document"></i>
+                                <div class="nav-item-content-text">
+                                    <h2>{t("landing:resume_title")}</h2>
+                                    <p>{t("landing:resume_description")}</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href={getLocaleUrl("/contact", locale)} rel="prefetch" class="card" title="Contact form">
-                <div class="card-content">
-                    <div class="card-image">
-                        <i class="gg-mail"></i>
-                    </div>
-                    <div class="card-info-wrapper">
-                        <div class="card-info">
-                            <i class="gg-mail"></i>
-                            <div class="card-info-title">
-                                <h3>{t("landing:contact_title")}</h3>
-                                <h4>{t("landing:contact_description")}</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href={getLocaleUrl("/projects", locale)} rel="prefetch" >
+                            <div class="nav-item-content">
+                                <i class="gg-git-fork"></i>
+                                <div class="nav-item-content-text">
+                                    <h2>{t("landing:projects_title")}</h2>
+                                    <p>{t("landing:projects_description")}</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href={getLocaleUrl("/contact", locale)} rel="prefetch" >
+                            <div class="nav-item-content">
+                                <i class="gg-mail"></i>
+                                <div class="nav-item-content-text">
+                                    <h2>{t("landing:contact_title")}</h2>
+                                    <p>{t("landing:contact_description")}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+        <Footer accentColor={accentColor} />
     </main>
-    <Footer accentColor={accentColor} />
+    
 </Layout>
 
+<style>
+    :root {
+        --nav-background: #222831;
+        --container-width: 750px;
+        --container-height: 400px;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-container {
+        width: var(--container-width);
+        height: var(--container-height);
+        display: flex;
+    }
+
+    .hero {
+        height: 100%;
+        background-color: rgba(var(--accent), 1);
+        border-radius: 15px;
+        transform: scale(1.08) perspective(1500px) rotateY(10deg);
+        padding: 1em;
+        flex: 0.7 1 0px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .hero-title-wrapper {
+        align-self: center;
+        justify-self: center;
+    }
+
+    .hero-title-wrapper > p {
+        margin-top: 1rem;
+        font-size: 1em;
+    }
+
+    .hero-title {
+        display: inline-flex;
+        font-size: 3rem;
+        font-family: "Major Mono Display";
+        color: black;
+        margin-bottom: 1rem;
+    }
+
+    .profile-picture {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 10px solid var(--bg-color);
+        position: absolute;
+        object-fit: cover;
+        top: -50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+    }
+
+    .nav {
+        flex: 1 1 0px;
+        background-color: var(--nav-background);
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-items {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+    }
+
+    .nav-items:hover > .nav-item::after {
+        opacity: 1;
+    }
+
+    .nav-item {
+        --hover-opacity: 0;
+        display: flex;
+        align-items: center;
+        height: 100px;
+        margin-bottom: 6px;
+        width: 80%;
+        border-radius: 10px;
+        transition:
+            box-shadow 600ms ease-in,
+            width 300ms ease-in;
+        pointer-events: none;
+        background-color: var(--card-bg);
+        position: relative;
+
+        & a {
+            cursor: pointer;
+            pointer-events: all;
+            width: 100%;
+            height: 100%;
+            color: white;
+            transition: color 300ms ease-in;
+        }
+    }
+
+    .nav-item:hover::before {
+        opacity: 1;
+    }
+
+    .nav-item::before,
+    .nav-item::after {
+        border-radius: inherit;
+        content: "";
+        height: 100%;
+        left: 0px;
+        opacity: var(--hover-opacity);
+        position: absolute;
+        top: 0px;
+        transition: opacity 500ms;
+        width: 100%;
+    }
+
+    .nav-item::before {
+        background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+        z-index: 3;
+    }
+
+    .nav-item::after {
+        background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.4), transparent 70%);
+        z-index: 1;
+    }
+
+    .nav-item-content {
+        gap: 1em;
+        align-items: center;
+        background-color: var(--card-color);
+        border-radius: 10px;
+        display: flex;
+        flex-grow: 1;
+        inset: 1px;
+        padding: 10px;
+        position: absolute;
+        z-index: 2;
+
+        & i {
+            color: rgba(255, 255, 255, 1);
+            opacity: 0.25;
+            margin: 1em;
+            --ggs: 2;
+        }
+
+        & .nav-item-content-text {
+            display: flex;
+            flex-direction: column;
+
+            & h2 {
+                font-size: 1.1em;
+                line-height: 20px;
+            }
+
+            & p {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.85em;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav-container {
+            width: 100vw;
+            transform: scale(0.95);
+        }
+
+        .hero {
+            transform: translateZ(0) scale(1.04) perspective(1500px) rotateY(10deg);
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            height: unset;
+            align-items: unset;
+            justify-content: unset;
+        }
+
+        .nav-container {
+            width: 100vw;
+            height: max-content;
+            display: flex;
+            flex-direction: column;
+            transform: unset;
+        }
+
+        .hero {
+            width: 100vw;
+            height: 150px;
+            flex: unset;
+            transform: unset;
+            border-radius: unset;
+            justify-content: flex-start;
+        }
+
+        .nav {
+            border-radius: unset;
+            border: unset;
+            background: linear-gradient(to bottom, var(--nav-background) 40%, transparent 100%);
+        }
+
+        .nav-items {
+            padding-top: 5em;
+
+        }
+
+        .nav-item {
+            width: 100%;
+        }
+
+        .profile-picture {
+            width: 110px;
+            height: 110px;
+            top: unset;
+            top: 50%;
+            transform: translateX(-50%) translateY(20%);
+            border: 10px solid var(--nav-background);
+        }
+    }
+</style>
+
 <script>
-    import * as card from "../scripts/setup-cards";
+    const setupNav = () => {
+        const navWrapper = document.querySelector(".nav-items") as HTMLDivElement;
+        if (navWrapper === null) {
+            return;
+        }
+        const items = navWrapper?.getElementsByClassName("nav-item") as HTMLCollectionOf<HTMLAnchorElement>;
+
+        navWrapper.onmousemove = (e) => {
+            for (const navitem of items) {
+                const rect = navitem.getBoundingClientRect(),
+                    x = e.clientX - rect.left,
+                    y = e.clientY - rect.top;
+
+                navitem.style.setProperty("--hover-opacity", "0");
+                navitem.style.setProperty("--mouse-x", `${x}px`);
+                navitem.style.setProperty("--mouse-y", `${y}px`);
+            }
+        };
+    };
 
     document.addEventListener(
         "astro:page-load",
         (e) => {
             e.target?.removeEventListener;
-            card.setupCards();
+            setupNav();
         },
         { once: false },
     );
 </script>
-
-<style define:vars={{accentColor}}>
-    @import url(../styles/cards.css);
-
-    main {}
-</style>
