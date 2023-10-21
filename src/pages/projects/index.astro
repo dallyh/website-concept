@@ -5,8 +5,7 @@ import profilePicture from "../../assets/img/profile.png";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
-import Hero from "../../components/astro/Hero.astro";
-import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
+import Banner from "../../components/astro/Banner.astro";
 
 const accentColor = "var(--accent-projects)";
 
@@ -19,18 +18,18 @@ await loadNamespaces(locale, namespaces);
 <Layout title="Dalibor Hon">
     <main>
         <div class="cards-wrapper">
-            <div class="hero-wrapper" transition:name="hero">
-                <Hero accentColor={accentColor} style="projects" />
+            <div class="banner-wrapper" transition:name="banner">
+                <Banner accentColor={accentColor} style="projects" />
             </div>
             <div class="cards">
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="gg-file-document"></i>
+                            <i class="bi bi-file-text-fill"></i>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
-                                <i class="gg-file-document"></i>
+                                <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
                                     <a href="#" target="_blank">This website</a>
                                     <p>Source code for this website</p>
@@ -42,11 +41,11 @@ await loadNamespaces(locale, namespaces);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="gg-file-document"></i>
+                            <i class="bi bi-file-text-fill"></i>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
-                                <i class="gg-file-document"></i>
+                                <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
                                     <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">Lemmy Kotlin Client</a>
                                     <p>A multiplatform client for <a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
@@ -58,11 +57,11 @@ await loadNamespaces(locale, namespaces);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="gg-file-document"></i>
+                            <i class="bi bi-file-text-fill"></i>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
-                                <i class="gg-file-document"></i>
+                                <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
                                     <a href="https://github.com/dallyh/web-resume" target="_blank">Old website</a>
                                     <p>Source code for my older website</p>
@@ -74,7 +73,6 @@ await loadNamespaces(locale, namespaces);
             </div>
         </div>
         <Footer accentColor={accentColor} />
-        <FloatingHomeButton accentColor={accentColor} />
     </main>
 </Layout>
 
@@ -103,7 +101,7 @@ await loadNamespaces(locale, namespaces);
         gap: 1em;
     }
 
-    .hero-wrapper {
+    .banner-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -205,13 +203,13 @@ await loadNamespaces(locale, namespaces);
     }
 
     .card-image > i {
-        --ggs: 3;
+        font-size: 4rem;
         opacity: 0.25;
     }
 
     @media (max-width: 350px) {
         .card-image > i {
-            --ggs: 1.5;
+            font-size: 1.5rem;
         }
     }
 
@@ -231,7 +229,7 @@ await loadNamespaces(locale, namespaces);
 
     .card-info > i {
         margin-top: 2px;
-        --ggs: 0.8;
+        font-size: 1rem;
     }
 
     .card-info-title > h3,
@@ -293,7 +291,7 @@ await loadNamespaces(locale, namespaces);
             width: 98%;
         }
 
-        .hero-wrapper {
+        .banner-wrapper {
             border-radius: unset;
         }
 

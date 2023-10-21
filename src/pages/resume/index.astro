@@ -32,10 +32,10 @@ await loadNamespaces(locale, namespaces);
             <section class="hero-container" id="hero">
                 <div class="hero">
                     <div class="profile-picture-wrapper">
-                        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+                        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" transition:name="profile-picture" />
                     </div>
                     <div class="hero-title-wrapper">
-                        <h1 class="hero-title" transition:name="title-name">
+                        <h1 class="hero-title">
                             dalibor<br />
                              Hon
                         </h1>
@@ -124,7 +124,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
 
                     <div class="list-card">
-                        <h3 class="dev-list-title">{t("resume:SkillsProgrammingLangAndTools")} <span><i class="gg-info" data-tooltip="top" data-tooltip-text={t("resume:HoverIconsTooltip")}></i></span></h3>
+                        <h3 class="dev-list-title">{t("resume:SkillsProgrammingLangAndTools")} <span><i class="bi bi-info-circle" data-tooltip="top" data-tooltip-text={t("resume:HoverIconsTooltip")}></i></span></h3>
                         <ul class="dev-list-inline">
                             <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="HTML5">
                                 <i class="devicon-html5-plain"></i>
@@ -372,7 +372,6 @@ await loadNamespaces(locale, namespaces);
             display: inline-block;
             color: white;
             margin-left: 10px;
-            --ggs: 0.8;
         }
     }
 

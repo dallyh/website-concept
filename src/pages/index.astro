@@ -5,7 +5,7 @@ import profilePicture from "../assets/img/profile.png";
 import { loadNamespaces, t } from "../i18n/i18n";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
 import Footer from "../components/astro/footer/Footer.astro"
-import Hero from "../components/astro/Hero.astro";
+import Banner from "../components/astro/Banner.astro";
 
 const accentColor = "var(--accent)"; // Color is in RGB
 
@@ -19,9 +19,9 @@ await loadNamespaces(locale, namespaces);
     <main>
         <div class="nav-container">
             <div class="hero">
-                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
-                <div class="hero-title-wrapper" transition:name="hero">
-                    <Hero accentColor={accentColor} style="landing">
+                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" transition:name="profile-picture" />
+                <div class="hero-title-wrapper" transition:name="banner">
+                    <Banner accentColor={accentColor} style="landing">
                 </div>
             </div>
             <nav class="nav">
@@ -29,7 +29,7 @@ await loadNamespaces(locale, namespaces);
                     <li class="nav-item">
                         <a href={getLocaleUrl("/resume", locale)} rel="prefetch" >
                             <div class="nav-item-content">
-                                <i class="gg-file-document"></i>
+                                <i class="bi bi-file-earmark-person-fill"></i>
                                 <div class="nav-item-content-text">
                                     <h2>{t("landing:resume_title")}</h2>
                                     <p>{t("landing:resume_description")}</p>
@@ -40,7 +40,7 @@ await loadNamespaces(locale, namespaces);
                     <li class="nav-item">
                         <a href={getLocaleUrl("/projects", locale)} rel="prefetch" >
                             <div class="nav-item-content">
-                                <i class="gg-git-fork"></i>
+                                <i class="bi bi-git"></i>
                                 <div class="nav-item-content-text">
                                     <h2>{t("landing:projects_title")}</h2>
                                     <p>{t("landing:projects_description")}</p>
@@ -51,7 +51,7 @@ await loadNamespaces(locale, namespaces);
                     <li class="nav-item">
                         <a href={getLocaleUrl("/contact", locale)} rel="prefetch" >
                             <div class="nav-item-content">
-                                <i class="gg-mail"></i>
+                                <i class="bi bi-envelope-fill"></i>
                                 <div class="nav-item-content-text">
                                     <h2>{t("landing:contact_title")}</h2>
                                     <p>{t("landing:contact_description")}</p>
@@ -219,9 +219,9 @@ await loadNamespaces(locale, namespaces);
 
         & i {
             color: rgba(255, 255, 255, 1);
-            opacity: 0.25;
-            margin: 1em;
-            --ggs: 2;
+            opacity: 0.45;
+            padding: 0.25em;
+            font-size: 2rem;
         }
 
         & .nav-item-content-text {

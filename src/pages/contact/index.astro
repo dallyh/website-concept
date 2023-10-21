@@ -6,8 +6,7 @@ import i18n, { loadNamespaces, t } from "../../i18n/i18n";
 import type { ContactForm as ContactFormRes } from "../../i18n/locales";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
-import Hero from "../../components/astro/Hero.astro";
-import FloatingHomeButton from "../../components/astro/FloatingHomeButton.astro";
+import Banner from "../../components/astro/Banner.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
 
 const accentColor = "var(--accent-contact)";
@@ -22,8 +21,8 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 <Layout title="Dalibor Hon">
     <main>
         <div class="contact-wrapper">
-            <div class="hero-wrapper" transition:name="hero">
-                <Hero accentColor={accentColor} style="contact" />
+            <div class="hero-wrapper" transition:name="banner">
+                <Banner accentColor={accentColor} style="contact" />
             </div>
             <div class="contact-info">
                 <div class="contact-me noprint">
@@ -46,7 +45,6 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
             </div>
         </div>
         <Footer accentColor={accentColor} />
-        <FloatingHomeButton accentColor={accentColor} />
     </main>
 </Layout>
 

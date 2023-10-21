@@ -23,10 +23,10 @@ const locale = getLocale(Astro.url);
     </nav>
     <div class="bottom-bar">
         <a href={getLocaleUrl("/", locale)} rel="prefetch" aria-label="Go home" title="Home page" class="bottom-bar-item home-button">
-            <i class="gg-home"></i>
+            <i class="bi bi-house-door"></i>
         </a>
         <button aria-label="Open menu" title="Menu" class="bottom-bar-item menu-button">
-            <i class="gg-menu"></i>
+            <i class="bi bi-list"></i>
         </button>
     </div>
 </div>
@@ -169,7 +169,7 @@ const locale = getLocale(Astro.url);
     .menu-button {
         position: absolute;
         right: 12px;
-        bottom: 12px;
+        bottom: 10px;
     }
 </style>
 
