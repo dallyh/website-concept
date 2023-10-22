@@ -1,9 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import profilePicture from "../../assets/img/profile.png";
 import { loadNamespaces, t } from "../../i18n/i18n";
-import { getLocaleUrl, getLocale } from "astro-i18n-aut";
+import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
 import Banner from "../../components/astro/Banner.astro";
 
@@ -11,11 +9,11 @@ const accentColor = "var(--accent-projects)";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["index", "shared"];
+const namespaces = ["index", "shared", "landing"];
 await loadNamespaces(locale, namespaces);
 ---
 
-<Layout title="Dalibor Hon">
+<Layout title={`Dalibor Hon - ${t("landing:projects_title")}`}>
     <main>
         <div class="cards-wrapper">
             <div class="banner-wrapper" transition:name="banner">

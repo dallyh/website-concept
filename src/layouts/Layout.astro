@@ -7,7 +7,6 @@ import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
 import BrowserWarning from "../components/astro/BrowserWarning.astro";
 import { getLocale } from "astro-i18n-aut";
 import LanguageSelectDialog from "../components/astro/LanguageSelectDialog.astro";
-import ModalDialog from "../components/astro/ModalDialog.astro";
 interface Props {
     title: string;
 }
@@ -29,7 +28,6 @@ const locale = getLocale(Astro.url);
         <link rel="icon" type="image/x-icon" href={`${basePath}favicon.ico`} />
         <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
-        <meta name="theme-color" content = "#141414">
         <link rel="preconnect" href="https://use.typekit.net" />
         <link rel="stylesheet prefetch" href="https://use.typekit.net/bxg2com.css" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

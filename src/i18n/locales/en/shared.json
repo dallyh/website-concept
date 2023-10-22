@@ -14,5 +14,6 @@
   "Location": "Location",
   "LeaveMeAMessage": "Leave me a message",
   "CzechRepublic": "Czech Republic",
-  "MSRegion": "Moravian-Silesian Region"
+  "MSRegion": "Moravian-Silesian Region",
+  "BrowserWarning": "Your browser currently does not support some of the features used on this site. Viewing experience may not be optimal."
 }

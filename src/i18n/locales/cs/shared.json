@@ -14,5 +14,6 @@
     "Location": "Lokace",
     "LeaveMeAMessage": "Zanechte mi zprávu",
     "CzechRepublic": "Česká Republika",
-    "MSRegion": "Moravskoslezský kraj"
+    "MSRegion": "Moravskoslezský kraj",
+    "BrowserWarning": "Váš prohlížeč momentálně nepodporuje některé funkce tohoto webu. Při prohlížení mohou nastat chyby."
 }

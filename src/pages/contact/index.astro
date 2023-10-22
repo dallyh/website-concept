@@ -1,10 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import profilePicture from "../../assets/img/profile.png";
 import i18n, { loadNamespaces, t } from "../../i18n/i18n";
 import type { ContactForm as ContactFormRes } from "../../i18n/locales";
-import { getLocaleUrl, getLocale } from "astro-i18n-aut";
+import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
 import Banner from "../../components/astro/Banner.astro";
 import ContactForm from "../../components/react/ContactForm/ContactForm";
@@ -18,7 +16,7 @@ await loadNamespaces(locale, namespaces);
 const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
 
-<Layout title="Dalibor Hon">
+<Layout title={`Dalibor Hon - ${t("landing:contact_title")}`}>
     <main>
         <div class="contact-wrapper">
             <div class="banner-wrapper" transition:name="banner">

@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro"
-import Navigation from "../../components/astro/resume/Navigation.astro";
 
 const accentColor = "var(--accent-resume)";
 
@@ -44,7 +43,7 @@ await loadNamespaces(locale, namespaces);
                 </div>
                 <div class="section-footer noprint">
                     <div class="section-next-chapter">
-                        <span class="gg-mouse mouse-anim"></span>
+                        <i class="bi bi-mouse mouse-anim"></i>
                     </div>
                 </div>
             </section>
@@ -397,7 +396,7 @@ await loadNamespaces(locale, namespaces);
         letter-spacing: 0.35rem;
         margin-top: 1rem;
         position: relative;
-        font-size: min(5vw, 1rem);
+        font-size: min(3vw, 1rem);
         width: max-content;
     }
 
@@ -459,6 +458,7 @@ await loadNamespaces(locale, namespaces);
         flex-direction: row;
         justify-content: center;
         text-transform: uppercase;
+        font-size: 1.5rem;
     }
 
     .mouse-anim {
