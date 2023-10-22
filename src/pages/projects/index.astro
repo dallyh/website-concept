@@ -90,6 +90,14 @@ await loadNamespaces(locale, namespaces);
         align-items: center;
     }
 
+    a {
+        color: rgba(var(--accentColor), 1);
+
+        &:visited {
+            color: rgba(var(--a-visited), 1);
+        }
+    }
+
     .cards-wrapper {
         width: var(--container-width);
         height: var(--container-height);
@@ -206,13 +214,7 @@ await loadNamespaces(locale, namespaces);
         font-size: 4rem;
         opacity: 0.25;
     }
-
-    @media (max-width: 350px) {
-        .card-image > i {
-            font-size: 1.5rem;
-        }
-    }
-
+    
     .card-info-wrapper {
         align-items: center;
         display: flex;
@@ -289,6 +291,7 @@ await loadNamespaces(locale, namespaces);
 
         .card {
             width: 98%;
+            height: 190px;
         }
 
         .banner-wrapper {

@@ -21,7 +21,7 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 <Layout title="Dalibor Hon">
     <main>
         <div class="contact-wrapper">
-            <div class="hero-wrapper" transition:name="banner">
+            <div class="banner-wrapper" transition:name="banner">
                 <Banner accentColor={accentColor} style="contact" />
             </div>
             <div class="contact-info">
@@ -73,7 +73,7 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
         gap: 1em;
     }
 
-    .hero-wrapper {
+    .banner-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -104,7 +104,7 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
         grid-template-rows: repeat(3, 0.35fr);
         grid-template-columns: 0.3fr 1fr;
         margin: 0rem 0 0.5rem 0rem;
-        gap: 2rem;
+        gap: 1em;
         padding: 1em;
     }
 
@@ -145,6 +145,7 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
             display: grid;
             grid-template-rows: repeat(auto-fit, minmax(min-content, 1fr));
             grid-template-columns: 1fr;
+            gap: 1em;
         }
         .social {
             grid-column: auto;
@@ -190,7 +191,8 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
             border: unset;
             background: linear-gradient(to bottom, var(--nav-background) 40%, transparent 100%);
         }
-        .hero-wrapper {
+
+        .banner-wrapper {
             border-radius: unset;
         }
     }

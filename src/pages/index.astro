@@ -19,7 +19,7 @@ await loadNamespaces(locale, namespaces);
     <main>
         <div class="nav-container">
             <div class="hero">
-                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" transition:name="profile-picture" />
+                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture"/>
                 <div class="hero-title-wrapper" transition:name="banner">
                     <Banner accentColor={accentColor} style="landing">
                 </div>
@@ -147,6 +147,7 @@ await loadNamespaces(locale, namespaces);
         justify-content: center;
         align-items: center;
         padding: 1em;
+        overflow: hidden;
     }
 
     .nav-items:hover > .nav-item::after {
@@ -161,9 +162,6 @@ await loadNamespaces(locale, namespaces);
         margin-bottom: 6px;
         width: 80%;
         border-radius: 10px;
-        transition:
-            box-shadow 600ms ease-in,
-            width 300ms ease-in;
         pointer-events: none;
         background-color: var(--card-bg);
         position: relative;

@@ -21,7 +21,7 @@ await loadNamespaces(locale, namespaces);
         <div class="banner landing">
             <h1 class="hello">
                 <div class="top-bar">
-                    <p>Hello, my name is</p>
+                    <p>hello, my name is</p>
                 </div>
                 <p>dalibor</p>
             </h1>
@@ -62,15 +62,20 @@ await loadNamespaces(locale, namespaces);
         margin-left: 2px;
         margin-bottom: -5px;
         font-size: min(5vw, 0.875rem);
-        font-style: italic;
+        /* font-style: italic; */
         letter-spacing: -1px;
         word-spacing: -5px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 1);
     }
 
     .hello > p {
         color: black;
         font-size: min(15vw, 3rem);
         font-style: normal;
+    }
+
+    .banner.landing .hello > p {
+        color: white;
+        font-weight: bold;
     }
 </style>

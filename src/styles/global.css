@@ -2,7 +2,7 @@
     --accent: 136, 58, 234;
     --accent-contact: 0, 221, 173;
     --accent-projects: 190, 156, 4;
-    --accent-resume: 0, 217, 255;
+    --accent-resume: 74, 144, 226;
     --accent-light: 224, 204, 250;
     --accent-dark: 49, 10, 101;
     --body-color: white;
@@ -17,6 +17,7 @@
     --header-size: 70px;
     --resume-page-width: 1350px;
     --header-bg: rgb(39, 39, 39);
+    --a-visited: 197, 138, 249;
 }
 
 html {
@@ -74,7 +75,7 @@ a {
     color: rgba(var(--accent), 1);
 
     &:visited {
-        color: rgb(197, 138, 249);
+        color: rgba(var(--a-visited), 1);
     }
 
     &:hover {
