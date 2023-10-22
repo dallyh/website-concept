@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
-import Footer from "../../components/astro/footer/Footer.astro"
+import Footer from "../../components/astro/footer/Footer.astro";
 
 const accentColor = "var(--accent-resume)";
 
@@ -15,7 +15,7 @@ import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-logo-white.png";
 import FloatingMenuButton from "../../components/astro/resume/FloatingMenuButton.astro";
 import ProgressBar from "../../components/astro/resume/ProgressBar.astro";
-
+import Navigation from "../../components/astro/resume/Navigation.astro";
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -24,7 +24,8 @@ await loadNamespaces(locale, namespaces);
 ---
 
 <Layout title={t("shared:NamePossesive") + " " + t("shared:Resume")}>
-    <ProgressBar accentColor={accentColor}/>
+    <Navigation />
+    <ProgressBar accentColor={accentColor} />
     <div class="resume-wrapper with-header">
         <main class="resume-content">
             <!-- Introduction -->
@@ -123,7 +124,10 @@ await loadNamespaces(locale, namespaces);
                     </div>
 
                     <div class="list-card">
-                        <h3 class="dev-list-title">{t("resume:SkillsProgrammingLangAndTools")} <span><i class="bi bi-info-circle" data-tooltip="top" data-tooltip-text={t("resume:HoverIconsTooltip")}></i></span></h3>
+                        <h3 class="dev-list-title">
+                            {t("resume:SkillsProgrammingLangAndTools")}
+                            <span><i class="bi bi-info-circle" data-tooltip="top" data-tooltip-text={t("resume:HoverIconsTooltip")}></i></span>
+                        </h3>
                         <ul class="dev-list-inline">
                             <li class="dev-list-inline-item" tabindex="0" data-tooltip="bottom" data-tooltip-text="HTML5">
                                 <i class="devicon-html5-plain"></i>
@@ -203,7 +207,7 @@ await loadNamespaces(locale, namespaces);
                                 <li>
                                     <a href="https://www.nintex.com/process-automation/k2-software/" target="_blank"> K2 Five/K2 Cloud</a>
                                 </li>
-                            </ul>                           
+                            </ul>
                         </div>
                         <p>
                             {t("resume:SkillsSoftwareAndPlatformsDescription")}
@@ -312,7 +316,6 @@ await loadNamespaces(locale, namespaces);
     </div>
     <Footer accentColor={accentColor} />
 </Layout>
-<FloatingMenuButton accentColor={accentColor} />
 
 <script>
     const timeline = () => {
@@ -381,14 +384,18 @@ await loadNamespaces(locale, namespaces);
         }
     }
 
+    section {
+        scroll-margin-top: 70px;
+    }
+
     /* Hero section */
     .hero-container {
         display: grid;
         gap: 0.5rem;
         padding-bottom: 1rem;
-        scroll-margin-top: 100px;
+        scroll-margin-top: 200px;
         align-items: center;
-        min-height: 100svh;
+        min-height: calc(100svh - var(--header-size));
     }
 
     .hero-title-wrapper > p {
@@ -475,12 +482,11 @@ await loadNamespaces(locale, namespaces);
         margin: auto;
         border-radius: 15px;
         position: relative;
-        margin-top: 1rem;
+        margin-top: calc(var(--header-size));
     }
 
     .resume-content {
         position: relative;
-        z-resume: 3;
         padding: 1rem;
     }
 

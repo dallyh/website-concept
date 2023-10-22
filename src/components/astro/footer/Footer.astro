@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import LanguageCollapsible from "./LanguageCollapsible.astro";
-import { getLocale } from "astro-i18n-aut";
+import { getLocale, getLocaleUrl } from "astro-i18n-aut";
 import { loadNamespaces, t } from "../../../i18n/i18n";
 
 interface Props {
@@ -16,21 +15,26 @@ const namespaces = ["footer"];
 await loadNamespaces(locale, namespaces);
 
 import astroSvg from "../../../../public/assets/img/astro/simple-full-logo-light.svg";
+import LanguageSelector from "./LanguageSelector.astro";
 ---
 
 <footer class="footer-container">
-    <LanguageCollapsible accentColor={accentColor} />
-    <p>{t("footer:PageCreatedBy")}</p>
-    <p>{t("footer:Host")}{" "}<a href="https://www.github.com" target="_blank"> {t("footer:Github")}</a>.</p>
+    <LanguageSelector accentColor={accentColor} showFlag={true} />
     <p>
-        {t("footer:Framework")} {" "}
+        {t("footer:PageCreatedBy")} {" "}
         <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework">
             <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
         </a>
     </p>
+    <p>{t("footer:Host")}{" "}<a href="https://www.github.com" target="_blank"> {t("footer:Github")}</a>.</p>
+    <a href={getLocaleUrl("/contact", locale)} rel="prefetch"><i class="bi bi-envelope-fill"></i> {t("footer:ContactMe")}</a>
 </footer>
 
-<style define:vars={{accentColor}}>
+<style define:vars={{ accentColor }}>
+    :root {
+        --footer-color: rgba(255, 255, 255, 0.5);
+    }
+    
     /* Footer */
     .footer-container {
         width: max-content;
@@ -42,7 +46,7 @@ import astroSvg from "../../../../public/assets/img/astro/simple-full-logo-light
         padding: 2rem;
         text-align: center;
         font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--footer-color);
         font-weight: 300;
     }
 
@@ -63,6 +67,11 @@ import astroSvg from "../../../../public/assets/img/astro/simple-full-logo-light
 
         &:visited {
             color: rgba(var(--a-visited), 1);
+        }
+
+        i {
+            margin-right: 0.25rem;
+            color: var(--footer-color);
         }
     }
 </style>

@@ -19,6 +19,12 @@ const { accentColor } = Astro.props;
         background: linear-gradient(to right, rgba(var(--accentColor), 1) var(--scroll), transparent 0);
         background-repeat: no-repeat;
     }
+
+    @media (width > 980px) {
+        .progress-bar {
+            mix-blend-mode: difference;
+        }
+    }
 </style>
 
 <script>

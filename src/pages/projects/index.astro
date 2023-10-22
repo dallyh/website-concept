@@ -4,12 +4,16 @@ import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
 import Banner from "../../components/astro/Banner.astro";
+import { Image } from "astro:assets";
+
+// Images
+import Lemmy from "../../assets/img/projects/lemmy.svg"
 
 const accentColor = "var(--accent-projects)";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["index", "shared", "landing"];
+const namespaces = ["landing", "projects"];
 await loadNamespaces(locale, namespaces);
 ---
 
@@ -23,14 +27,14 @@ await loadNamespaces(locale, namespaces);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="bi bi-file-text-fill"></i>
+                            <i class="bi bi-globe"></i>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
                                 <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
-                                    <a href="#" target="_blank">This website</a>
-                                    <p>Source code for this website</p>
+                                    <a href="#" target="_blank">{t("projects:ThisWebsite")}</a>
+                                    <p>{t("projects:ThisWebsiteDescription")}</p>
                                 </div>
                             </div>
                         </div>
@@ -39,14 +43,14 @@ await loadNamespaces(locale, namespaces);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="bi bi-file-text-fill"></i>
+                            <Image class="lemmy-logo" src={Lemmy} width={100} format="avif" alt="Profile picture"/>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
                                 <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
-                                    <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">Lemmy Kotlin Client</a>
-                                    <p>A multiplatform client for <a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
+                                    <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">{t("projects:LemmyKtClient")}</a>
+                                    <p>{t("projects:LemmyKtClientDescription")}{" "}<a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
                                 </div>
                             </div>
                         </div>
@@ -55,14 +59,14 @@ await loadNamespaces(locale, namespaces);
                 <div class="card">
                     <div class="card-content">
                         <div class="card-image">
-                            <i class="bi bi-file-text-fill"></i>
+                            <i class="bi bi-file-person-fill"></i>
                         </div>
                         <div class="card-info-wrapper">
                             <div class="card-info">
                                 <i class="bi bi-link-45deg"></i>
                                 <div class="card-info-title">
-                                    <a href="https://github.com/dallyh/web-resume" target="_blank">Old website</a>
-                                    <p>Source code for my older website</p>
+                                    <a href="https://github.com/dallyh/web-resume" target="_blank">{t("projects:OldWebsite")}</a>
+                                    <p>{t("projects:OldWebisteDescription")}</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +214,7 @@ await loadNamespaces(locale, namespaces);
 
     .card-image > i {
         font-size: 4rem;
-        opacity: 0.25;
+        opacity: 0.45;
     }
     
     .card-info-wrapper {
@@ -245,8 +249,8 @@ await loadNamespaces(locale, namespaces);
         margin-top: 8px;
     }
 
-    .card-image > .gg-git-fork {
-        margin-right: 25px;
+    .lemmy-logo {
+        opacity: 0.45;
     }
 
     @media (max-width: 768px) {
