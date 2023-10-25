@@ -122,27 +122,31 @@ await loadNamespaces(locale, namespaces);
     .header-menu {
         font-size: 1rem;
         display: flex;
+        justify-content: center;
+        align-items: center;
         position: relative;
-        height: inherit;
+        height: 55%;
         gap: 1rem;
         justify-content: space-evenly;
     }
 
     .header-menu::before {
         content: " ";
-        width: 100%;
+        width: 110%;
         height: 100%;
+        border-radius: 10px;
         position: absolute;
-        left: 0;
-        top: 0;
-        background-color: rgba(var(--accent-resume), 0.8);
+        left: -5%;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(var(--accent-resume), 1);
         z-index: -1;
-        transform: skewX(-20deg) scaleX(1.2);
+        /* transform: skewX(-20deg) scaleX(1.2); */
 
     }
 
     .header-menu-item {
-        height: inherit;
+        height: 100%;
         width: 100%;
         display: flex;
         align-items: center;
@@ -190,7 +194,7 @@ await loadNamespaces(locale, namespaces);
         height: 2px;
         width: 100%;
         background-color: white;
-        bottom: 0px;
+        bottom: 0%;
         left: 0;
         right: 0;
         transform: scale(0);
