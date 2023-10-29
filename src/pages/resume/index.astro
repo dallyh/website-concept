@@ -13,7 +13,6 @@ import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
 import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-logo-white.png";
-import FloatingMenuButton from "../../components/astro/resume/FloatingMenuButton.astro";
 import ProgressBar from "../../components/astro/resume/ProgressBar.astro";
 import Navigation from "../../components/astro/resume/Navigation.astro";
 
@@ -67,12 +66,12 @@ await loadNamespaces(locale, namespaces);
                         <div class="bars">
                             <div class="bar">
                                 <label for="ba">{t("resume:CardBATitle")}</label>
-                                <progress id="ba" value="75" max="100"></progress>
+                                <progress id="ba" value="85" max="100"></progress>
                                 <p>{t("resume:CardBADetail")}</p>
                             </div>
                             <div class="bar">
                                 <label for="ba">{t("resume:CardImplementationTitle")}</label>
-                                <progress id="ba" value="50" max="100"></progress>
+                                <progress id="ba" value="60" max="100"></progress>
                                 <p>{t("resume:CardImplementationDetail")}</p>
                             </div>
                             <div class="bar">
@@ -537,7 +536,9 @@ await loadNamespaces(locale, namespaces);
             }
 
             & label {
-                font-size: 1.25rem;
+                font-size: 1.2rem;
+                font-weight: lighter;
+                color: rgba(var(--accentColor), 1);
             }
         }
     }
@@ -545,21 +546,21 @@ await loadNamespaces(locale, namespaces);
     progress[value] {
         --color: rgba(var(--accentColor), 1); /* the progress color */
         --background: rgba(119, 119, 119, 0.2); /* the background color */
-
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
         border: none;
         width: 100%;
         height: 2px;
         background: var(--background);
     }
+
     progress[value]::-webkit-progress-bar {
         background: var(--background);
     }
+
     progress[value]::-webkit-progress-value {
         background: var(--color);
     }
+
     progress[value]::-moz-progress-bar {
         background: var(--color);
     }
@@ -637,7 +638,13 @@ await loadNamespaces(locale, namespaces);
 
     @media (max-width: 768px) {
         .certifications-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .certifications-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
         }
     }
@@ -650,7 +657,7 @@ await loadNamespaces(locale, namespaces);
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        background-color: var(--bg-color);
+        background-color: rgba(var(--accent-resume), 0.04);
         border: 1px solid rgba(var(--accentColor), 0.4);
         border-radius: 10px;
     }
@@ -662,9 +669,10 @@ await loadNamespaces(locale, namespaces);
     }
 
     .cert-card-logo {
-        max-width: 150px;
-        max-height: 40px;
-        /* filter: brightness(100%) grayscale(100%) invert(1); */
+        max-width: 170px;
+        max-height: 50px;
+        width: auto;
+        height: auto;
     }
 
     @media (max-width: 768px) {

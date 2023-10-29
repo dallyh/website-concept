@@ -1,5 +1,5 @@
 ---
-import { getLocale, getLocaleUrl } from "astro-i18n-aut";
+import { getLocale } from "astro-i18n-aut";
 import { loadNamespaces, t } from "../../../i18n/i18n";
 
 // i18next
@@ -11,11 +11,11 @@ await loadNamespaces(locale, namespaces);
 <div class="header-container noprint">
     <header class="header">
         <div class="header-burger-menu">
-            <div class="header-burger-menu-button">
+            <div class="header-burger-menu-button" id="resumeMenuButton">
                 <span></span>
             </div>
         </div>
-        <p>{`${t("shared:NamePossesive")} ${t("shared:Resume")}`}</p>
+        <p>{t("navigation:DaliborsResume")}</p>
         <div class="header-menu">
             <a href="#hero" class="header-menu-item menu-hover-effect">
                 <span>00</span>TOP
@@ -37,7 +37,7 @@ await loadNamespaces(locale, namespaces);
 </div>
 
 <div class="nav-container noprint">
-    <aside class="aside">
+    <aside class="aside" id="resumeAsideMenu">
         <div class="contact-info">
             <p>Dalibor Hon</p>
             <a href="https://www.linkedin.com/in/dalibor-hon/" target="_blank">
@@ -97,6 +97,8 @@ await loadNamespaces(locale, namespaces);
         justify-content: space-between;
         gap: 1em;
         align-items: center;
+        padding-left: 1em;
+        padding-right: 1em;
     }
 
     .header-burger-menu {
@@ -114,9 +116,9 @@ await loadNamespaces(locale, namespaces);
     header p {
         color: rgba(var(--accent-resume), 1);
         font-size: 1.2rem;
-        font-weight: 400;
+        font-weight: 600;
         display: block;
-        padding: 0rem 0rem 0rem 1rem;
+        font-family: "Major Mono Display";
     }
 
     .header-menu {
@@ -128,6 +130,7 @@ await loadNamespaces(locale, namespaces);
         height: 55%;
         gap: 1rem;
         justify-content: space-evenly;
+        margin-right: 35px;
     }
 
     .header-menu::before {
@@ -139,10 +142,10 @@ await loadNamespaces(locale, namespaces);
         left: -5%;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(var(--accent-resume), 1);
+        background-color: rgba(var(--accent-resume), 0.07);
         z-index: -1;
+        border: 1px solid rgba(var(--accent-resume), 0.1);
         /* transform: skewX(-20deg) scaleX(1.2); */
-
     }
 
     .header-menu-item {
@@ -160,18 +163,18 @@ await loadNamespaces(locale, namespaces);
         position: relative;
         overflow: visible;
     }
-    
+
     .header-menu-item:hover {
         text-decoration: none;
     }
 
     .header-menu-item > span {
-        color: white;
+        color: rgba(var(--accent-resume), 1);
     }
 
     .header-menu .header-menu-item {
         color: rgba(var(--accent-resume), 1);
-        color: black;
+        color: white;
     }
 
     .menu-hover-effect:focus {
@@ -220,7 +223,6 @@ await loadNamespaces(locale, namespaces);
 
         header p {
             display: block !important;
-            margin-right: 1.5rem;
         }
 
         .header-burger-menu {
@@ -230,7 +232,6 @@ await loadNamespaces(locale, namespaces);
             width: 2.125rem;
             margin-top: auto;
             margin-bottom: auto;
-            margin-left: 1rem;
         }
 
         .header-burger-menu-button {
@@ -438,199 +439,156 @@ await loadNamespaces(locale, namespaces);
             transition: transform 200ms;
         }
     }
+
+    @media (max-width: 480px) {
+        .header p {
+            width: min-content;
+            font-size: 1rem;
+        }
+    }
 </style>
 
 <script>
+    import { navigate } from "astro:transitions/client";
     import Hammer from "hammerjs";
-    class SideNav {
-        constructor() {
+
+    const initSideNav = () => {
+        // Sidebar navigation
+        const navButton = document.querySelector<HTMLDivElement>("#resumeMenuButton"),
+            navigation = document.querySelector<HTMLElement>("#resumeAsideMenu"),
+            navLinks = document.querySelectorAll<HTMLAnchorElement>("a");
+
+        if (navButton === null) {
+            return;
         }
 
-        public initSideNav(): void {
-            // Sidebar navigation
-            const navButton = document.querySelector(".header-burger-menu-button") as HTMLDivElement;
-            const navigation = document.querySelector(".nav-container") as HTMLElement;
-            const sections = document.querySelectorAll("section");
-            const headerNavLinks = document.querySelectorAll(".header-menu > .header-menu-item");
+        /**
+         * Opens/closes navigation menu.
+         */
+        const openCloseNav = () => {
+            navButton.classList.toggle("active");
+            document.body.classList.toggle("nav-active");
+        };
 
-            /**
-             * Opens/closes navigation menu.
-             */
-            const openCloseNav = () => {
-                navButton.classList.toggle("active");
-                document.body.classList.toggle("nav-active");
-            };
+        /**
+         * Closes navigation menu
+         */
+        const closeNav = () => {
+            if (document.body.classList.contains("nav-active")) {
+                navButton.classList.remove("active");
+                document.body.classList.remove("nav-active");
+            }
+        };
 
-            /**
-             * Closes navigation menu
-             */
-            const closeNav = () => {
-                if (document.body.classList.contains("nav-active")) {
-                    navButton.classList.remove("active");
-                    document.body.classList.remove("nav-active");
+        /**
+         * Opens navigation menu
+         */
+        const openNav = () => {
+            if (document.body.classList.contains("nav-active") === false) {
+                navButton.classList.add("active");
+                document.body.classList.add("nav-active");
+            }
+        };
+
+        /**
+         * Handles header on scroll
+         */
+        const headerOnScroll = () => {
+            var prevScrollpos = window.scrollY;
+            var headerDiv = document.querySelector(".header-container") as HTMLElement;
+            window.onscroll = function () {
+                // Makes the header smaller
+                if (document.body.scrollTop >= 20 || document.documentElement.scrollTop >= 20) {
+                    headerDiv.classList.add("small");
+                } else {
+                    headerDiv.classList.remove("small");
                 }
-            };
 
-            /**
-             * Opens navigation menu
-             */
-            const openNav = () => {
-                if (document.body.classList.contains("nav-active") == false) {
-                    navButton.classList.add("active");
-                    document.body.classList.add("nav-active");
+                // Hides header on scroll
+                var currentScrollPos = window.scrollY;
+
+                /* if scrolling down, let it scroll out of view as normal */
+                if (prevScrollpos <= currentScrollPos) {
+                    headerDiv.classList.add("hidden");
+                } else {
+                    /* otherwise if we're scrolling up, fix the nav to the top */
+                    headerDiv.classList.remove("hidden");
                 }
+
+                prevScrollpos = currentScrollPos;
             };
+        };
 
-            /**
-             * https://stackoverflow.com/questions/4620906/how-do-i-know-when-ive-stopped-scrolling
-             */
-            const waitForScrollEnd = () => {
-                let last_changed_frame = 0;
-                let last_x = window.scrollX;
-                let last_y = window.scrollY;
+        // Hammertime (swipe gestures for nav menu)
+        const hammerTime = () => {
+            //@ts-ignore -- removes the default user-select:none from HammerJS init.
+            delete Hammer.defaults.cssProps.userSelect;
+            let hammertime = new Hammer(document.body);
+            hammertime.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+            hammertime.on("swipe", function (ev) {
+                if (ev.direction === 4) {
+                    // Swipe right
+                    openNav();
+                }
 
-                return new Promise<void>((resolve) => {
-                    function tick(frames: number) {
-                        // We requestAnimationFrame either for 500 frames or until 20 frames with
-                        // no change have been observed.
-                        if (frames >= 500 || frames - last_changed_frame > 20) {
-                            resolve();
-                        } else {
-                            if (window.scrollX != last_x || window.scrollY != last_y) {
-                                last_changed_frame = frames;
-                                last_x = window.scrollX;
-                                last_y = window.scrollY;
-                            }
-                            requestAnimationFrame(tick.bind(null, frames + 1));
-                        }
-                    }
-                    tick(0);
-                });
-            };
-
-            /**
-             * Removes active attribude from all sections and navigation
-             */
-            const removeAttributesOnScroll = (activeSection: Element, activeNavLink?: HTMLAnchorElement) => {
-                sections.forEach((section) => {
-                    if (section !== activeSection) section.removeAttribute("data-js-active");
-                });
-
-                if (activeNavLink === undefined) return;
-
-                headerNavLinks.forEach((navLink) => {
-                    if (navLink !== activeNavLink) {
-                        if (navLink.classList.contains("active")) navLink.classList.remove("active");
-                    }
-                });
-            };
-
-            /**
-             * Sets active attribute to clicked navigation link
-             */
-            const navAnchorClick = () =>
-                headerNavLinks.forEach((navLink) => {
-                    navLink.addEventListener("click", (e) => {
-                        let anchorLink = e.target as HTMLAnchorElement;
-                        let href = anchorLink.getAttribute("href");
-                        if (href === null) return;
-
-                        let section = document.querySelector(href);
-                        if (section !== null) {
-                            section.setAttribute("data-js-active", "");
-                            navLink.classList.add("active");
-                        }
-
-                        waitForScrollEnd().then(() => {
-                            if (section !== null) removeAttributesOnScroll(section, anchorLink);
-                        });
-                    });
-                });
-
-            /**
-             * Handles header on scroll
-             */
-            const headerOnScroll = () => {
-                var prevScrollpos = window.scrollY;
-                var headerDiv = document.querySelector(".header-container") as HTMLElement;
-                window.onscroll = function () {
-                    // Makes the header smaller
-                    if (document.body.scrollTop >= 20 || document.documentElement.scrollTop >= 20) {
-                        headerDiv.classList.add("small");
-                    } else {
-                        headerDiv.classList.remove("small");
-                    }
-
-                    // Hides header on scroll
-                    var currentScrollPos = window.scrollY;
-
-                    /* if scrolling down, let it scroll out of view as normal */
-                    if (prevScrollpos <= currentScrollPos) {
-                        headerDiv.classList.add("hidden");
-                    } else {
-                        /* otherwise if we're scrolling up, fix the nav to the top */
-                        headerDiv.classList.remove("hidden");
-                    }
-
-                    prevScrollpos = currentScrollPos;
-                };
-            };
-
-            // Hammertime (swipe gestures for nav menu)
-            const hammerTime = () => {
-                //@ts-ignore -- removes the default user-select:none from HammerJS init.
-                delete Hammer.defaults.cssProps.userSelect;
-                let hammertime = new Hammer(document.body);
-                hammertime.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
-                hammertime.on("swipe", function (ev) {
-                    if (ev.direction === 4) {
-                        // Swipe right
-                        openNav();
-                    }
-
-                    if (ev.direction === 2) {
-                        // Swipe left
-                        closeNav();
-                    }
-                });
-            };
-
-            const collapseNav = () => {
-                // Collapse responsive navbar on click outside or on its child items
-                // https://stackoverflow.com/questions/50359249/bootsrap-v4-1-closing-a-collapse-menu-when-clicking-outside-of-div
-                document.addEventListener("click", function (click) {
-                    let container = navigation;
-                    if (click.target instanceof HTMLElement) {
-                        if (click.target === navButton) return;
-                        if (click.target instanceof HTMLInputElement) return;
-                        if (click.target === container || container.contains(click.target)) {
-                            if (click.target instanceof HTMLAnchorElement) closeNav();
-
-                            return;
-                        }
-                        closeNav();
-                    }
-                });
-            };
-
-            // Run everything
-            navButton.addEventListener("click", (e) => {
-                e.preventDefault();
-                openCloseNav();
+                if (ev.direction === 2) {
+                    // Swipe left
+                    closeNav();
+                }
             });
-            navAnchorClick();
-            headerOnScroll();
-            hammerTime();
-            collapseNav();
-            console.log("Navigation initialized.");
-        }
-    }
+        };
+
+        // Collapse responsive navbar on click outside or on its child items
+        const collapseNav = () => {
+            document.onmouseup = (e) => {
+                let target = e.target as HTMLElement;
+
+                if (navigation === target || navButton === target) {
+                    return;
+                }
+
+                if (navigation?.contains(target)) {
+                    closeNav();
+                }
+
+                closeNav();
+            };
+        };
+
+        // Prevent back button to use hash links
+        const handleHashes = () => {
+            navLinks.forEach((e) => {
+                let link = e.href;
+                if (link.includes("#") === false) {
+                    return;
+                }
+
+                e.onclick = (e) => {
+                    e.preventDefault();
+                    window.location.replace(link);
+                }
+                
+            });
+        };
+
+        // Run everything
+        navButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            openCloseNav();
+        });
+
+        headerOnScroll();
+        hammerTime();
+        collapseNav();
+        handleHashes();
+
+        console.log("Navigation initialized.");
+    };
 
     document.addEventListener(
         "astro:page-load",
         (e) => {
-            let sideNav = new SideNav();
-            sideNav.initSideNav();
+            initSideNav();
         },
         { once: false },
     );

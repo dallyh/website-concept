@@ -21,20 +21,25 @@ import LanguageSelector from "./LanguageSelector.astro";
 <footer class="footer-container">
     <LanguageSelector accentColor={accentColor} showFlag={true} />
     <p>
-        {t("footer:PageCreatedBy")} {" "}
+        {t("footer:PageCreatedBy")}
+        {" "}
         <a href="https://astro.build/" aria-label="Astro Framework." title="Astro Framework">
             <Image src={astroSvg} alt="Astro.build logo." class="svg-astro" />
         </a>
     </p>
     <p>{t("footer:Host")}{" "}<a href="https://www.github.com" target="_blank"> {t("footer:Github")}</a>.</p>
-    <a href={getLocaleUrl("/contact", locale)} rel="prefetch"><i class="bi bi-envelope-fill"></i> {t("footer:ContactMe")}</a>
+    <div class="links">
+        <a href={getLocaleUrl("/", locale)} rel="prefetch"><i class="bi bi-house-fill"></i> {t("footer:HomePage")}</a>
+        {"|"}
+        <a href={getLocaleUrl("/contact", locale)} rel="prefetch"><i class="bi bi-envelope-fill"></i> {t("footer:ContactMe")}</a>
+    </div>
 </footer>
 
 <style define:vars={{ accentColor }}>
     :root {
         --footer-color: rgba(255, 255, 255, 0.5);
     }
-    
+
     /* Footer */
     .footer-container {
         width: max-content;
@@ -60,6 +65,12 @@ import LanguageSelector from "./LanguageSelector.astro";
         background-repeat: no-repeat;
         filter: invert(100%) grayscale(100%);
         opacity: 50%;
+    }
+
+    .links {
+        display: flex;
+        justify-content: center;
+        gap: 0.25em;
     }
 
     a {

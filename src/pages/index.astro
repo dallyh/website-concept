@@ -110,14 +110,6 @@ await loadNamespaces(locale, namespaces);
         font-size: 1em;
     }
 
-    .hero-title {
-        display: inline-flex;
-        font-size: 3rem;
-        font-family: "Major Mono Display";
-        color: black;
-        margin-bottom: 1rem;
-    }
-
     .profile-picture {
         width: 140px;
         height: 140px;
@@ -266,7 +258,7 @@ await loadNamespaces(locale, namespaces);
 
         .hero {
             width: 100vw;
-            height: 120px;
+            height: 140px;
             flex: unset;
             transform: unset;
             border-radius: unset;
@@ -323,7 +315,6 @@ await loadNamespaces(locale, namespaces);
     document.addEventListener(
         "astro:page-load",
         (e) => {
-            e.target?.removeEventListener;
             setupNav();
         },
         { once: false },
