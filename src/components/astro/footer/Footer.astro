@@ -5,9 +5,11 @@ import { loadNamespaces, t } from "../../../i18n/i18n";
 
 interface Props {
     accentColor: string;
+    showHomePage?: boolean;
+    showContact?: boolean;
 }
 
-const { accentColor } = Astro.props;
+const { accentColor, showHomePage = true, showContact = true } = Astro.props;
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -29,9 +31,21 @@ import LanguageSelector from "./LanguageSelector.astro";
     </p>
     <p>{t("footer:Host")}{" "}<a href="https://www.github.com" target="_blank"> {t("footer:Github")}</a>.</p>
     <div class="links">
-        <a href={getLocaleUrl("/", locale)} rel="prefetch"><i class="bi bi-house-fill"></i> {t("footer:HomePage")}</a>
-        {"|"}
-        <a href={getLocaleUrl("/contact", locale)} rel="prefetch"><i class="bi bi-envelope-fill"></i> {t("footer:ContactMe")}</a>
+        {
+            showHomePage && (
+                <a href={getLocaleUrl("/", locale)} rel="prefetch">
+                    <i class="bi bi-house-fill" /> {t("footer:HomePage")}
+                </a>
+            )
+        }
+        {showHomePage && showContact && "|"}
+        {
+            showContact && (
+                <a href={getLocaleUrl("/contact", locale)} rel="prefetch">
+                    <i class="bi bi-envelope-fill" /> {t("footer:ContactMe")}
+                </a>
+            )
+        }
     </div>
 </footer>
 
