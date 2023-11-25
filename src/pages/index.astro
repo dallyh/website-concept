@@ -1,323 +1,170 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import profilePicture from "../assets/img/profile.png";
-import { loadNamespaces, t } from "../i18n/i18n";
+import i18n, { loadNamespaces, t } from "../i18n/i18n";
+import type { ContactForm as ContactFormRes } from "../i18n/locales";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
-import Footer from "../components/astro/footer/Footer.astro"
-import Banner from "../components/astro/Banner.astro";
-
-const accentColor = "var(--accent)"; // Color is in RGB
+import ContactForm from "../components/react/ContactForm/ContactForm";
+import Footer from "../components/astro/footer/Footer.astro";
+import Intro from "../components/astro/parts/Intro.astro";
+import Projects from "../components/astro/parts/Projects.astro";
+import Contact from "../components/astro/parts/Contact.astro";
+import codeBgSm from "../assets/img/projects/code_bg_sm.svg";
 
 // i18next
 const locale = getLocale(Astro.url);
 const namespaces = ["landing"];
+namespaces.push("contactForm", "shared", "landing");
+namespaces.push("landing", "projects");
+
 await loadNamespaces(locale, namespaces);
+
+const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
 
 <Layout title="Dalibor Hon">
     <main>
-        <div class="nav-container">
-            <div class="hero">
-                <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture"/>
-                <div class="hero-title-wrapper" transition:name="banner">
-                    <Banner accentColor={accentColor} style="landing">
+        <section class="intro">
+            <div class="section-content-container">
+                <Intro />
+            </div>
+            <div class="section-footer first-section">
+                <div class="section-next-chapter">
+                    <i class="bi bi-mouse mouse-anim"></i>
                 </div>
             </div>
-            <nav class="nav">
-                <ul class="nav-items">
-                    <li class="nav-item">
-                        <a href={getLocaleUrl("/resume", locale)} rel="prefetch" >
-                            <div class="nav-item-content">
-                                <i class="bi bi-file-earmark-person-fill"></i>
-                                <div class="nav-item-content-text">
-                                    <h2>{t("landing:resume_title")}</h2>
-                                    <p>{t("landing:resume_description")}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href={getLocaleUrl("/projects", locale)} rel="prefetch" >
-                            <div class="nav-item-content">
-                                <i class="bi bi-git"></i>
-                                <div class="nav-item-content-text">
-                                    <h2>{t("landing:projects_title")}</h2>
-                                    <p>{t("landing:projects_description")}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href={getLocaleUrl("/contact", locale)} rel="prefetch" >
-                            <div class="nav-item-content">
-                                <i class="bi bi-envelope-fill"></i>
-                                <div class="nav-item-content-text">
-                                    <h2>{t("landing:contact_title")}</h2>
-                                    <p>{t("landing:contact_description")}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <Footer accentColor={accentColor} showHomePage={false} showContact={false}/>
+        </section>
+        <section class="projects">
+            <div class="section-content-container">
+                <div class="section-header">
+                    <h3 data-text={t("landing:projects_title")}>{t("landing:projects_title")}</h3>
+                </div>
+                <div class="section-info">
+                    <p>A list of my personal hobby projects</p>
+                </div>
+                <div class="section-content">
+                    <Projects />
+                </div>
+            </div>
+        </section>
+        <section class="contact" id="contact">
+            <div class="section-content-container">
+                <div class="section-header">
+                    <h3 data-text={t("shared:LeaveMeAMessage")}>{t("shared:LeaveMeAMessage")}</h3>
+                </div>
+                <div class="section-info">
+                    <p>{t("contactForm:ContactMe")}</p>
+                </div>
+                <div class="section-content">
+                    <Contact />
+                </div>
+            </div>
+        </section>
     </main>
-    
+    <Footer showContact={false} showHomePage={false} accentColor="var(--accent)" />
 </Layout>
 
 <style>
-    :root {
-        --container-width: 750px;
-        --container-height: 400px;
-    }
-
-    body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav-container {
-        width: var(--container-width);
-        height: var(--container-height);
-        display: flex;
-    }
-
-    .hero {
-        height: 100%;
-        background-color: rgba(var(--accent), 1);
-        border-radius: 15px;
-        transform: scale(1.08) perspective(1500px) rotateY(10deg);
-        padding: 1em;
-        flex: 0.7 1 0px;
+    main {
+        max-width: var(--page-width);
+        margin: auto;
         display: flex;
         flex-direction: column;
-        position: relative;
-        justify-content: center;
-        z-index: 1;
     }
 
-    .hero-title-wrapper {
-        align-self: center;
-        justify-self: center;
-    }
-
-    .hero-title-wrapper > p {
-        margin-top: 1rem;
-        font-size: 1em;
-    }
-
-    .profile-picture {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        border: 10px solid var(--bg-color);
-        position: absolute;
-        object-fit: cover;
-        top: -50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(100%);
-    }
-
-    .nav {
-        flex: 1 1 0px;
-        background-color: var(--nav-background);
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-items {
+    section {
         width: 100%;
-        height: 100%;
+        display: grid;
+        height: max-content;
+        height: 90vh;
+
+        @media (max-width: 768px) {
+            height: unset;
+        }
+
+        &.intro {
+            height: 100vh;
+            grid-template-rows: 1fr min-content;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .section-content-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        padding: 1em;
-        overflow: hidden;
-    }
+        align-items: flex-start;
+        padding: 4rem 4rem 1rem 4rem;
 
-    .nav-items:hover > .nav-item::after {
-        opacity: 1;
-    }
+        @media (max-width: 768px) {
+            padding: 2rem;
+        }
 
-    .nav-item {
-        --hover-opacity: 0;
-        display: flex;
-        align-items: center;
-        height: 100px;
-        margin-bottom: 6px;
-        width: 80%;
-        border-radius: 10px;
-        pointer-events: none;
-        background-color: var(--card-bg);
-        position: relative;
+        @media (max-width: 480px) {
+            padding: 0.7rem;
+        }
 
-        & a {
-            cursor: pointer;
-            pointer-events: all;
+        .section-header {
+            font-size: 2rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                background-color: rgba(var(--accent), 1);
+                bottom: -2px;
+                z-index: -1;
+            }
+        }
+
+        [data-text]::after {
+            content: attr(data-text);
             width: 100%;
             height: 100%;
-            color: white;
-            transition: color 300ms ease-in;
-        }
-    }
-
-    .nav-item:hover::before {
-        opacity: 1;
-    }
-
-    .nav-item::before,
-    .nav-item::after {
-        border-radius: inherit;
-        content: "";
-        height: 100%;
-        left: 0px;
-        opacity: var(--hover-opacity);
-        position: absolute;
-        top: 0px;
-        transition: opacity 500ms;
-        width: 100%;
-    }
-
-    .nav-item::before {
-        background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
-        z-index: 3;
-    }
-
-    .nav-item::after {
-        background: radial-gradient(150px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.4), transparent 70%);
-        z-index: 1;
-    }
-
-    .nav-item-content {
-        gap: 1em;
-        align-items: center;
-        background-color: var(--card-color);
-        border-radius: 10px;
-        display: flex;
-        flex-grow: 1;
-        inset: 1px;
-        padding: 10px;
-        position: absolute;
-        z-index: 2;
-
-        & i {
-            color: rgba(255, 255, 255, 1);
-            opacity: 0.45;
-            padding: 0.25em;
+            color: rgba(var(--accent), 0.8);
+            position: absolute;
+            top: 2px;
+            left: 2px;
             font-size: 2rem;
+            z-index: -1;
         }
 
-        & .nav-item-content-text {
-            display: flex;
-            flex-direction: column;
-
-            & h2 {
-                font-size: 1.1em;
-                line-height: 20px;
-            }
-
-            & p {
-                color: rgba(255, 255, 255, 0.5);
-                font-size: 0.85em;
-                margin-top: 8px;
-            }
-        }
-    }
-
-    @media (max-width: 768px) {
-        .nav-container {
-            width: 100vw;
-            transform: scale(0.95);
+        .section-info {
+            margin-top: 30px;
         }
 
-        .hero {
-            transform: translateZ(0) scale(1.04) perspective(1500px) rotateY(10deg);
-        }
-    }
-
-    @media (max-width: 480px) {
-        body {
-            height: unset;
-            align-items: unset;
-            justify-content: unset;
-        }
-
-        .nav-container {
-            width: 100vw;
-            height: max-content;
-            display: flex;
-            flex-direction: column;
-            transform: unset;
-        }
-
-        .hero {
-            width: 100vw;
-            height: 140px;
-            flex: unset;
-            transform: unset;
-            border-radius: unset;
-            justify-content: flex-start;
-        }
-
-        .nav {
-            border-radius: unset;
-            border: unset;
-            background: linear-gradient(to bottom, var(--nav-background) 40%, transparent 100%);
-        }
-
-        .nav-items {
-            padding-top: 5em;
-
-        }
-
-        .nav-item {
+        .section-content {
+            margin-top: 0.5rem;
             width: 100%;
+            height: 100%;
+        }
+    }
+
+    .section-footer {
+        padding-bottom: 2rem;
+
+        &.first-section {
+            font-size: 1.5rem;
         }
 
-        .profile-picture {
-            width: 110px;
-            height: 110px;
-            top: unset;
-            top: 50%;
-            transform: translateX(-50%) translateY(20%);
-            border: 10px solid var(--nav-background);
-            box-shadow: 0px -8px 12px 0px rgba(0, 0, 0, 0.2);
+        .section-next-chapter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+    }
+
+    .mouse-anim {
+        animation-name: mouseAnim;
+        animation-iteration-count: infinite;
+        animation-duration: 1.2s;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        color: white;
     }
 </style>
-
-<script>
-    const setupNav = () => {
-        const navWrapper = document.querySelector(".nav-items") as HTMLDivElement;
-        if (navWrapper === null) {
-            return;
-        }
-        const items = navWrapper?.getElementsByClassName("nav-item") as HTMLCollectionOf<HTMLAnchorElement>;
-
-        navWrapper.onmousemove = (e) => {
-            for (const navitem of items) {
-                const rect = navitem.getBoundingClientRect(),
-                    x = e.clientX - rect.left,
-                    y = e.clientY - rect.top;
-
-                navitem.style.setProperty("--hover-opacity", "0");
-                navitem.style.setProperty("--mouse-x", `${x}px`);
-                navitem.style.setProperty("--mouse-y", `${y}px`);
-            }
-        };
-    };
-
-    document.addEventListener(
-        "astro:page-load",
-        (e) => {
-            setupNav();
-        },
-        { once: false },
-    );
-</script>

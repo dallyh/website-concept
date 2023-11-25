@@ -106,18 +106,27 @@ const contactForm = (props: ContactFormProps) => {
                     <p>{props.resources.SubmitSuccess}</p>
                 </div>
             )}
-            {(!state.succeeded && !state.submitting) && (
+            {!state.succeeded && !state.submitting && (
                 <form id="fs-frm" ref={formRef} name="simple-contact-form" onSubmit={handleSubmit}>
                     <fieldset id="fs-frm-inputs">
-                        <label htmlFor="full-name">{props.resources.FullName}</label>
-                        <input type="text" autoComplete="name" name="name" id="full-name" placeholder={props.resources.NameAndSurname} required />
-                        <label htmlFor="email">{props.resources.EmailAddress}</label>
-                        <input id="email" autoComplete="email" type="email" name="email" placeholder="@" required />
-                        {errorState.some((key) => key.type === "EMAIL") && <p className="error">{errorState.find((item) => item.type === "EMAIL")?.message}</p>}
-                        <label htmlFor="message">{props.resources.Message}</label>
-                        <textarea rows={5} name="message" id="message" placeholder={props.resources.MessagePlaceholder} required></textarea>
-                        {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
-                        <input type="hidden" name="_subject" id="email-subject" value="New resume submission" />
+                        <div className="contact-info-container">
+                            <label htmlFor="full-name">{props.resources.FullName}</label>
+                            <input type="text" autoComplete="name" name="name" id="full-name" placeholder={props.resources.NameAndSurname} required />
+                            <label htmlFor="email">{props.resources.EmailAddress}</label>
+                            <input id="email" autoComplete="email" type="email" name="email" placeholder="@" required />
+                            {errorState.some((key) => key.type === "EMAIL") && <p className="error">{errorState.find((item) => item.type === "EMAIL")?.message}</p>}
+                            <label htmlFor="email-subject">Subject</label>
+                            <input type="text" name="_subject" id="email-subject" placeholder="Subject" defaultValue="New resume submission" required />
+                        </div>
+                        <div className="message-container">
+                            <label htmlFor="message">{props.resources.Message}</label>
+                            <div className="textarea-container">
+                                <div className="textarea-bg"/>
+                                <textarea name="message" id="message" placeholder={props.resources.MessagePlaceholder} required/>
+                            </div>
+                            {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
+                        </div>
+
                         <input type="hidden" name="_language" value="cs" />
                     </fieldset>
                     {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}

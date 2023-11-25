@@ -31,11 +31,11 @@ await loadNamespaces(locale, namespaces);
             <section class="hero-container" id="hero">
                 <div class="hero">
                     <div class="profile-picture-wrapper">
-                        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+                        <Image transition:name="profile-picture" class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
                     </div>
                     <div class="hero-title-wrapper">
-                        <h1 class="hero-title">
-                            dalibor<br />
+                        <h1 transition:name="profile-name" class="hero-title">
+                            Dalibor<br />
                              Hon
                         </h1>
                         <p>BUSINESS CONSULTANT</p>
@@ -421,7 +421,6 @@ await loadNamespaces(locale, namespaces);
         display: inline-flex;
         font-size: min(15vw, 7rem);
         position: relative;
-        font-family: "Major Mono Display";
         color: rgba(var(--accentColor), 1);
         margin-bottom: 1rem;
     }
@@ -448,8 +447,10 @@ await loadNamespaces(locale, namespaces);
         height: clamp(140px, 40vw, 220px);
         object-fit: cover;
         border-radius: 50%;
-        border: 2px solid rgba(var(--accentColor), 1);
         margin-bottom: 2rem;
+        box-shadow:
+            0px 5px 50px 0px rgba(var(--accentColor), 1),
+            0px 0px 0px 7px rgba(var(--accentColor), 0.5);
     }
 
     .section-footer {

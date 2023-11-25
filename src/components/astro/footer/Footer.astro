@@ -41,7 +41,7 @@ import LanguageSelector from "./LanguageSelector.astro";
         {showHomePage && showContact && "|"}
         {
             showContact && (
-                <a href={getLocaleUrl("/contact", locale)} rel="prefetch">
+                <a href={getLocaleUrl("/#contact", locale)} rel="prefetch">
                     <i class="bi bi-envelope-fill" /> {t("footer:ContactMe")}
                 </a>
             )
@@ -51,22 +51,24 @@ import LanguageSelector from "./LanguageSelector.astro";
 
 <style define:vars={{ accentColor }}>
     :root {
-        --footer-color: rgba(255, 255, 255, 0.5);
+        --footer-color: rgba(255, 255, 255, 0.8);
     }
 
     /* Footer */
     .footer-container {
-        width: max-content;
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--card-color);
+        border-top: 1px solid var(--card-bg);
         gap: 0.25rem;
         display: flex;
         flex-direction: column;
-        height: auto;
         margin: 0px auto;
-        padding: 2rem;
         text-align: center;
         font-size: 0.8rem;
         color: var(--footer-color);
         font-weight: 300;
+        margin-top: auto;
     }
 
     :global(.svg-astro) {
@@ -88,10 +90,10 @@ import LanguageSelector from "./LanguageSelector.astro";
     }
 
     a {
-        color: rgba(var(--accentColor), 1);
+        /* color: rgba(var(--accentColor), 1); */
 
         &:visited {
-            color: rgba(var(--a-visited), 1);
+            /* color: rgba(var(--a-visited), 1); */
         }
 
         i {

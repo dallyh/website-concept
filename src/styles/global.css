@@ -8,15 +8,18 @@
     --body-color: white;
     --button-color: white;
     --button-hover-color: black;
-    --bg-color: rgb(20, 20, 20);
-    --card-color: rgb(23, 23, 23);
+    --bg-color: rgba(20, 20, 20, 1);
+    --card-color: rgba(23, 23, 23, 0.4);
+    --card-hover-color: rgba(23, 23, 23, 1);
     --card-bg: rgba(255, 255, 255, 0.1);
+    --card-bg-rgb: 255, 255, 255;
     --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
     --dropdown-bg: #161b22;
     --dropdown-border-color: rgba(255, 255, 255, 0.3);
     --header-size: 95px;
     --resume-page-width: 1350px;
-    --header-bg: rgb(39, 39, 39);
+    --page-width: 1350px;
+    --header-bg: 39, 39, 39;
     --a-visited: 197, 138, 249;
     --burger-menu-bg: #dddddd;
     --nav-background: #222831;
@@ -26,10 +29,23 @@
 html {
     font-size: 1rem;
     line-height: 1;
-    font-family: "Twemoji Country Flags", muli, ubuntu, "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: "Twemoji Country Flags", "Quicksand", muli, ubuntu, "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+/*
+@media (max-width: 768px) {
+    html {
+        width: 100vw;
+        margin-right: calc(100vw - 100%);
+        padding-right: 23px;
+    }
+
+    html:has(.no-scroll) {
+        overflow-y: hidden;
+    }
+}
+*/
 
 body {
     color: white;
