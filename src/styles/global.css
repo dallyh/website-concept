@@ -11,7 +11,7 @@
     --bg-color: rgba(20, 20, 20, 1);
     --card-color: rgba(23, 23, 23, 0.4);
     --card-hover-color: rgba(23, 23, 23, 1);
-    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(255, 255, 255, 0.08);
     --card-bg-rgb: 255, 255, 255;
     --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
     --dropdown-bg: #161b22;

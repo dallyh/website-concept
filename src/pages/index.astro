@@ -1,15 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import i18n, { loadNamespaces, t } from "../i18n/i18n";
 import type { ContactForm as ContactFormRes } from "../i18n/locales";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
-import ContactForm from "../components/react/ContactForm/ContactForm";
 import Footer from "../components/astro/footer/Footer.astro";
 import Intro from "../components/astro/parts/Intro.astro";
 import Projects from "../components/astro/parts/Projects.astro";
 import Contact from "../components/astro/parts/Contact.astro";
-import codeBgSm from "../assets/img/projects/code_bg_sm.svg";
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -21,7 +18,6 @@ await loadNamespaces(locale, namespaces);
 
 const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
-
 <Layout title="Dalibor Hon">
     <main>
         <section class="intro">
@@ -29,8 +25,9 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
                 <Intro />
             </div>
             <div class="section-footer first-section">
-                <div class="section-next-chapter">
-                    <i class="bi bi-mouse mouse-anim"></i>
+                <div class="mouse" id="mouse">
+                    <div class="mouse-wheel"></div>
+                    <div class="arrows"></div>
                 </div>
             </div>
         </section>
@@ -73,17 +70,14 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
     }
 
     section {
-        width: 100%;
         display: grid;
-        height: max-content;
-        height: 90vh;
 
         @media (max-width: 768px) {
             height: unset;
         }
 
         &.intro {
-            height: 100vh;
+            height: 100svh;
             grid-template-rows: 1fr min-content;
             justify-content: center;
             align-items: center;
@@ -133,38 +127,110 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
             font-size: 2rem;
             z-index: -1;
         }
-
         .section-info {
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .section-content {
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             width: 100%;
             height: 100%;
         }
     }
 
     .section-footer {
-        padding-bottom: 2rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1rem;
 
-        &.first-section {
-            font-size: 1.5rem;
+        .mouse {
+            opacity: 0.4;
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 35px;
+            position: relative;
         }
 
-        .section-next-chapter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .mouse-wheel {
+            position: relative;
+            overflow: hidden;
+            width: 30px;
+            height: 15px;
+            border: 1px solid white;
+            width: 6px;
+            border-radius: 500px;
+            margin: 5px auto 0;
+            margin-top: 5px;
         }
-    }
 
-    .mouse-anim {
-        animation-name: mouseAnim;
-        animation-iteration-count: infinite;
-        animation-duration: 1.2s;
-        animation-fill-mode: both;
-        animation-timing-function: ease-in-out;
-        color: white;
+        .mouse-wheel::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            background-color: #fff;
+            height: 4px;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 15px;
+            animation: mouseScroll 1.5s 000ms infinite ease;
+        }
+
+        .arrows {
+            width: 26px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: -5px;
+        }
+
+        .arrows-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .arrows {
+            position: absolute;
+            left: 13px;
+            overflow: hidden;
+            transform: rotate(45deg);
+            margin-left: -5px;
+            content: "";
+            opacity: 0;
+            width: 10px;
+            height: 10px;
+            border: 2px solid white;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            animation: arrowScroll 1.5s 500ms ease-in-out infinite;
+        }
     }
 </style>
+
+<script>
+    const hideMouse = () => {
+        const mouseElem = document.getElementById("mouse") as HTMLElement;
+        const maxScroll = 550;
+        const initialOpacity = Number(window.getComputedStyle(mouseElem).opacity) ?? 1;
+
+        document.addEventListener("scroll", (e) => {
+            let opacity = initialOpacity - window.scrollY / maxScroll;
+            mouseElem.style.opacity = opacity.toString();
+
+            if (opacity <= 0) {
+                mouseElem.style.display = "none";
+            } else {
+                mouseElem.style.display = "block";
+            }
+        });
+    };
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            hideMouse();
+        },
+        { once: false },
+    );
+</script>

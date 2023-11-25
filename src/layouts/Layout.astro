@@ -7,6 +7,7 @@ import HeadHrefLangs from "../components/astro/HeadHrefLangs.astro";
 import BrowserWarning from "../components/astro/BrowserWarning.astro";
 import { getLocale } from "astro-i18n-aut";
 import LanguageSelectDialog from "../components/astro/LanguageSelectDialog.astro";
+import ContactModal from "../components/astro/ContactModal.astro";
 interface Props {
     title: string;
 }
@@ -39,6 +40,7 @@ const locale = getLocale(Astro.url);
     <body>
         <BrowserWarning />
         <LanguageSelectDialog />
+        <ContactModal />
         <slot />
         <script>
             import DropdownHandler from "../scripts/dropdown";

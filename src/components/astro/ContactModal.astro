@@ -1,0 +1,32 @@
+---
+import ModalDialog from "./ModalDialog.astro";
+import i18n, { loadNamespaces, t } from "../../i18n/i18n";
+import { getLocale } from "astro-i18n-aut";
+import ContactForm from "../react/ContactForm/ContactForm";
+import type { ContactForm as ContactFormRes } from "../../i18n/locales";
+
+const accentColor = "var(--accent)";
+
+// i18next
+const locale = getLocale(Astro.url);
+const namespaces = ["contactForm"];
+await loadNamespaces(locale, namespaces);
+
+const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
+
+const modalTitle = "Contact me";
+const closeButtonText = t("shared:PopupClose");
+
+---
+
+<ModalDialog accentColor={accentColor} dialogId="contactModal" modalTitle={modalTitle} closeButtonText={closeButtonText}>
+    <div class="contact-form-dialog-wrapper" slot="body">
+        <ContactForm resources={res}></ContactForm>
+    </div>
+</ModalDialog>
+
+<script>
+    const contactModal = document.querySelector<HTMLDialogElement>("#contactModal");
+    //contactModal?.showModal();
+
+</script>
