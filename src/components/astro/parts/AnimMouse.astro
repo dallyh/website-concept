@@ -1,0 +1,88 @@
+<div class="mouse" id="mouse">
+    <div class="mouse-wheel"></div>
+    <div class="arrows"></div>
+</div>
+
+<style>
+    
+    .mouse {
+            opacity: 0.4;
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 35px;
+            position: relative;
+        }
+
+        .mouse-wheel {
+            position: relative;
+            overflow: hidden;
+            width: 30px;
+            height: 15px;
+            border: 1px solid white;
+            width: 6px;
+            border-radius: 500px;
+            margin: 5px auto 0;
+            margin-top: 5px;
+        }
+
+        .mouse-wheel::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            background-color: #fff;
+            height: 4px;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 15px;
+            animation: mouseScroll 1.5s 000ms infinite ease;
+        }
+
+        .arrows {
+            width: 26px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: -5px;
+        }
+
+        .arrows-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .arrows {
+            position: absolute;
+            left: 13px;
+            overflow: hidden;
+            transform: rotate(45deg);
+            margin-left: -5px;
+            content: "";
+            opacity: 0;
+            width: 10px;
+            height: 10px;
+            border: 2px solid white;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            animation: arrowScroll 1.5s 500ms ease-in-out infinite;
+        }
+</style>
+
+<script>
+    const hideMouse = () => {
+        const mouseElem = document.getElementById("mouse") as HTMLElement;
+        const maxScroll = 550;
+        const initialOpacity = Number(window.getComputedStyle(mouseElem).opacity) ?? 1;
+
+        document.addEventListener("scroll", (e) => {
+            let opacity = initialOpacity - window.scrollY / maxScroll;
+            mouseElem.style.opacity = opacity.toString();
+        });
+    };
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            hideMouse();
+        },
+        { once: false },
+    );
+</script>
