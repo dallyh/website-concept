@@ -218,12 +218,6 @@ const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
         document.addEventListener("scroll", (e) => {
             let opacity = initialOpacity - window.scrollY / maxScroll;
             mouseElem.style.opacity = opacity.toString();
-
-            if (opacity <= 0) {
-                mouseElem.style.display = "none";
-            } else {
-                mouseElem.style.display = "block";
-            }
         });
     };
     document.addEventListener(
