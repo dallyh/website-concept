@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
+import { slidePageToTop } from "../../animations";
 
 const accentColor = "var(--accent-resume)";
 
@@ -25,17 +26,16 @@ await loadNamespaces(locale, namespaces);
 
 <Layout title={t("shared:NamePossesive") + " " + t("shared:Resume")}>
     <Navigation />
-    <ProgressBar accentColor={accentColor} />
     <div class="resume-wrapper with-header">
         <main class="resume-content">
             <!-- Introduction -->
             <section class="hero-container" id="hero">
                 <div class="hero">
                     <div class="profile-picture-wrapper">
-                        <Image transition:name="profile-picture" class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+                        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
                     </div>
                     <div class="hero-title-wrapper">
-                        <h1 transition:name="profile-name" class="hero-title">
+                        <h1 class="hero-title">
                             Dalibor<br />
                              Hon
                         </h1>
@@ -43,7 +43,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
                 <div class="section-footer noprint">
-                    <AnimMouse/>
+                    <AnimMouse />
                 </div>
             </section>
             <section class="resume-section skills" id="intro">
@@ -64,18 +64,18 @@ await loadNamespaces(locale, namespaces);
                     <div class="intro-summary">
                         <div class="bars">
                             <div class="bar">
-                                <label for="ba">{t("resume:CardBATitle")}</label>
-                                <progress id="ba" value="85" max="100"></progress>
+                                <div class="title">{t("resume:CardBATitle")}</div>
+                                <div class="fill" style="--width: 80%"></div>
                                 <p>{t("resume:CardBADetail")}</p>
                             </div>
                             <div class="bar">
-                                <label for="ba">{t("resume:CardImplementationTitle")}</label>
-                                <progress id="ba" value="60" max="100"></progress>
+                                <div class="title">{t("resume:CardImplementationTitle")}</div>
+                                <div class="fill" style="--width: 60%"></div>
                                 <p>{t("resume:CardImplementationDetail")}</p>
                             </div>
                             <div class="bar">
-                                <label for="ba">{t("resume:CardDevTitle")}</label>
-                                <progress id="ba" value="20" max="100"></progress>
+                                <div class="title">{t("resume:CardDevTitle")}</div>
+                                <div class="fill" style="--width: 20%"></div>
                                 <p>{t("resume:CardDevDetail")}</p>
                             </div>
                         </div>
@@ -515,38 +515,26 @@ await loadNamespaces(locale, namespaces);
             flex-direction: column;
             flex: 1 1 0px;
 
-            > .bar-progress {
-                width: 100%;
+            .fill {
+                height: 2px;
+                background: rgba(255, 255, 255, 0.5);
+                position: relative;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: var(--width);
+                    height: 100%;
+                    background: rgba(var(--accentColor), 1);
+                }
             }
 
-            & label {
+            .title {
                 font-size: 1.2rem;
                 font-weight: lighter;
                 color: rgba(var(--accentColor), 1);
             }
         }
-    }
-
-    progress[value] {
-        --color: rgba(var(--accentColor), 1); /* the progress color */
-        --background: rgba(119, 119, 119, 0.2); /* the background color */
-        appearance: none;
-        border: none;
-        width: 100%;
-        height: 2px;
-        background: var(--background);
-    }
-
-    progress[value]::-webkit-progress-bar {
-        background: var(--background);
-    }
-
-    progress[value]::-webkit-progress-value {
-        background: var(--color);
-    }
-
-    progress[value]::-moz-progress-bar {
-        background: var(--color);
     }
 
     .list-card {

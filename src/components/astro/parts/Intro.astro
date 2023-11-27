@@ -14,11 +14,11 @@ await loadNamespaces(locale, namespaces);
 
 <div class="intro-container">
     <div class="profile-picture-wrapper">
-        <Image transition:name="profile-picture" class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
+        <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
     </div>
     <div class="profile-container">
         <div class="profile-info-container">
-            <h1 transition:name="profile-name">Dalibor Hon</h1>
+            <h1>Dalibor Hon</h1>
             <h2>Business Consultant<span class="hide-sm"> from <strong>Czech Republic</strong></span></h2>
             <div class="location">
                 <i class="bi bi-geo-alt-fill"></i>
@@ -38,7 +38,7 @@ await loadNamespaces(locale, namespaces);
                 <i class="bi bi-envelope-fill"></i>
                 <p>Contact</p>
             </a>
-            <a href={getLocaleUrl("/resume", locale)} class="resume-link">
+            <a href={getLocaleUrl("/resume", locale)} class="resume-link" data-astro-prefetch="viewport">
                 <i class="bi bi-file-person-fill"></i>
                 <p>Resume</p>
             </a>
@@ -49,8 +49,8 @@ await loadNamespaces(locale, namespaces);
 <style>
     .intro-container {
         width: 600px;
-        background-color: var(--card-color);
-        border: 1px solid var(--card-bg);
+        background-color: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 15px;
         padding: 1rem;
         position: relative;

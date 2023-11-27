@@ -51,23 +51,33 @@
     }
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
+@keyframes mouseFadeIn {
+    0% {
+        opacity: 0;
     }
 
-    to {
-        transform: translateX(0);
+    100% {
+        opacity: 0.4;
     }  
 }
 
-@keyframes slideOut {
+@keyframes slideInFromTop {
     from {
-        transform: translateX(0);
+        transform: translateY(-100%);
     }
 
     to {
-        transform: translateX(-100%);
+        transform: translateY(0);
+    }  
+}
+
+@keyframes slideOutToTop {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
     } 
 }
 
@@ -95,7 +105,7 @@
         opacity: 1;
     }
     to {
-        margin-top: 10px;
+        margin-top: 7px;
         transform: rotate(45deg);
         opacity: 0;
     }

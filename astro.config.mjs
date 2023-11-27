@@ -4,7 +4,6 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 // i18n
-import prefetch from "@astrojs/prefetch";
 const defaultLocale = "cs";
 const locales = {
     en: "en-US",
@@ -30,9 +29,6 @@ export default defineConfig({
             filter: filterSitemapByDefaultLocale({
                 defaultLocale,
             }),
-        }),
-        prefetch({
-            throttle: 3,
         }),
     ],
 });
