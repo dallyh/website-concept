@@ -41,7 +41,7 @@ import LanguageSelector from "./LanguageSelector.astro";
         {showHomePage && showContact && "|"}
         {
             showContact && (
-                <a href={getLocaleUrl("/#contact", locale)} rel="prefetch">
+                <a href="" id="contactLink">
                     <i class="bi bi-envelope-fill" /> {t("footer:ContactMe")}
                 </a>
             )
@@ -102,3 +102,26 @@ import LanguageSelector from "./LanguageSelector.astro";
         }
     }
 </style>
+
+<script>
+    const initializeFooter = () => {
+        const contactModal = document.querySelector<HTMLDivElement>("#contactModal");
+        const contactLink = document.querySelector<HTMLAnchorElement>("#contactLink");
+
+        if (contactLink !== undefined && contactLink !== null) {
+            contactLink.onclick = (e) => {
+                e.preventDefault();
+                contactModal?.classList.toggle("show");
+                document.documentElement.classList.toggle("no-scroll");
+            };
+        }
+    };
+
+    document.addEventListener(
+        "astro:page-load",
+        (e) => {
+            initializeFooter();
+        },
+        { once: false },
+    );
+</script>

@@ -457,7 +457,7 @@ await loadNamespaces(locale, namespaces);
         // Sidebar navigation
         const navButton = document.querySelector<HTMLDivElement>("#resumeMenuButton"),
             navigation = document.querySelector<HTMLElement>("#resumeAsideMenu"),
-            navLinks = document.querySelectorAll<HTMLAnchorElement>("a");
+            navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-container > a, .header-container > a ");
 
         if (navButton === null) {
             return;

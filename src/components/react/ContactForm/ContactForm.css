@@ -15,8 +15,9 @@
     position: relative;
 
     textarea {
-        width: 100%;
-        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        resize: vertical;
     }
 
     .textarea-bg {
@@ -47,13 +48,8 @@
 
     @media (max-width: 768px) {
         grid-template-columns: unset;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: repeat(2, min-content);
     }
-}
-
-#fs-frm #fs-frm-submit-button {
-    width: max-content;
-    align-self: end;
 }
 
 /* Chrome shenanigans */
@@ -61,10 +57,6 @@ input:autofill {
     box-shadow: 0 0 0 1000px var(--card-bg) inset !important;
     -webkit-text-fill-color: white !important;
     transition: background-color 600000s 0s, color 600000s 0s !important;
-}
-
-#fs-frm textarea {
-    resize: vertical;
 }
 
 #fs-frm input:focus,
@@ -99,9 +91,28 @@ input:autofill {
     color: rgba(var(--accent), 1);
 }
 
+#fs-frm .buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-left: auto;
+    margin-top: 0.5rem;
+
+    @media (max-width: 480px) { 
+        width: 100%;
+        justify-content: baseline;
+    }
+}
+
 #fs-frm .button {
     border: 2px solid rgba(var(--accent), 1);
     backdrop-filter: blur(3px);
+    width: 120px;
+
+    @media (max-width: 480px) { 
+        padding: 0.8rem;
+        width: 100%;
+    }
 }
 
 #fs-frm .button:hover {

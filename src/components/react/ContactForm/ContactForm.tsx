@@ -6,6 +6,7 @@ import type { ContactForm } from "../../../i18n/locales";
 
 interface ContactFormProps {
     resources: ContactForm;
+    showCloseButton?: boolean;
 }
 
 const contactForm = (props: ContactFormProps) => {
@@ -121,8 +122,8 @@ const contactForm = (props: ContactFormProps) => {
                         <div className="message-container">
                             <label htmlFor="message">{props.resources.Message}</label>
                             <div className="textarea-container">
-                                <div className="textarea-bg"/>
-                                <textarea name="message" id="message" placeholder={props.resources.MessagePlaceholder} required/>
+                                <div className="textarea-bg" />
+                                <textarea name="message" id="message" placeholder={props.resources.MessagePlaceholder} required />
                             </div>
                             {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
                         </div>
@@ -131,9 +132,16 @@ const contactForm = (props: ContactFormProps) => {
                     </fieldset>
                     {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}
                     {errorState.some((key) => key.type === "UNDEFINED") && <p className="error">{errorState.find((item) => item.type === "UNDEFINED")?.message}</p>}
-                    <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
-                        {props.resources.Submit}
-                    </button>
+                    <div className="buttons-container">
+                        {props.showCloseButton && (
+                            <button type="button" id="fs-frm-close-button" className="button" disabled={state.submitting}>
+                                {props.resources.CloseButton}
+                            </button>
+                        )}
+                        <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
+                            {props.resources.Submit}
+                        </button>
+                    </div>
                 </form>
             )}
         </div>

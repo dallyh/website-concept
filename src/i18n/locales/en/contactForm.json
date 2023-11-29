@@ -13,5 +13,6 @@
     "ERROR_TYPE_TEXT": "Field cannot be empty.",
     "ContactMeAt": "Please contact me at my",
     "Profile": "profile",
-    "ERROR_CORRECT_FIELDS": "Please correct all of the fields before sending."
+    "ERROR_CORRECT_FIELDS": "Please correct all of the fields before sending.",
+    "CloseButton": "Close"
 }

@@ -33,19 +33,26 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
-/*
+
+html.no-scroll {
+    overflow-y: hidden;
+
+    @media (width > 768px) {
+        width: 100vw;
+        margin-right: calc(100vw - 100%);
+        padding-right: 16px;
+    }
+}
+
 @media (max-width: 768px) {
+    /*
     html {
         width: 100vw;
         margin-right: calc(100vw - 100%);
-        padding-right: 23px;
+        padding-right: 23px !important;
     }
-
-    html:has(.no-scroll) {
-        overflow-y: hidden;
-    }
+    */
 }
-*/
 
 body {
     color: white;

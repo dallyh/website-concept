@@ -13,5 +13,6 @@
     "ERROR_TYPE_TEXT": "Pole nesmí být prázdné.",
     "ContactMeAt": "Veškeré kontakty jsou k dostání na mém",
     "Profile": "profilu",
-    "ERROR_CORRECT_FIELDS": "Před odesláním prosím opravte všechna pole."
+    "ERROR_CORRECT_FIELDS": "Před odesláním prosím opravte všechna pole.",
+    "CloseButton": "Zavřít"
 }
