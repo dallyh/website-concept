@@ -1,24 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import i18n, { loadNamespaces, t } from "../i18n/i18n";
-import type { ContactForm as ContactFormRes } from "../i18n/locales";
-import { getLocaleUrl, getLocale } from "astro-i18n-aut";
+import { loadNamespaces, t } from "../i18n/i18n";
+import { getLocale } from "astro-i18n-aut";
 import Footer from "../components/astro/footer/Footer.astro";
 import Intro from "../components/astro/parts/Intro.astro";
 import Projects from "../components/astro/parts/Projects.astro";
 import Contact from "../components/astro/parts/Contact.astro";
 import AnimMouse from "../components/astro/parts/AnimMouse.astro";
-import { slidePageToTop } from "../animations";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["landing"];
-namespaces.push("contactForm", "shared", "landing");
-namespaces.push("landing", "projects");
-
+const namespaces = ["contactForm", "shared", "landing"];
 await loadNamespaces(locale, namespaces);
 
-const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
 ---
 
 <Layout title="Dalibor Hon">

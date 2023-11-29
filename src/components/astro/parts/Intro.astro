@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import { getLocaleUrl, getLocale } from "astro-i18n-aut";
-import { loadNamespaces } from "../../../i18n/i18n";
+import { loadNamespaces, t } from "../../../i18n/i18n";
 
 // Images
 import profilePicture from "../../../assets/img/profile.png";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["landing"];
+const namespaces = ["landing", "shared"];
 await loadNamespaces(locale, namespaces);
 ---
 
@@ -19,16 +19,16 @@ await loadNamespaces(locale, namespaces);
     <div class="profile-container">
         <div class="profile-info-container">
             <h1>Dalibor Hon</h1>
-            <h2>Business Consultant<span class="hide-sm"> from <strong>Czech Republic</strong></span></h2>
+            <h2>Business Consultant</h2>
             <div class="location">
                 <i class="bi bi-geo-alt-fill"></i>
-                <strong>Ostrava, Czech Republic</strong>
+                <strong>Ostrava, {t("shared:CzechRepublic")}</strong>
             </div>
         </div>
         <div class="profile-social-container">
             <a href="#" class="github-link">
                 <i class="bi bi-github"></i>
-                <p>Github</p>
+                <p>GitHub</p>
             </a>
             <a href="#" class="linkedin-link">
                 <i class="bi bi-linkedin"></i>
@@ -36,11 +36,11 @@ await loadNamespaces(locale, namespaces);
             </a>
             <a href="#contact" class="contact-link">
                 <i class="bi bi-envelope-fill"></i>
-                <p>Contact</p>
+                <p>{t("landing:contact_title")}</p>
             </a>
             <a href={getLocaleUrl("/resume", locale)} class="resume-link" data-astro-prefetch="viewport">
                 <i class="bi bi-file-person-fill"></i>
-                <p>Resume</p>
+                <p>{t("landing:resume_title")}</p>
             </a>
         </div>
     </div>

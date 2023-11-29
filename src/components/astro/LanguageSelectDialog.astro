@@ -118,8 +118,13 @@ const capitalizeFirstLetter = (str: string) => {
                 console.error("Could not find 'data-js-current-language' attribute.");
                 return;
             }
+
             if (languageDialog.returnValue === "cancel") {
                 window.localStorage.setItem("language", currentLanguage);
+            }
+
+            if (document.documentElement.classList.contains("no-scroll")) {
+                document.documentElement.classList.remove("no-scroll");
             }
         });
     };
@@ -134,6 +139,10 @@ const capitalizeFirstLetter = (str: string) => {
             assignCancelButton();
             if (window.localStorage.getItem("language") === null) {
                 languageDialog.showModal();
+
+                if (document.documentElement.classList.contains("no-scroll") === false) {
+                    document.documentElement.classList.add("no-scroll");
+                }
             } else {
                 //redirectUser();
             }

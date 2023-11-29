@@ -64,17 +64,17 @@ await loadNamespaces(locale, namespaces);
                     <div class="intro-summary">
                         <div class="bars">
                             <div class="bar">
-                                <div class="title">{t("resume:CardBATitle")}</div>
+                                <h3>{t("resume:CardBATitle")}</h3>
                                 <div class="fill" style="--width: 80%"></div>
                                 <p>{t("resume:CardBADetail")}</p>
                             </div>
                             <div class="bar">
-                                <div class="title">{t("resume:CardImplementationTitle")}</div>
+                                <h3>{t("resume:CardImplementationTitle")}</h3>
                                 <div class="fill" style="--width: 60%"></div>
                                 <p>{t("resume:CardImplementationDetail")}</p>
                             </div>
                             <div class="bar">
-                                <div class="title">{t("resume:CardDevTitle")}</div>
+                                <h3>{t("resume:CardDevTitle")}</h3>
                                 <div class="fill" style="--width: 20%"></div>
                                 <p>{t("resume:CardDevDetail")}</p>
                             </div>
@@ -363,7 +363,7 @@ await loadNamespaces(locale, namespaces);
     h3 {
         line-height: 1;
         font-size: 1.2rem;
-        font-weight: lighter;
+        font-weight: 400;
         color: rgba(var(--accentColor), 1);
         padding-bottom: 1rem;
 
@@ -527,12 +527,6 @@ await loadNamespaces(locale, namespaces);
                     height: 100%;
                     background: rgba(var(--accentColor), 1);
                 }
-            }
-
-            .title {
-                font-size: 1.2rem;
-                font-weight: lighter;
-                color: rgba(var(--accentColor), 1);
             }
         }
     }

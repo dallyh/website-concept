@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type FormEvent } from "react";
 import { useForm } from "@formspree/react";
 import autoAnimate from "@formkit/auto-animate";
 import "./ContactForm.css";
@@ -7,6 +7,7 @@ import type { ContactForm } from "../../../i18n/locales";
 interface ContactFormProps {
     resources: ContactForm;
     showCloseButton?: boolean;
+    isDialog?: boolean;
 }
 
 const contactForm = (props: ContactFormProps) => {
@@ -110,6 +111,7 @@ const contactForm = (props: ContactFormProps) => {
             {!state.succeeded && !state.submitting && (
                 <form id="fs-frm" ref={formRef} name="simple-contact-form" onSubmit={handleSubmit}>
                     <fieldset id="fs-frm-inputs">
+                        <input type="hidden" name="_language" value="cs" />
                         <div className="contact-info-container">
                             <label htmlFor="full-name">{props.resources.FullName}</label>
                             <input type="text" autoComplete="name" name="name" id="full-name" placeholder={props.resources.NameAndSurname} required />
@@ -127,11 +129,9 @@ const contactForm = (props: ContactFormProps) => {
                             </div>
                             {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
                         </div>
-
-                        <input type="hidden" name="_language" value="cs" />
+                        {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}
+                        {errorState.some((key) => key.type === "UNDEFINED") && <p className="error">{errorState.find((item) => item.type === "UNDEFINED")?.message}</p>}
                     </fieldset>
-                    {errorState.some((key) => key.type === "CORRECT_FIELDS") && <p className="error">{errorState.find((item) => item.type === "CORRECT_FIELDS")?.message}</p>}
-                    {errorState.some((key) => key.type === "UNDEFINED") && <p className="error">{errorState.find((item) => item.type === "UNDEFINED")?.message}</p>}
                     <div className="buttons-container">
                         {props.showCloseButton && (
                             <button type="button" id="fs-frm-close-button" className="button" disabled={state.submitting}>

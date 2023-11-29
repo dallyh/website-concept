@@ -5,25 +5,20 @@ import { getLocale } from "astro-i18n-aut";
 import ContactForm from "../react/ContactForm/ContactForm";
 import type { ContactForm as ContactFormRes } from "../../i18n/locales";
 
-const accentColor = "var(--accent)";
-
 // i18next
 const locale = getLocale(Astro.url);
 const namespaces = ["contactForm"];
 await loadNamespaces(locale, namespaces);
 
 const res: ContactFormRes = i18n?.getResourceBundle(locale, "contactForm");
-
-const modalTitle = "Contact me";
-const closeButtonText = t("shared:PopupClose");
 ---
 
 <div class="contact-form-dialog-wrapper" id="contactModal">
     <div class="contact-form-dialog-container">
         <div class="header">
-            <p data-text="Contact me">Contact me</p>
+            <p data-text={t("shared:LeaveMeAMessage")}>{t("shared:LeaveMeAMessage")}</p>
         </div>
-        <ContactForm resources={res} showCloseButton={true} />
+        <ContactForm resources={res} showCloseButton={true} client:load/>
     </div>
 </div>
 
@@ -32,7 +27,7 @@ const closeButtonText = t("shared:PopupClose");
         position: fixed;
         top: 0;
         min-width: 100vw;
-        height: 100svh;
+        height: 100vh;
         z-index: 9999;
         background: linear-gradient(to bottom, var(--bg-color) 40%, transparent 100%);
         backdrop-filter: blur(2px);

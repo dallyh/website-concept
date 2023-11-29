@@ -13,7 +13,6 @@
     --card-hover-color: rgba(23, 23, 23, 1);
     --card-bg: rgba(255, 255, 255, 0.08);
     --card-bg-rgb: 255, 255, 255;
-    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
     --dropdown-bg: #161b22;
     --dropdown-border-color: rgba(255, 255, 255, 0.3);
     --header-size: 95px;
@@ -21,6 +20,7 @@
     --page-width: 1350px;
     --header-bg: 39, 39, 39;
     --a-visited: 197, 138, 249;
+    --a-color: 167, 91, 255;
     --burger-menu-bg: #dddddd;
     --nav-background: #222831;
     color-scheme: dark;
@@ -42,16 +42,6 @@ html.no-scroll {
         margin-right: calc(100vw - 100%);
         padding-right: 16px;
     }
-}
-
-@media (max-width: 768px) {
-    /*
-    html {
-        width: 100vw;
-        margin-right: calc(100vw - 100%);
-        padding-right: 23px !important;
-    }
-    */
 }
 
 body {
@@ -100,7 +90,7 @@ p {
 }
 
 a {
-    color: rgba(var(--accent), 1);
+    color: rgba(var(--a-color), 1);
 
     &:visited {
         color: rgba(var(--a-visited), 1);

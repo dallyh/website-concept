@@ -18,6 +18,11 @@
         min-width: 100%;
         min-height: 100%;
         resize: vertical;
+
+        @media (max-width: 768px) {
+            min-height: 140px;
+            
+        }
     }
 
     .textarea-bg {
@@ -80,8 +85,9 @@ input:autofill {
 }
 
 #fs-frm .error {
-    margin: 0.5rem 0 0.5rem 0.2rem;
     color: red;
+    margin-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 #submit-success {

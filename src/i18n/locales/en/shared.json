@@ -13,7 +13,9 @@
   "SocialLinks": "Social",
   "Location": "Location",
   "LeaveMeAMessage": "Leave me a message",
-  "CzechRepublic": "Czech Republic",
-  "MSRegion": "Moravian-Silesian Region",
+  "CzechRepublic": "Czech republic",
+  "WordFrom": "from",
+  "FromCzechRepublic": "Czech republic",
+  "MSRegion": "Moravian-Silesian region",
   "BrowserWarning": "Your browser currently does not support some of the features used on this site. Viewing experience may not be optimal."
 }
