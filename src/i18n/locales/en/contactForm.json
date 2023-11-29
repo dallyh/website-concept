@@ -14,5 +14,7 @@
     "ContactMeAt": "Please contact me at my",
     "Profile": "profile",
     "ERROR_CORRECT_FIELDS": "Please correct all of the fields before sending.",
-    "CloseButton": "Close"
+    "CloseButton": "Close",
+    "Subject": "Subject",
+    "SubjectDefault": "New submisson from the web"
 }
