@@ -1,143 +1,218 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { loadNamespaces, t } from "../i18n/i18n";
-import { getLocale } from "astro-i18n-aut";
-import Footer from "../components/astro/footer/Footer.astro";
-import Intro from "../components/astro/parts/Intro.astro";
-import Projects from "../components/astro/parts/Projects.astro";
-import Contact from "../components/astro/parts/Contact.astro";
-import AnimMouse from "../components/astro/parts/AnimMouse.astro";
+import { getLocale, localeKeys } from "astro-i18n-aut";
+import LanguageSelector from "../components/astro/footer/LanguageSelector.astro"
+import { fade } from "astro:transitions";
 
 // i18next
 const locale = getLocale(Astro.url);
-const namespaces = ["contactForm", "shared", "landing"];
+const namespaces = ["landing"];
 await loadNamespaces(locale, namespaces);
+
+const welcomes = localeKeys.map((key) => {
+    return t("landing:welcome", { lng: key });
+});
+const colors = ["accent", "accent-resume"];
+let color = 0;
 
 ---
 
 <Layout title="Dalibor Hon">
     <main>
-        <section class="intro">
-            <div class="section-content-container">
-                <Intro />
+        <div class="loading">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
-            <div class="section-footer first-section">
-                <AnimMouse/>
-            </div>
-        </section>
-        <section class="projects">
-            <div class="section-content-container">
-                <div class="section-header">
-                    <h3 data-text={t("landing:projects_title")}>{t("landing:projects_title")}</h3>
-                </div>
-                <div class="section-info">
-                    <p>A list of my personal hobby projects</p>
-                </div>
-                <div class="section-content">
-                    <Projects />
-                </div>
-            </div>
-        </section>
-        <section class="contact" id="contact">
-            <div class="section-content-container">
-                <div class="section-header">
-                    <h3 data-text={t("shared:LeaveMeAMessage")}>{t("shared:LeaveMeAMessage")}</h3>
-                </div>
-                <div class="section-info">
-                    <p>{t("contactForm:ContactMe")}</p>
-                </div>
-                <div class="section-content">
-                    <Contact />
-                </div>
-            </div>
-        </section>
+        </div>
+        <div class="welcomes-container">
+            {
+                welcomes.map((welcome) => {
+                    return (
+                        <>
+                            <span class={`welcome ${colors[color++]}`}>{welcome}</span>
+                        </>
+                    );
+                })
+            }
+        </div>
+        <section class="go-home">
+            <LanguageSelector accentColor="var(--accent)" showFlag={true} showTitle={false} />
     </main>
-    <Footer showContact={false} showHomePage={false} accentColor="var(--accent)" />
 </Layout>
 
 <style>
-    main {
-        max-width: var(--page-width);
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-    }
-
-    section {
-        display: grid;
-
-        @media (max-width: 768px) {
-            height: unset;
-        }
-
-        &.intro {
-            height: 100svh;
-            grid-template-rows: 1fr min-content;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-    .section-content-container {
+    body {
+        width: 100vw;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
-        padding: 4rem 4rem 1rem 4rem;
-
-        @media (max-width: 768px) {
-            padding: 2rem;
-        }
-
-        @media (max-width: 480px) {
-            padding: 0.7rem;
-        }
-
-        .section-header {
-            font-size: 2rem;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-
-            &::before {
-                content: "";
-                width: 100%;
-                height: 2px;
-                position: absolute;
-                background-color: rgba(var(--accent), 1);
-                bottom: -2px;
-                z-index: -1;
-            }
-        }
-
-        [data-text]::after {
-            content: attr(data-text);
-            width: 100%;
-            height: 100%;
-            color: rgba(var(--accent), 0.8);
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            font-size: 2rem;
-            z-index: -1;
-        }
-        .section-info {
-            margin-top: 10px;
-        }
-
-        .section-content {
-            margin-top: 1rem;
-            width: 100%;
-            height: 100%;
-        }
+        align-items: center;
     }
 
-    .section-footer {
+    main {
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 1rem;
+        flex-direction: column;
+    }
+
+    .go-home {
+        font-size: 1rem;
+    }
+
+    .welcomes-container {
+        font-size: 4rem;
+        font-weight: 800;
+        position: relative;
+        width: 800px;
+        height: 200px;
+
+        .welcome {
+            position: absolute;
+            width: max-content;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            opacity: 0;
+
+            &.accent {
+                color: rgba(var(--accent), 1);
+            }
+
+            &.accent-resume {
+                color: rgba(var(--accent-resume), 1)
+            }
+        }
+    }
+
+    .loading {
+        width: 100%;
+        height: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .lds-ring {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        min-height: 50px;
+    }
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border: 6px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: rgba(var(--accent), 1) transparent transparent transparent;
+    }
+
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
     }
 </style>
+
+<style is:global>
+    .letter {
+        display: inline-block;
+        position: relative;
+        float: left;
+        transform: translateZ(25px);
+        transform-origin: 50% 50% 25px;
+    }
+
+    .letter.out {
+        transform: rotateX(90deg);
+        transition: transform 0.42s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    .letter.behind {
+        transform: rotateX(-90deg);
+    }
+
+    .letter.in {
+        transform: rotateX(0deg);
+        transition: transform 0.48s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+</style>
+
+<script>
+    var words = document.getElementsByClassName("welcome");
+    var wordArray: string[] = [];
+    var currentWord = 0;
+
+    words[currentWord].style.opacity = 1;
+    for (var i = 0; i < words.length; i++) {
+        splitLetters(words[i]);
+    }
+
+    function changeWord() {
+        var cw = wordArray[currentWord];
+        var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+        for (var i = 0; i < cw.length; i++) {
+            animateLetterOut(cw, i);
+        }
+
+        for (var i = 0; i < nw.length; i++) {
+            nw[i].className = "letter behind";
+            nw[0].parentElement.style.opacity = 1;
+            animateLetterIn(nw, i);
+        }
+
+        currentWord = currentWord == wordArray.length - 1 ? 0 : currentWord + 1;
+    }
+
+    function animateLetterOut(cw, i) {
+        setTimeout(function () {
+            cw[i].className = "letter out";
+        }, i * 80);
+    }
+
+    function animateLetterIn(nw, i) {
+        setTimeout(
+            function () {
+                nw[i].className = "letter in";
+            },
+            340 + i * 80,
+        );
+    }
+
+    function splitLetters(word) {
+        var content = word.innerHTML;
+        word.innerHTML = "";
+        var letters = [];
+        for (var i = 0; i < content.length; i++) {
+            var letter = document.createElement("span");
+            letter.className = "letter";
+            letter.innerHTML = content.charAt(i);
+            word.appendChild(letter);
+            letters.push(letter);
+        }
+
+        wordArray.push(letters);
+    }
+
+    changeWord();
+    setInterval(changeWord, 2000);
+    delay(7000);
+</script>

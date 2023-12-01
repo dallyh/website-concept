@@ -41,6 +41,10 @@ const initOnce = async () => {
         await i18n.init().then(() => {
             console.debug("initOnce: i18n was initialized.");
         });
+
+        await i18n.loadLanguages(localeKeys).then(() => {
+            console.debug("initOnce: i18n loaded languages.");
+        });
     }
 };
 
