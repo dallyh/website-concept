@@ -51,6 +51,16 @@
     }
 }
 
+@keyframes fadeOut {
+    0% {
+        opacity: 100;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes mouseFadeIn {
     0% {
         opacity: 0;
@@ -108,5 +118,14 @@
         margin-top: 7px;
         transform: rotate(45deg);
         opacity: 0;
+    }
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

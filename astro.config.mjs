@@ -15,11 +15,15 @@ export default defineConfig({
     site: "https://dallyh.github.io",
     base: "/website-concept",
     trailingSlash: "always",
+    build: {
+        format: "directory",
+    },
+    prefetch: true,
     integrations: [
         react(),
         i18n({
             locales,
-            defaultLocale,
+            defaultLocale
         }),
         sitemap({
             i18n: {

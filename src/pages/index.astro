@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { loadNamespaces, t } from "../i18n/i18n";
-import { getLocale, localeKeys } from "astro-i18n-aut";
-import LanguageSelector from "../components/astro/footer/LanguageSelector.astro"
+import { getLocale, getLocaleUrl, localeKeys } from "astro-i18n-aut";
+import LanguageSelector from "../components/astro/footer/LanguageSelector.astro";
 import { fade } from "astro:transitions";
 
 // i18next
@@ -15,32 +15,22 @@ const welcomes = localeKeys.map((key) => {
 });
 const colors = ["accent", "accent-resume"];
 let color = 0;
-
 ---
 
 <Layout title="Dalibor Hon">
     <main>
-        <div class="loading">
-            <div class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <div class="welcomes-container">
+            <div class="welcome">
+                <span class="accent">Welc</span>
+                <div class="lds-ring index">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <span class="accent">me!</span>
             </div>
         </div>
-        <div class="welcomes-container">
-            {
-                welcomes.map((welcome) => {
-                    return (
-                        <>
-                            <span class={`welcome ${colors[color++]}`}>{welcome}</span>
-                        </>
-                    );
-                })
-            }
-        </div>
-        <section class="go-home">
-            <LanguageSelector accentColor="var(--accent)" showFlag={true} showTitle={false} />
     </main>
 </Layout>
 
@@ -61,6 +51,11 @@ let color = 0;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        gap: 1rem;
+
+        &.fade-out {
+            animation: fadeOut 500ms ease-out forwards;
+        }
     }
 
     .go-home {
@@ -71,148 +66,114 @@ let color = 0;
         font-size: 4rem;
         font-weight: 800;
         position: relative;
-        width: 800px;
-        height: 200px;
+        opacity: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
         .welcome {
-            position: absolute;
             width: max-content;
-            left: 50%;
-            top: 50%;
-            transform: translateY(-50%) translateX(-50%);
-            opacity: 0;
+            display: flex;
 
-            &.accent {
+            .accent {
                 color: rgba(var(--accent), 1);
-            }
-
-            &.accent-resume {
-                color: rgba(var(--accent-resume), 1)
             }
         }
     }
 
-    .loading {
-        width: 100%;
-        height: 100%;
-        display: none;
-        justify-content: center;
-        align-items: center;
+    .lds-ring.index {
+        margin-top: 20px;
+        margin-left: 4px;
+        margin-right: 2px;
+        --width: 38px;
+        --height: 38px;
+        width: var(--width);
+        height: var(--height);
     }
 
-    .lds-ring {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 50px;
-        min-height: 50px;
-    }
-
-    .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 50px;
-        height: 50px;
+    .lds-ring.index div {
+        width: var(--width);
+        height: var(--height);
         border: 6px solid #fff;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: rgba(var(--accent), 1) transparent transparent transparent;
-    }
-
-    .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-    }
-
-    .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-    }
-    .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-    }
-</style>
-
-<style is:global>
-    .letter {
-        display: inline-block;
-        position: relative;
-        float: left;
-        transform: translateZ(25px);
-        transform-origin: 50% 50% 25px;
-    }
-
-    .letter.out {
-        transform: rotateX(90deg);
-        transition: transform 0.42s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    }
-
-    .letter.behind {
-        transform: rotateX(-90deg);
-    }
-
-    .letter.in {
-        transform: rotateX(0deg);
-        transition: transform 0.48s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-color: rgba(var(--accent-resume), 1) transparent transparent transparent;
     }
 </style>
 
 <script>
-    var words = document.getElementsByClassName("welcome");
-    var wordArray: string[] = [];
-    var currentWord = 0;
+    import { navigate } from "astro:transitions/client";
+    import { getLocaleUrl } from "astro-i18n-aut";
+    import { prefetch } from "astro:prefetch";
 
-    words[currentWord].style.opacity = 1;
-    for (var i = 0; i < words.length; i++) {
-        splitLetters(words[i]);
-    }
+    const redirectUser = (lang: string) => {
+        console.debug("Navigating by language: '" + lang + "'");
+        switch (lang) {
+            case "cs":
+                let url = getLocaleUrl("/home/", "cs");
+                prefetch(url, { with: "fetch" });
+                navigate(url);
+                break;
+            case "sk":
+                navigate(getLocaleUrl("/home/", "cs"));
+                break;
+            case "en":
+                navigate(getLocaleUrl("/home/", "en"));
+                break;
+            default:
+                navigate(getLocaleUrl("/home/", "cs"));
+                break;
+        }
+    };
 
-    function changeWord() {
-        var cw = wordArray[currentWord];
-        var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
-        for (var i = 0; i < cw.length; i++) {
-            animateLetterOut(cw, i);
+    const checkDebug = (): boolean => {
+        const queryString = window.location.search;
+        if (queryString) {
+            const urlParams = new URLSearchParams(queryString);
+            if (urlParams.has("debug")) {
+                console.log("Page running in debug mode...");
+                return true;
+            }
         }
 
-        for (var i = 0; i < nw.length; i++) {
-            nw[i].className = "letter behind";
-            nw[0].parentElement.style.opacity = 1;
-            animateLetterIn(nw, i);
+        return false;
+    };
+
+    const navigateUser = () => {
+        if (checkDebug()) return;
+
+        let languagePreference = window.localStorage.getItem("language");
+        if (languagePreference) {
+            redirectUser(languagePreference);
+            return;
         }
 
-        currentWord = currentWord == wordArray.length - 1 ? 0 : currentWord + 1;
-    }
-
-    function animateLetterOut(cw, i) {
-        setTimeout(function () {
-            cw[i].className = "letter out";
-        }, i * 80);
-    }
-
-    function animateLetterIn(nw, i) {
-        setTimeout(
-            function () {
-                nw[i].className = "letter in";
-            },
-            340 + i * 80,
-        );
-    }
-
-    function splitLetters(word) {
-        var content = word.innerHTML;
-        word.innerHTML = "";
-        var letters = [];
-        for (var i = 0; i < content.length; i++) {
-            var letter = document.createElement("span");
-            letter.className = "letter";
-            letter.innerHTML = content.charAt(i);
-            word.appendChild(letter);
-            letters.push(letter);
+        let navigatorLanguages = navigator.languages;
+        for (let lang of navigatorLanguages) {
+            if (lang.includes("-")) {
+                lang = lang.split("-")[0];
+            }
+            redirectUser(lang);
+            break;
         }
+    };
 
-        wordArray.push(letters);
-    }
+    const loadComplete = (callback: () => void) => {
+        if (checkDebug()) return;
+        const main = document.querySelector<HTMLElement>("main");
+        main?.addEventListener("animationend", (e) => {
+            callback();
+            console.log("ended");
+        });
+        main?.classList.add("fade-out");
+    };
 
-    changeWord();
-    setInterval(changeWord, 2000);
-    delay(7000);
+    document.addEventListener(
+        "astro:page-load",
+        () => {
+            loadComplete(() => {
+                navigateUser();
+            });
+        },
+        { once: true },
+    );
 </script>
