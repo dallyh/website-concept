@@ -1,34 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { loadNamespaces, t } from "../i18n/i18n";
-import { getLocale, getLocaleUrl, localeKeys } from "astro-i18n-aut";
-import LanguageSelector from "../components/astro/footer/LanguageSelector.astro";
-import { fade } from "astro:transitions";
-
-// i18next
-const locale = getLocale(Astro.url);
-const namespaces = ["landing"];
-await loadNamespaces(locale, namespaces);
-
-const welcomes = localeKeys.map((key) => {
-    return t("landing:welcome", { lng: key });
-});
-const colors = ["accent", "accent-resume"];
-let color = 0;
 ---
 
 <Layout title="Dalibor Hon">
     <main>
-        <div class="welcomes-container">
-            <div class="welcome">
-                <span class="accent">Welc</span>
-                <div class="lds-ring index">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <span class="accent">me!</span>
+        <div class="loader">
+            <div class="cs-loader">
+                <label>●</label>
+                <label>●</label>
+                <label>●</label>
+                <label>●</label>
+                <label>●</label>
+                <label>●</label>
             </div>
         </div>
     </main>
@@ -37,93 +20,55 @@ let color = 0;
 <style>
     body {
         width: 100vw;
-        height: 100vh;
+        height: 100svh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
+    .cs-loader {
+        color: #fff;
+        padding: 0 100px;
+        text-align: center;
 
-    main {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 1rem;
-
-        &.fade-out {
-            animation: fadeOut 500ms ease-out forwards;
+        & label {
+            font-size: 20px;
+            opacity: 0;
+            display: inline-block;
         }
     }
 
-    .go-home {
-        font-size: 1rem;
+    .cs-loader label:nth-child(6) {
+        animation: loader 3s infinite ease-in-out;
     }
 
-    .welcomes-container {
-        font-size: 4rem;
-        font-weight: 800;
-        position: relative;
-        opacity: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        .welcome {
-            width: max-content;
-            display: flex;
-
-            .accent {
-                color: rgba(var(--accent), 1);
-            }
-        }
+    .cs-loader label:nth-child(5) {
+        animation: loader 3s 100ms infinite ease-in-out;
     }
 
-    .lds-ring.index {
-        margin-top: 20px;
-        margin-left: 4px;
-        margin-right: 2px;
-        --width: 38px;
-        --height: 38px;
-        width: var(--width);
-        height: var(--height);
+    .cs-loader label:nth-child(4) {
+        animation: loader 3s 200ms infinite ease-in-out;
     }
 
-    .lds-ring.index div {
-        width: var(--width);
-        height: var(--height);
-        border: 6px solid #fff;
-        border-color: rgba(var(--accent-resume), 1) transparent transparent transparent;
+    .cs-loader label:nth-child(3) {
+        animation: loader 3s 300ms infinite ease-in-out;
+    }
+
+    .cs-loader label:nth-child(2) {
+        animation: loader 3s 400ms infinite ease-in-out;
+    }
+
+    .cs-loader-inner label:nth-child(1) {
+        animation: loader 3s 500ms infinite ease-in-out;
     }
 </style>
 
 <script>
     import { navigate } from "astro:transitions/client";
-    import { getLocaleUrl } from "astro-i18n-aut";
+    import { getLocaleUrl, defaultLocale, localeKeys } from "astro-i18n-aut";
     import { prefetch } from "astro:prefetch";
 
-    const redirectUser = (lang: string) => {
-        console.debug("Navigating by language: '" + lang + "'");
-        switch (lang) {
-            case "cs":
-                let url = getLocaleUrl("/home/", "cs");
-                prefetch(url, { with: "fetch" });
-                navigate(url);
-                break;
-            case "sk":
-                navigate(getLocaleUrl("/home/", "cs"));
-                break;
-            case "en":
-                navigate(getLocaleUrl("/home/", "en"));
-                break;
-            default:
-                navigate(getLocaleUrl("/home/", "cs"));
-                break;
-        }
-    };
+    let redirectUrl = getLocaleUrl("/home", defaultLocale); // Default URL by default locale
 
     const checkDebug = (): boolean => {
         const queryString = window.location.search;
@@ -138,12 +83,34 @@ let color = 0;
         return false;
     };
 
-    const navigateUser = () => {
+    const prefetchEvent = new Event("prefetchEvent");
+    const prefetchWithEvent = (url: string) => {
+        prefetch(url, { with: "fetch" });
+        document.dispatchEvent(prefetchEvent);
+        console.log("dispatched");
+    };
+
+    const getRedirectUrlAndPrefetch = (lang: string) => {
+        console.debug("Redirect URL by language: '" + lang + "'");
+        switch (lang) {
+            case "en":
+                redirectUrl = getLocaleUrl("/home/", "en");
+                break;
+            default:
+                break;
+        }
+
+        console.log("Final URL: " + redirectUrl);
+        prefetchWithEvent(redirectUrl);
+    };
+
+    const getLanguagePreferences = () => {
         if (checkDebug()) return;
 
         let languagePreference = window.localStorage.getItem("language");
         if (languagePreference) {
-            redirectUser(languagePreference);
+            console.log("Found local storage preference: " + languagePreference);
+            getRedirectUrlAndPrefetch(languagePreference);
             return;
         }
 
@@ -152,27 +119,32 @@ let color = 0;
             if (lang.includes("-")) {
                 lang = lang.split("-")[0];
             }
-            redirectUser(lang);
-            break;
+
+            if (localeKeys.includes(lang)) {
+                console.log("Found browser preference matching locales: " + lang);
+                getRedirectUrlAndPrefetch(lang);
+                break;
+            }
         }
     };
 
-    const loadComplete = (callback: () => void) => {
-        if (checkDebug()) return;
-        const main = document.querySelector<HTMLElement>("main");
-        main?.addEventListener("animationend", (e) => {
-            callback();
-            console.log("ended");
+    const addLoadCompleteListeners = () => {
+        const loader = document.querySelector<HTMLDivElement>(".loader");
+        loader?.addEventListener("animationend", () => {});
+        document.addEventListener("prefetchEvent", (e) => {
+            loader?.classList.add("fade-out");
         });
-        main?.classList.add("fade-out");
     };
+
+    document.addEventListener("prefetchEvent", (e) => {
+        navigate(redirectUrl);
+    });
 
     document.addEventListener(
         "astro:page-load",
         () => {
-            loadComplete(() => {
-                navigateUser();
-            });
+            //addLoadCompleteListeners();
+            getLanguagePreferences();
         },
         { once: true },
     );

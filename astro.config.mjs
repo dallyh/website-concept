@@ -6,8 +6,8 @@ import sitemap from "@astrojs/sitemap";
 // i18n
 const defaultLocale = "cs";
 const locales = {
-    en: "en-US",
-    cs: "cs-CZ",
+    en: "en",
+    cs: "cs",
 };
 
 // https://astro.build/config

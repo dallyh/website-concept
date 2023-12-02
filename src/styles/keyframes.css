@@ -129,3 +129,22 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes loader {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);   
+    }
+    33% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    66% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
