@@ -22,9 +22,8 @@ const i18n = i18next
 export const t = i18n.t;
 
 export const loadNamespaces = async (locale: string, namespaces: string[]) => {
-    console.debug("loadNamespaces: loading namespaces: " + namespaces);
     if (!i18n.isInitialized) {
-        console.warn("loadNamespaces: i18n is not initialized. Trying to init.");
+        logMessage("loadNamespaces", "i18n is not initialized. Trying to init.");
         await initOnce();
     }
 
@@ -32,20 +31,31 @@ export const loadNamespaces = async (locale: string, namespaces: string[]) => {
         await i18n.changeLanguage(locale);
     }
 
-    await i18n.loadNamespaces(namespaces);
+    for (let i = 0; i < namespaces.length; i++) {
+        if (i18n.hasLoadedNamespace(namespaces[i]) === false) {
+            logMessage("loadNamespaces", "loading namespace: " + namespaces[i]);
+            await i18n.loadNamespaces(namespaces[i]);
+        }
+    }
 };
 
 const initOnce = async () => {
     if (!i18n.isInitialized) {
-        console.debug("initOnce: i18n start init.");
+        logMessage("initOnce", "i18n start init.");
         await i18n.init().then(() => {
-            console.debug("initOnce: i18n was initialized.");
+            logMessage("initOnce", "i18n was initialized.");
         });
 
         await i18n.loadLanguages(localeKeys).then(() => {
-            console.debug("initOnce: i18n loaded languages.");
+            logMessage("initOnce", "i18n loaded languages.");
         });
     }
+};
+
+const logMessage = (fn: string, msg: string) => {
+    const gray = "\x1b[90m";
+    const currentDate = new Date();
+    console.log(gray, `${currentDate.toLocaleTimeString()} [i18n: ${fn}]: ${msg}`);
 };
 
 export default i18n;
