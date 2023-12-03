@@ -112,8 +112,8 @@ input:autofill {
 
 #fs-frm .button {
     border: 2px solid rgba(var(--accent), 1);
-    backdrop-filter: blur(3px);
-    width: 120px;
+    position: relative;
+    height: 45px;
 
     @media (max-width: 480px) { 
         padding: 0.8rem;
@@ -125,10 +125,8 @@ input:autofill {
     background-color: rgba(var(--accent), 1);
 }
 
-#submitting {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+#loading {
+    width: 30px;
+    height: 30px;
+    position: absolute;
 }

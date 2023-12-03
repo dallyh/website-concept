@@ -61,6 +61,9 @@ p {
 }
 
 .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: inherit;
     background-color: var(--card-bg);
     color: var(--button-color);
@@ -72,6 +75,8 @@ p {
     border: 2px solid rgba(var(--accent), 1);
     font-size: 1rem;
     transition: 300ms;
+    min-width: 120px;
+    height: min-content;
 }
 
 .button a {
@@ -219,4 +224,18 @@ a.dropdown-link:after {
 
 .fade-in {
     animation: fadeIn 300ms ease-in forwards;
+}
+
+#loading {
+    --color: #fff;
+    --bg: #777;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border-top: 4px solid var(--color);
+    border-right: 4px solid var(--color);
+    border-bottom: 4px solid var(--bg);
+    border-left: 4px solid var(--bg);
+    animation: loading 1.2s infinite linear;
 }

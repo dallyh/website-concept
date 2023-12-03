@@ -136,16 +136,7 @@ const contactForm = (props: ContactFormProps) => {
                         )}
                         <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
                             {!state.submitting && props.resources.Submit}
-                            {state.submitting && (
-                                <div id="submitting">
-                                    <div className="lds-ring">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            )}
+                            {state.submitting && <div id="loading"></div>}
                         </button>
                     </div>
                 </form>
