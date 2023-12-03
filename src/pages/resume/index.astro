@@ -4,7 +4,8 @@ import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
-import { slidePageToTop } from "../../animations";
+import AnimMouse from "../../components/astro/parts/AnimMouse.astro";
+import Navigation from "../../components/astro/resume/Navigation.astro";
 
 const accentColor = "var(--accent-resume)";
 
@@ -14,10 +15,7 @@ import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
 import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-logo-white.png";
-import ProgressBar from "../../components/astro/resume/ProgressBar.astro";
-import Navigation from "../../components/astro/resume/Navigation.astro";
-import AnimMouse from "../../components/astro/parts/AnimMouse.astro";
-import ContactModal from "../../components/astro/ContactModal.astro";
+
 
 // i18next
 const locale = getLocale(Astro.url);
