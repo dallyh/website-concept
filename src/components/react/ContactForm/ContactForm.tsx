@@ -120,7 +120,6 @@ const contactForm = (props: ContactFormProps) => {
                         <div className="message-container">
                             <label htmlFor="message">{props.resources.Message}</label>
                             <div className="textarea-container">
-                                <div className="textarea-bg" />
                                 <textarea name="message" id="message" placeholder={props.resources.MessagePlaceholder} required onFocus={selectText} />
                             </div>
                             {errorState.some((key) => key.type === "TEXT") && <p className="error">{errorState.find((item) => item.type === "TEXT")?.message}</p>}
