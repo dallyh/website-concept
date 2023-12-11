@@ -24,6 +24,12 @@ await loadNamespaces(locale, namespaces);
                         <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
                             <a href="https://github.com/dallyh/website" target="_blank">{t("projects:ThisWebsite")}</a>
+                            <div class="card-info-tags">
+                                <div class="rounded-tag astro">Astro.js</div>
+                                <div class="rounded-tag typescript">TypeScript</div>
+                                <div class="rounded-tag javascript">JavaScript</div>
+                                <div class="rounded-tag webdev">Web</div>
+                            </div>
                             <p>{t("projects:ThisWebsiteDescription")}</p>
                         </div>
                     </div>
@@ -40,6 +46,9 @@ await loadNamespaces(locale, namespaces);
                         <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
                             <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">{t("projects:LemmyKtClient")}</a>
+                            <div class="card-info-tags">
+                                <div class="rounded-tag kmp">Kotlin Multiplatform</div>
+                            </div>
                             <p>{t("projects:LemmyKtClientDescription")}{" "}<a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
                         </div>
                     </div>
@@ -56,6 +65,12 @@ await loadNamespaces(locale, namespaces);
                         <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
                             <a href="https://github.com/dallyh/web-resume" target="_blank">{t("projects:OldWebsite")}</a>
+                            <div class="card-info-tags">
+                                <div class="rounded-tag astro">Astro.js</div>
+                                <div class="rounded-tag typescript">TypeScript</div>
+                                <div class="rounded-tag javascript">JavaScript</div>
+                                <div class="rounded-tag webdev">Web</div>
+                            </div>
                             <p>{t("projects:OldWebisteDescription")}</p>
                         </div>
                     </div>
@@ -91,8 +106,9 @@ await loadNamespaces(locale, namespaces);
 
     .cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 320px));
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1.5rem;
         width: 100%;
         height: 100%;
         justify-content: center;
@@ -104,11 +120,16 @@ await loadNamespaces(locale, namespaces);
         backdrop-filter: blur(2px);
         border-radius: 10px;
         display: flex;
-        height: 230px;
         flex-direction: column;
         position: relative;
         transition: background-color 300ms ease-in-out;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+    }
+
+    .card-content {
+        display: flex;
+        gap: 1rem;
     }
 
     .card:hover {
@@ -122,9 +143,11 @@ await loadNamespaces(locale, namespaces);
     .card-image {
         align-items: center;
         display: flex;
-        height: 140px;
+        height: 120px;
+        width: 100px;
         justify-content: center;
         overflow: hidden;
+        min-width:;
     }
 
     .card-image > i {
@@ -133,7 +156,6 @@ await loadNamespaces(locale, namespaces);
     }
 
     .card-info-wrapper {
-        align-items: center;
         display: flex;
         flex-grow: 1;
         justify-content: flex-start;
@@ -146,18 +168,52 @@ await loadNamespaces(locale, namespaces);
         gap: 10px;
     }
 
+    .card-info-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.725rem;
+        margin-top: 0.5rem;
+        color: black;
+        font-weight: 600;
+
+        .rounded-tag {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            border-radius: 8px;
+
+            &.astro {
+                background-color: rgb(232 121 249);
+            }
+
+            &.typescript {
+                background-color: rgb(251 113 133);
+            }
+
+            &.webdev {
+                background-color: rgb(163 230 53);
+            }
+
+            &.javascript {
+                background-color: rgb(250 204 21);
+            }
+
+            &.kmp {
+                background: #7f52ff linear-gradient(to right, #ef4857 0, #de4970 20%, #b44db0 50%, #7f52ff 100%);
+            }
+        }
+    }
+
     .card-info > i {
         margin-top: 2px;
-        font-size: 1rem;
     }
 
-    .card-info-title > h3,
     .card-info-title > a {
-        font-size: 1em;
-        line-height: 20px;
+        font-weight: 600;
     }
 
-    .card-info-title > h4,
     .card-info-title > p {
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.85em;

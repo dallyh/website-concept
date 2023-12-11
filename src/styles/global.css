@@ -1,5 +1,6 @@
 :root {
     --accent: 136, 58, 234;
+    --accent-rgba: rgba(136, 58, 234, 1);
     --accent-contact: 0, 221, 173;
     --accent-projects: 190, 156, 4;
     --accent-resume: 74, 144, 226;
@@ -8,21 +9,21 @@
     --body-color: white;
     --button-color: white;
     --button-hover-color: black;
-    --bg-color: rgba(20, 20, 20, 1);
+    --bg-color: rgba(15, 23, 42, 1);;
     --card-color: rgba(23, 23, 23, 0.4);
-    --card-hover-color: rgba(23, 23, 23, 1);
-    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-hover-color: rgba(30, 41, 59, 1);
+    --card-bg: rgba(30, 41, 59, 0.4);
     --card-bg-rgb: 255, 255, 255;
     --dropdown-bg: #161b22;
     --dropdown-border-color: rgba(255, 255, 255, 0.3);
     --header-size: 95px;
     --resume-page-width: 1350px;
-    --page-width: 1350px;
-    --header-bg: 39, 39, 39;
+    --page-width: 1024px;
+    --header-bg: 22, 27, 34;
     --a-visited: 197, 138, 249;
     --a-color: 167, 91, 255;
     --burger-menu-bg: #dddddd;
-    --nav-background: #222831;
+    --nav-background: #161b22;
     color-scheme: dark;
 }
 

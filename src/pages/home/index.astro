@@ -12,7 +12,6 @@ import AnimMouse from "../../components/astro/parts/AnimMouse.astro";
 const locale = getLocale(Astro.url);
 const namespaces = ["contactForm", "shared", "landing"];
 await loadNamespaces(locale, namespaces);
-
 ---
 
 <Layout title="Dalibor Hon">
@@ -22,7 +21,7 @@ await loadNamespaces(locale, namespaces);
                 <Intro />
             </div>
             <div class="section-footer first-section">
-                <AnimMouse/>
+                <AnimMouse />
             </div>
         </section>
         <section class="projects">
@@ -83,7 +82,8 @@ await loadNamespaces(locale, namespaces);
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        padding: 4rem 4rem 1rem 4rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
 
         @media (max-width: 768px) {
             padding: 2rem;
@@ -126,9 +126,10 @@ await loadNamespaces(locale, namespaces);
         }
 
         .section-content {
-            margin-top: 1rem;
             width: 100%;
             height: 100%;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
         }
     }
 
