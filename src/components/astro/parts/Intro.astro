@@ -15,19 +15,25 @@ await loadNamespaces(locale, namespaces);
 <div class="intro-container">
     <div class="profile-container">
         <div class="profile-info-container">
-            <h1 class="hi-there">Hi there, I'm <strong>Dalibor</strong>👋</h1>
+            <h1 class="hi-there">{t("landing:hi_there")} <strong>Dalibor</strong><span class="shake">👋</span></h1>
             <div class="profile-description">
-                <p>Business Consultant from</p>
-                <p>Ostrava, {t("shared:CzechRepublic")}.</p>
+                <div class="icon-text">
+                    <i class="bi bi-briefcase"></i>
+                    <p>Business Consultant</p>
+                </div>
+                <div class="icon-text">
+                    <i class="bi bi-geo-alt"></i>
+                    <p>Ostrava, {t("shared:CzechRepublic")}</p>
+                </div>
             </div>
         </div>
         <div class="profile-social-container">
             <div>
-                <a href="#" class="github-link">
+                <a href="https://github.com/dallyh" target="_blank" class="github-link">
                     <i class="bi bi-github"></i>
                     <p>GitHub</p>
                 </a>
-                <a href="#" class="linkedin-link">
+                <a href="https://www.linkedin.com/in/dalibor-hon/" target="_blank" class="linkedin-link">
                     <i class="bi bi-linkedin"></i>
                     <p>LinkedIn</p>
                 </a>
@@ -43,7 +49,6 @@ await loadNamespaces(locale, namespaces);
                 </a>
             </div>
         </div>
-        
     </div>
     <div class="profile-picture-wrapper">
         <Image class="profile-picture" src={profilePicture} width={220} height={220} format="avif" alt="Profile picture" />
@@ -54,7 +59,9 @@ await loadNamespaces(locale, namespaces);
 <style>
     strong {
         font-weight: 600;
-        color: rgba(var(--accent), 1);
+        color: transparent;
+        background: var(--accent-gradient);
+        background-clip: text;
     }
 
     .shake {
@@ -62,7 +69,6 @@ await loadNamespaces(locale, namespaces);
     }
 
     .location {
-        
         i {
             margin-right: 5px;
         }
@@ -71,6 +77,7 @@ await loadNamespaces(locale, namespaces);
     .intro-container {
         display: flex;
         flex-direction: row;
+        align-items: center;
         position: relative;
 
         @media (max-width: 1024px) {
@@ -95,7 +102,8 @@ await loadNamespaces(locale, namespaces);
         box-shadow: 0px 0px 10px 2px rgba(var(--accent), 0.6);
         top: 50%;
         transform: translateY(-50%);
-        animation: droplet 2s ease-in-out both;
+        animation: droplet 1s ease-in-out both;
+        animation-iteration-count: 2;
     }
 
     .profile-picture-wrapper {
@@ -116,29 +124,39 @@ await loadNamespaces(locale, namespaces);
             box-shadow:
                 0px 5px 30px 0px rgba(var(--accent), 1),
                 0px 0px 0px 7px rgba(var(--accent), 0.5);
-            animation: scaleImage 500ms 1400ms ease-out both;
+            animation: scaleImage 500ms 1450ms ease-out both;
         }
     }
 
     .profile-info-container {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
         font-size: clamp(0.65rem, 5vw, 1rem);
 
         .profile-description {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
             margin-bottom: 1rem;
 
-            @media (max-width: 468px) {
-                display: block;
+            .icon-text {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                @media (max-width: 1024px) {
+                    justify-content: center;
+                }
             }
         }
 
         .hi-there {
-            font-size: clamp(1rem, 8vw, 1.725rem);
+            font-size: clamp(1rem, 7vw, 1.725rem);
+
+            span {
+                display: inline-block;
+            }
 
             @media (max-width: 468px) {
                 display: block;

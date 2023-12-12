@@ -135,7 +135,7 @@ const contactForm = (props: ContactFormProps) => {
                         )}
                         <button type="submit" id="fs-frm-submit-button" className="button" disabled={state.submitting}>
                             {!state.submitting && props.resources.Submit}
-                            {state.submitting && <div id="loading"></div>}
+                            {state.submitting && <div className="dot-flashing"></div>}
                         </button>
                     </div>
                 </form>

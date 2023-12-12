@@ -6,7 +6,7 @@ import Footer from "../../components/astro/footer/Footer.astro";
 import Intro from "../../components/astro/parts/Intro.astro";
 import Projects from "../../components/astro/parts/Projects.astro";
 import Contact from "../../components/astro/parts/Contact.astro";
-import AnimMouse from "../../components/astro/parts/AnimMouse.astro";
+import ScrollIndicator from "../../components/astro/parts/ScrollIndicator.astro";
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -20,17 +20,17 @@ await loadNamespaces(locale, namespaces);
             <div class="section-content-container">
                 <Intro />
             </div>
-            <div class="section-footer first-section">
-                <AnimMouse />
+            <div class="section-footer">
+                <ScrollIndicator href="#projects" />
             </div>
         </section>
-        <section class="projects">
+        <section class="projects" id="projects">
             <div class="section-content-container">
                 <div class="section-header">
                     <h3 data-text={t("landing:projects_title") + " </>"}>{t("landing:projects_title")} {" </>"}</h3>
                 </div>
                 <div class="section-info">
-                    <p>A list of my personal hobby projects</p>
+                    <p>{t("landing:projects_description")}</p>
                 </div>
                 <div class="section-content">
                     <Projects />
@@ -60,6 +60,11 @@ await loadNamespaces(locale, namespaces);
         margin: auto;
         display: flex;
         flex-direction: column;
+
+        @media screen and (min-width: 1400px) {
+            max-width: calc(var(--page-width) + 300px);
+        }
+        
     }
 
     section {
@@ -85,11 +90,11 @@ await loadNamespaces(locale, namespaces);
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
 
-        @media (max-width: 768px) {
-            padding: 2rem;
+        @media (max-width: 1024px) {
+            padding: 1rem;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 468px) {
             padding: 0.7rem;
         }
 
@@ -148,6 +153,5 @@ await loadNamespaces(locale, namespaces);
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 1rem;
     }
 </style>

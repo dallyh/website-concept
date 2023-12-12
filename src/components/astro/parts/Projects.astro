@@ -27,6 +27,7 @@ await loadNamespaces(locale, namespaces);
                                 <div class="rounded-tag astro">Astro.js</div>
                                 <div class="rounded-tag typescript">TypeScript</div>
                                 <div class="rounded-tag javascript">JavaScript</div>
+                                <div class="rounded-tag react">React</div>
                                 <div class="rounded-tag webdev">Web</div>
                             </div>
                         </div>
@@ -66,6 +67,7 @@ await loadNamespaces(locale, namespaces);
                                 <div class="rounded-tag astro">Astro.js</div>
                                 <div class="rounded-tag typescript">TypeScript</div>
                                 <div class="rounded-tag javascript">JavaScript</div>
+                                <div class="rounded-tag react">React</div>
                                 <div class="rounded-tag webdev">Web</div>
                             </div>
                         </div>
@@ -149,6 +151,11 @@ await loadNamespaces(locale, namespaces);
         width: 100px;
         justify-content: center;
         overflow: hidden;
+
+        @media (max-width: 468px) {
+            height: 90px;
+            width: 100%;
+        }
     }
 
     .card-image > i {
@@ -204,6 +211,10 @@ await loadNamespaces(locale, namespaces);
             &.kmp {
                 background: #7f52ff linear-gradient(to right, #ef4857 0, #de4970 20%, #b44db0 50%, #7f52ff 100%);
             }
+
+            &.react {
+                background-color: rgb(20 158 202);
+            }
         }
     }
 
@@ -211,7 +222,7 @@ await loadNamespaces(locale, namespaces);
         display: flex;
         flex-direction: column;
         > p {
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--body-color);
             font-size: 0.85em;
             margin-top: 8px;
         }

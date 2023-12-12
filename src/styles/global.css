@@ -1,15 +1,13 @@
 :root {
-    --accent: 136, 58, 234;
-    --accent-rgba: rgba(136, 58, 234, 1);
-    --accent-contact: 0, 221, 173;
-    --accent-projects: 190, 156, 4;
+    --accent: 152, 75, 245; /*136, 58, 234*/
+    --accent-rgba: rgba(152, 75, 245, 1);
+    --accent-gradient: linear-gradient(85deg, rgba(var(--accent), 1) 0%, rgb(162, 85, 255) 100%);
+    --secondary: 30, 41, 59;
     --accent-resume: 74, 144, 226;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
     --body-color: white;
     --button-color: white;
     --button-hover-color: black;
-    --bg-color: rgba(15, 23, 42, 1);;
+    --bg-color: rgba(15, 23, 42, 1);
     --card-color: rgba(23, 23, 23, 0.4);
     --card-hover-color: rgba(30, 41, 59, 1);
     --card-bg: rgba(30, 41, 59, 0.4);
@@ -20,7 +18,6 @@
     --header-size: 95px;
     --resume-page-width: 1350px;
     --page-width: 1024px;
-    --header-bg: 30, 41, 59;
     --a-visited: 197, 138, 249;
     --a-color: 167, 91, 255;
     --burger-menu-bg: #dddddd;
@@ -188,56 +185,44 @@ a.dropdown-link:after {
     border-left: 0.3em solid transparent;
 }
 
-.lds-ring {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 16px;
+/* Thanks! https://codepen.io/nzbin/pen/GGrXbp */
+.dot-flashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
 }
 
-.lds-ring div {
-    box-sizing: border-box;
-    display: block;
+.dot-flashing::before,
+.dot-flashing::after {
+    content: "";
+    display: inline-block;
     position: absolute;
-    width: 31px;
-    height: 31px;
-    border: 4px solid #fff;
-    border-color: rgba(var(--accent), 1) transparent transparent transparent;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    top: 0;
 }
 
-.lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
+.dot-flashing::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
 }
 
-.lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-
-.lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-
-.fade-out {
-    animation: fadeOut 300ms ease-out forwards;
-}
-
-.fade-in {
-    animation: fadeIn 300ms ease-in forwards;
-}
-
-#loading {
-    --color: #fff;
-    --bg: #777;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: transparent;
-    border-top: 4px solid var(--color);
-    border-right: 4px solid var(--color);
-    border-bottom: 4px solid var(--bg);
-    border-left: 4px solid var(--bg);
-    animation: loading 1.2s infinite linear;
+.dot-flashing::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
 }

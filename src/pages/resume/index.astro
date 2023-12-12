@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { loadNamespaces, t } from "../../i18n/i18n";
 import { getLocale } from "astro-i18n-aut";
 import Footer from "../../components/astro/footer/Footer.astro";
-import AnimMouse from "../../components/astro/parts/AnimMouse.astro";
+import ScrollIndicator from "../../components/astro/parts/ScrollIndicator.astro";
 import Navigation from "../../components/astro/resume/Navigation.astro";
 
 const accentColor = "var(--accent-resume)";
@@ -15,6 +15,7 @@ import abbyyLogo from "../../assets/img/company-logos/ABBYY.png";
 import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-logo-white.png";
+
 
 // i18next
 const locale = getLocale(Astro.url);
@@ -41,7 +42,7 @@ await loadNamespaces(locale, namespaces);
                     </div>
                 </div>
                 <div class="section-footer noprint">
-                    <AnimMouse />
+                    <ScrollIndicator href="#intro"/>
                 </div>
             </section>
             <section class="resume-section skills" id="intro">
@@ -455,7 +456,6 @@ await loadNamespaces(locale, namespaces);
         justify-content: center;
         align-items: center;
         align-self: flex-end;
-        padding-bottom: 1rem;
     }
 
     .resume-wrapper {
