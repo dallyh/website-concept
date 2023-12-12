@@ -21,17 +21,16 @@ await loadNamespaces(locale, namespaces);
                 </div>
                 <div class="card-info-wrapper">
                     <div class="card-info">
-                        <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
-                            <a href="https://github.com/dallyh/website" target="_blank">{t("projects:ThisWebsite")}</a>
+                            <a href="https://github.com/dallyh/website" target="_blank"><i class="bi bi-link-45deg"></i>{t("projects:ThisWebsite")}</a>
                             <div class="card-info-tags">
                                 <div class="rounded-tag astro">Astro.js</div>
                                 <div class="rounded-tag typescript">TypeScript</div>
                                 <div class="rounded-tag javascript">JavaScript</div>
                                 <div class="rounded-tag webdev">Web</div>
                             </div>
-                            <p>{t("projects:ThisWebsiteDescription")}</p>
                         </div>
+                        <p>{t("projects:ThisWebsiteDescription")}</p>
                     </div>
                 </div>
             </div>
@@ -43,14 +42,13 @@ await loadNamespaces(locale, namespaces);
                 </div>
                 <div class="card-info-wrapper">
                     <div class="card-info">
-                        <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
-                            <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank">{t("projects:LemmyKtClient")}</a>
+                            <a href="https://github.com/dallyh/lemmy-kt-client" target="_blank"><i class="bi bi-link-45deg"></i>{t("projects:LemmyKtClient")}</a>
                             <div class="card-info-tags">
                                 <div class="rounded-tag kmp">Kotlin Multiplatform</div>
                             </div>
-                            <p>{t("projects:LemmyKtClientDescription")}{" "}<a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
                         </div>
+                        <p>{t("projects:LemmyKtClientDescription")}{" "}<a href="https://join-lemmy.org/" target="_blank">Lemmy</a></p>
                     </div>
                 </div>
             </div>
@@ -62,17 +60,16 @@ await loadNamespaces(locale, namespaces);
                 </div>
                 <div class="card-info-wrapper">
                     <div class="card-info">
-                        <i class="bi bi-link-45deg"></i>
                         <div class="card-info-title">
-                            <a href="https://github.com/dallyh/web-resume" target="_blank">{t("projects:OldWebsite")}</a>
+                            <a href="https://github.com/dallyh/web-resume" target="_blank"><i class="bi bi-link-45deg"></i>{t("projects:OldWebsite")}</a>
                             <div class="card-info-tags">
                                 <div class="rounded-tag astro">Astro.js</div>
                                 <div class="rounded-tag typescript">TypeScript</div>
                                 <div class="rounded-tag javascript">JavaScript</div>
                                 <div class="rounded-tag webdev">Web</div>
                             </div>
-                            <p>{t("projects:OldWebisteDescription")}</p>
                         </div>
+                        <p>{t("projects:OldWebisteDescription")}</p>
                     </div>
                 </div>
             </div>
@@ -152,7 +149,6 @@ await loadNamespaces(locale, namespaces);
         width: 100px;
         justify-content: center;
         overflow: hidden;
-    
     }
 
     .card-image > i {
@@ -211,18 +207,24 @@ await loadNamespaces(locale, namespaces);
         }
     }
 
-    .card-info > i {
-        margin-top: 2px;
+    .card-info {
+        display: flex;
+        flex-direction: column;
+        > p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
     }
 
-    .card-info-title > a {
-        font-weight: 600;
-    }
+    .card-info-title {
+        > a {
+            font-weight: 600;
 
-    .card-info-title > p {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.85em;
-        margin-top: 8px;
+            i {
+                margin-right: 5px;
+            }
+        }
     }
 
     .lemmy-logo {

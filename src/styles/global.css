@@ -13,17 +13,18 @@
     --card-color: rgba(23, 23, 23, 0.4);
     --card-hover-color: rgba(30, 41, 59, 1);
     --card-bg: rgba(30, 41, 59, 0.4);
+    --resume-card-bg: rgb(30, 41, 59);
     --card-bg-rgb: 255, 255, 255;
     --dropdown-bg: #161b22;
     --dropdown-border-color: rgba(255, 255, 255, 0.3);
     --header-size: 95px;
     --resume-page-width: 1350px;
     --page-width: 1024px;
-    --header-bg: 22, 27, 34;
+    --header-bg: 30, 41, 59;
     --a-visited: 197, 138, 249;
     --a-color: 167, 91, 255;
     --burger-menu-bg: #dddddd;
-    --nav-background: #161b22;
+    --nav-background: rgb(30, 41, 59);
     color-scheme: dark;
 }
 

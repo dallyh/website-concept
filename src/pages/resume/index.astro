@@ -16,7 +16,6 @@ import mfilesLogo from "../../assets/img/company-logos/m-files.png";
 import msftLogo from "../../assets/img/company-logos/MSFT_BIG.png";
 import nintextLogo from "../../assets/img/company-logos/nintex-logo-white.png";
 
-
 // i18next
 const locale = getLocale(Astro.url);
 const namespaces = ["resume", "shared"];
@@ -622,8 +621,8 @@ await loadNamespaces(locale, namespaces);
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        background-color: rgba(var(--accent-resume), 0.04);
-        border: 1px solid rgba(var(--accentColor), 0.4);
+        background-color: var(--resume-card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
     }
 
