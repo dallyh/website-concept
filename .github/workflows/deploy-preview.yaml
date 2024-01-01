@@ -1,7 +1,8 @@
-name: Build and Deploy PR Preview
+name: Build and deploy new PR site preview
 
 on:
     pull_request:
+        types: [opened, reopened]
         branches: [main]
     workflow_dispatch:
 
