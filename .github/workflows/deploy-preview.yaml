@@ -31,16 +31,13 @@ jobs:
             - name: Create dotenv
               run: |
                   echo "SITE_URL=https://dallyh.github.io/" >> .env
-                  echo "SITE_BASE=/deploy-previews/website-concept/${{ github.event.pull_request.number }}/" >> .env
+                  echo "SITE_BASE=/deploy-previews/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/" >> .env
 
             - name: Install Node dependencies
               run: npm install
 
             - name: Build the site
               run: npm run build
-
-            - name: Create .nojekyll file
-              run: touch ./dist/.nojekyll
 
             - name: Upload site artifact
               uses: actions/upload-artifact@v3
@@ -53,7 +50,7 @@ jobs:
         runs-on: ubuntu-latest
         environment:
             name: pull-request-preview
-            url: https://dallyh.github.io/deploy-previews/website-concept/${{ github.event.pull_request.number }}/
+            url: https://dallyh.github.io/deploy-previews/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/
 
         steps:
             - name: Download the artifact
@@ -68,13 +65,13 @@ jobs:
                   API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
               with:
                   source-directory: "./dist/"
-                  destination-github-username: "dallyh"
+                  destination-github-username: ${{ github.actor }}
                   destination-repository-name: "deploy-previews"
                   target-branch: main
-                  target-directory: "website-concept/${{ github.event.pull_request.number }}"
+                  target-directory: "${{ github.event.repository.name }}/${{ github.event.pull_request.number }}"
 
             - name: Output the URL
-              run: echo "https://dallyh.github.io/deploy-previews/website-concept/${{ github.event.pull_request.number }}/"
+              run: echo "https://dallyh.github.io/deploy-previews/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/"
 
             - name: Update comment
               uses: hasura/comment-progress@v2.2.0
@@ -83,4 +80,4 @@ jobs:
                   repository: ${{ github.repository }}
                   number: ${{ github.event.number }}
                   id: deploy-preview
-                  message: "A preview of ${{ github.event.after }} is uploaded and can be seen here:\n\n ✨ https://dallyh.github.io/deploy-previews/website-concept/${{ github.event.pull_request.number }}/ ✨\n\nPlease note that it may take a few seconds for GitHub Pages to build and deploy."
+                  message: "A preview of ${{ github.event.after }} is uploaded and can be seen here:\n\n ✨ https://dallyh.github.io/deploy-previews/${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/ ✨\n\nPlease note that it may take a few seconds for GitHub Pages to build and deploy."
