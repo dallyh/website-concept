@@ -1,0 +1,78 @@
+name: Build and Deploy PR Preview
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout and setup node
+            - uses: actions/checkout@v3
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: npn
+                  cache-dependency-path: "./package-lock.json"
+
+            - name: Create dotenv
+              run: |
+                  echo "SITE_URL=https://dallyh.github.io/deploy-previews/" >> .env
+                  echo "SITE_BASE=/website-concept/${{ github.event.pull_request.number }}/" >> .env
+
+            - name: Install Node dependencies
+              run: npm install
+
+            - name: Upload site artifact
+              uses: actions/upload-artifact@v3
+              with:
+                  name: site
+                  path: ./dist/
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: pull-request-preview
+            url: https://dallyh.github.io/deploy-previews/website-concept/${{ github.event.pull_request.number }}/
+
+        steps:
+            - name: Download the artifact
+              uses: actions/download-artifact@v3
+              with:
+                  name: site
+                  path: ./dist/
+
+            - name: Upload files to GitHub Pages
+              uses: cpina/github-action-push-to-another-repository@v1.4.2
+              env:
+                  API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+              with:
+                  source-directory: "./dist/"
+                  destination-github-username: "dallyh"
+                  destination-repository-name: "deploy-previews"
+                  target-branch: main
+                  target-directory: "website-concept/${{ github.event.pull_request.number }}"
+
+            - name: Output the URL
+              run: echo "https://dallyh.github.io/deploy-previews/website-concept/${{ github.event.pull_request.number }}/"
+
+    comment-on-pull-request:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        # Only run if a comment was not already made
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' && !contains(github.event.pull_request.body, 'A [live preview]') }}
+        steps:
+            - uses: actions/github-script@v5
+              with:
+                  script: |
+                      github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: 'A [live preview](https://dallyh.github.io/previews/website-concept/${{ github.event.pull_request.number }}/) is being deployed!<br><br>Please note that it may take a few seconds for GitHub Pages to build and deploy. The preview will be removed at midnight UTC.'
+                      })
